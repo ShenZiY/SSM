@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	</head>
 
-	<body>
+	<body >
 		<!-- 顶部开始 -->
 		<div class="container">
 			<div class="logo">
@@ -103,25 +103,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<li>
 						<a href="javascript:;">
 							<i class="iconfont">&#xe6b8;</i>
-							<cite>会员管理</cite>
+							<cite>图片管理</cite>
 							<i class="iconfont nav_right">&#xe697;</i>
 						</a>
 						<ul class="sub-menu">
 							<li>
-								<a href="./pages/member/list.html">
+								<a _href="/picLoad">
 									<i class="iconfont">&#xe6a7;</i>
-									<cite>会员列表</cite>
+									<cite>图片上传</cite>
 
 								</a>
 							</li>
 							<li>
 								<a _href="./pages/member/del.html">
 									<i class="iconfont">&#xe6a7;</i>
-									<cite>会员删除</cite>
+									<cite>图片处理</cite>
 
 								</a>
 							</li>
-							<li>
+							<%--<li>
 								<a href="javascript:;">
 									<i class="iconfont">&#xe70b;</i>
 									<cite>会员管理</cite>
@@ -147,31 +147,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										</a>
 									</li>
 								</ul>
-							</li>
+							</li>--%>
 						</ul>
 					</li>
 					<li>
 						<a href="javascript:;">
 							<i class="iconfont">&#xe705;</i>
-							<cite>文章管理</cite>
+							<cite>采集数据管理</cite>
 							<i class="iconfont nav_right">&#xe697;</i>
 						</a>
 						<ul class="sub-menu">
 							<li>
 								<a _href="./pages/article/list.html">
 									<i class="iconfont">&#xe6a7;</i>
-									<cite>文章列表</cite>
+									<cite>数据导入</cite>
 								</a>
 							</li>
 							<li>
 								<a _href="./pages/article/category.html">
 									<i class="iconfont">&#xe6a7;</i>
-									<cite>分类管理</cite>
+									<cite>数据导出</cite>
 								</a>
 							</li>
 						</ul>
 					</li>
-					<li>
+					<%--<li>
 						<a href="javascript:;">
 							<i class="iconfont">&#xe723;</i>
 							<cite>订单管理</cite>
@@ -281,7 +281,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</a>
 							</li>
 						</ul>
-					</li>
+					</li>--%>
 				</ul>
 			</div>
 		</div>
@@ -305,7 +305,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<!-- 中部结束 -->
 		<!-- 底部开始 -->
 		<div class="footer">
-			<div class="copyright">Copyright ©2018 WeAdmin v1.0 All Rights Reserved</div>
+			<div class="copyright">Copyright © 天津市消防研究所 All Rights Reserved</div>
 		</div>
 		<!-- 底部结束 -->
 		<script type="text/javascript">

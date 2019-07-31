@@ -1,15 +1,14 @@
 package cn.nankai.tjxf1.controller;
 
-import java.io.File;
-import java.util.UUID;
-
+import cn.nankai.tjxf1.service.UploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import cn.nankai.tjxf1.service.UploadService;
+import java.io.File;
+import java.util.UUID;
 
 @Controller
 @RequestMapping
@@ -17,10 +16,17 @@ public class UploadController {
     @Autowired
     private UploadService uploadService;
 
+    @RequestMapping("/picLoad")
+    public String picLoad(){
+        return "picLoad";
+    }
+
+
+
     @RequestMapping("/upload")
     //参数file是从前端提交过来的
     public String upload(@RequestParam("file")MultipartFile pictureFile) throws Exception {
-        String FILEPATH = "D:\\pictures\\";
+        String FILEPATH = "F:\\pictures\\";
         String originalFilename = "";
         String newFileName = "";
         String description = "layui";
@@ -46,7 +52,7 @@ public class UploadController {
 
     @RequestMapping("/uploadMultipart")
     public String uploadMultipart(@RequestParam("file")MultipartFile[] pictureFile) throws Exception {
-        String FILEPATH = "D:\\pictures\\";
+        String FILEPATH = "F:\\pictures\\";
         String originalFilename = "";
         String newFileName = "";
         String description = "layui";

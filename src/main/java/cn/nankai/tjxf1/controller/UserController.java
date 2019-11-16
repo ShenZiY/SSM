@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import cn.nankai.tjxf1.util.ResultBean;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import cn.nankai.tjxf1.entity.User;
 import cn.nankai.tjxf1.service.UserService;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/user")
@@ -30,70 +34,78 @@ public class UserController {
 	
 	//注册功能
 	@RequestMapping("/signup")
-	public String signup(User user,Model model,HttpServletRequest request,HttpServletResponse response) throws Exception{
-		
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out=response.getWriter();
+    @ResponseBody
+	public ResultBean signup(User user, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception{
+
+	    Integer id = user.getId();
+	    boolean isOnly = userServivce.registerIdOnly(id);
+	    if(isOnly == true )
+	        return ResultBean.error("用户ID已经存在！");
+
+		/*response.setContentType("text/html;charset=utf-8");
 		if(userServivce.addUser(user)){
 			//request.getSession().setAttribute("user", user);
 			//out.print("<script language='JavaScript'>alert('注册成功! ');window.location.href='"+request.getContextPath()+"/login.jsp';</script>");
 			//return "sectionElementshow";
 			//return "redirect:/login.jsp";
-			return "success3";
+			return ;
 		}
 		else{
 			//out.print("<script language='JavaScript'>alert('注册失败! ');window.location.href='"+request.getContextPath()+"/login.jsp';</script>");
 			//return "redirect:/login.jsp";
 			return "fail";
-		}
+		}*/
+		return ResultBean.success(userServivce.addUser(user));
 	}
 	
 	
 	//表单提交过来的路径
+    /*@RequestMapping("/checkLogin")
+    public ResultBean checkLogin(@RequestParam(value = "id") Integer id, @RequestParam(value = "password") String password){
+        System.out.println(id);
+        System.out.println(password);
+	    if(userServivce.checkLogin(id,password)){
+	        return ResultBean.success("登录成功！");
+        }else{
+	        return ResultBean.error("登录失败！");
+        }
+    }*/
+
 	@RequestMapping("/checkLogin")
-	public String checkLogin(User user,Model model,HttpServletRequest request,HttpServletResponse response) throws Exception{
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out=response.getWriter();
+	@ResponseBody
+	public ResultBean checkLogin(Integer id, String password,HttpServletRequest request,HttpServletResponse response,HttpSession session) throws Exception{
+
+		System.out.println("239000000");
+		boolean isOnly = userServivce.registerIdOnly(id);
+		if(isOnly == false ){
+			return ResultBean.error("用户ID不存在！");
+		}
 		//调用service方法
-		user = userServivce.checkLogin(user.getUsername(), user.getPassword());
-		
-		//若有user则添加到model里并且跳转到成功页面
-		if(user != null){
-			String userName = user.getUsername();
-			//model.addAttribute("user",user);
-			request.getSession().setAttribute("uName", userName);
-			request.getSession().setAttribute("user", user);
-			request.getSession().setAttribute("loginflag", "success");
-			return "main3";
-			//request.getRequestDispatcher("/WEB-INF/jsp/sectionElementshow.jsp").forward(request, response);
-			
-			
+		boolean res = userServivce.checkLogin(id , password);
+
+		if(res){
+			User user = userServivce.findUserById(id);
+			request.getSession().setAttribute("curUserName",user.getUsername());
+			request.getSession().setAttribute("curUserId",user.getId());
+			session.setAttribute("id",user.getId());
+			session.setAttribute("user",user);
+			System.out.println("登录成功");
+			return ResultBean.success("登录成功");
 		}
 		else{
-			//out.print("<script language='JavaScript'>alert('用户名或密码错误！');</script>");
-			request.getSession().setAttribute("loginflag", "fail");
-			response.sendRedirect(request.getContextPath()+"/index.jsp");
-			return null;
+			System.out.println("密码错误！");
+			return ResultBean.error("密码错误！");
 		}
-		
+
 	}
 	
 	
 	//用来判断用户名是否唯一
-    @RequestMapping("/registerUserName")
-   // @ResponseBody
-    public void registerUserName(String username,Model model,HttpServletRequest request,HttpServletResponse response) throws IOException{
-        //校验registerUserName方法传入的参数registerName是否为空
-       /* if(StringUtils.isEmpty(registerName)){
-            LOGGER.error("registerUserName方法的参数registerName是空的");
-            request.setAttribute("error", "用户名不能为空!");
-            System.out.println("error");
-            //return LOGINNEW;//如果出现空指针异常，先让其跳回loginNew.jsp页面。
-        }*/
-        //Map<String,Object> resultMap = new HashMap<String, Object>();  
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out=response.getWriter();
-        boolean tOf = userServivce.registerNameOnly(username);
+    @RequestMapping("/registerId")
+    @ResponseBody
+    public boolean registerUserName(Integer  userId , Model model,HttpServletRequest request,HttpServletResponse response) throws IOException{
+        System.out.println("beitaioy");
+        boolean tof = userServivce.registerIdOnly(userId);
         /*if(tOf == true){
             resultMap.put("result", "success");
             return resultMap;
@@ -102,34 +114,46 @@ public class UserController {
             return resultMap;
         }
         */
-		if(tOf == true){
+        return tof;
+		/*if(tOf == true){
 			out.print("success");
 		}
 		else{
 			out.print("fail");
 			//out.print("<script language='JavaScript'>alert('用户名已存在! ');window.location.href='"+request.getContextPath()+"/regist.jsp';</script>");
 			//return "redirect:/login.jsp";
-		}
+		}*/
     }
-    
-    
-	//测试超链接跳转到另一个页面是否可以取到session值
-	@RequestMapping("/anotherpage")
-	public String hrefpage(){
-		
-		return "anotherpage";
+
+	@RequestMapping("/register")
+	public String registerUserName(){
+		return "register";
 	}
-	
+	@RequestMapping("/main")
+	public String main3(){
+		return "main3";
+	}
+
 	//注销方法
 	@RequestMapping("/outLogin")
 	public String outLogin(HttpSession session){
 		//通过session.invalidata()方法来注销当前的session
 		session.invalidate();
-		return "redirect:/index.jsp";
+		return"redirect:login";
+
 	}
-	@RequestMapping("/login")
-	public void login(Model model,HttpServletRequest request,HttpServletResponse response) throws IOException{
-		response.sendRedirect(request.getContextPath()+"/login.jsp");
+//	@RequestMapping("/login")
+//	public void login(Model model,HttpServletRequest request,HttpServletResponse response) throws IOException{
+//		response.sendRedirect(request.getContextPath()+"/login.jsp");
+//	}
+    @RequestMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+	@RequestMapping("/welcome")
+	public String welcome() {
+		return "welcome";
 	}
-	
+
 }

@@ -14,15 +14,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<head>
 		<meta charset="UTF-8">
-		<title>NAIS-TJ管理系统主页面</title>
+		<title>主页面</title>
 		<meta name="renderer" content="webkit|ie-comp|ie-stand">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
 		<meta http-equiv="Cache-Control" content="no-siteapp" />
-		<link rel="shortcut icon" href="${APP_PATH}/WeAdmin-master/favicon.ico" type="image/x-icon" />
+		<link rel="shortcut icon" href="${APP_PATH }/static/logo.ico" type="image/x-icon" />
 		<link rel="stylesheet" href="${APP_PATH}/WeAdmin-master/static/css/font.css">
 		<link rel="stylesheet" href="${APP_PATH}/WeAdmin-master/static/css/weadmin.css">
 		<script type="text/javascript" src="${APP_PATH}/WeAdmin-master/lib/layui/layui.js" charset="utf-8"></script>
+        <script type="text/javascript" src="${APP_PATH}/ok-admin/js/okadmin.js" charset="utf-8"></script>
+
 
 	</head>
 
@@ -30,47 +32,59 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<!-- 顶部开始 -->
 		<div class="container">
 			<div class="logo">
-				<a href="http://www.tfri.com.cn/manage/html/index.html">天津市消防研究所</a>
+				<a >天津市消防研究所</a>
 			</div>
 			<div class="left_open">
-				<i title="展开左侧栏" class="iconfont">&#xe699;</i>
+				<i title="展开左侧栏" class="iconfont" style="color: black;">&#xe699;</i>
 			</div>
-			<ul class="layui-nav left fast-add" lay-filter="">
+			<div class="left1_open"  id="tp-weather-widget">
+				<%--<i title="展开左侧栏" class="iconfont" style="color: rgba(0,5,3,0.98);">&#xe699;</i>--%>
+			</div>
+			<%--<div id="tp-weather-widget" ></div>--%>
+			<ul class="layui-nav right" lay-filter="">
+				<%--<li>
+					<div id="tp-weather-widget"></div>
+				</li>--%>
 				<li class="layui-nav-item">
-					<a href="javascript:;">+新增</a>
+					<% String name = (String)session.getAttribute("curUserName"); %>
+					<a href="javascript:;"><i class="layui-icon layui-icon-friends" style="font-size: 15px; color: #009688;"></i><cite>&nbsp&nbsp<%=name %></cite></a>
 					<dl class="layui-nav-child">
 						<!-- 二级菜单 -->
 						<dd>
-							<a onclick="WeAdminShow('资讯','http://www.baidu.com')"><i class="iconfont">&#xe6a2;</i>资讯</a>
+							<a onclick="WeAdminShow('个人信息','http://www.baidu.com')">个人信息</a>
 						</dd>
 						<dd>
-							<a onclick="WeAdminShow('图片','http://www.baidu.com')"><i class="iconfont">&#xe6a8;</i>图片</a>
-						</dd>
-						<dd>
-							<a onclick="WeAdminShow('用户','http://www.baidu.com')"><i class="iconfont">&#xe6b8;</i>用户</a>
+							<a onclick="WeAdminShow('修改密码','./login.html')">修改密码</a>
 						</dd>
 					</dl>
 				</li>
+				<li class="layui-nav-item to-index">
+					<a href="/user/outLogin" ><cite> &nbsp退出&nbsp</cite><i class="layui-icon layui-icon-snowflake" style="font-size: 15px; color: #961221;"></i></a>
+				</li>
 			</ul>
-			<ul class="layui-nav right" lay-filter="">
-				<li class="layui-nav-item">
-				<% String name = (String)session.getAttribute("uName"); %>
+
+			<%--<ul class="layui-nav " lay-filter="">
+				<li class="layui-nav-item ">
+				<% String name = (String)session.getAttribute("curUserName"); %>
 					<a href="javascript:;"><%=name %></a>
 					<dl class="layui-nav-child">
 						<!-- 二级菜单 -->
 						<dd>
-							<a onclick="WeAdminShow('百度','http://www.baidu.com')">百度</a>
+							<a onclick="WeAdminShow('百度','http://www.baidu.com')">个人信息</a>
 						</dd>
+                        <dd>
+                            <a onclick="WeAdminShow('百度','http://www.baidu.com')">修改密码</a>
+                        </dd>
 						<dd>
-							<a class="loginout" href="/TJXF1/user/outLogin">退出</a>
+							<a class="loginout" href="/user/outLogin">退出1</a>
 						</dd>
 					</dl>
 				</li>
-				<!-- <li class="layui-nav-item to-index">
-					<a href="/TJXF1">前台首页</a>
-				</li> -->
-			</ul>
 
+				<li class="layui-nav-item to-index">
+					<a href="https://www.jiuwei.com/" target="_blank">退出</a>
+				</li>
+			</ul>--%>
 		</div>
 		<!-- 顶部结束 -->
 		<!-- 中部开始 -->
@@ -86,7 +100,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</a>
 						<ul class="sub-menu">
 							<li>
-								<a _href="./pages/article/list.html">
+								<a _href="/jsp/newAccident">
 									<i class="iconfont">&#xe6a7;</i>
 									<cite>新建事故</cite>
 								</a>
@@ -295,7 +309,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</ul>
 				<div class="layui-tab-content">
 					<div class="layui-tab-item layui-show">
-						<iframe src='./pages/welcome.html' frameborder="0" scrolling="yes" class="weIframe"></iframe>
+						<iframe src='/user/welcome' frameborder="0" scrolling="yes" class="weIframe"></iframe>
 					</div>
 				</div>
 			</div>
@@ -304,9 +318,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<!-- 右侧主体结束 -->
 		<!-- 中部结束 -->
 		<!-- 底部开始 -->
-		<div class="footer">
+		<%--<div class="footer">
 			<div class="copyright">Copyright © 天津市消防研究所 All Rights Reserved</div>
-		</div>
+		</div>--%>
 		<!-- 底部结束 -->
 		<script type="text/javascript">
 //			layui扩展模块的两种加载方式-示例
@@ -340,6 +354,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
 			
 		</script>
+
+		<script>
+            (function(a,h,g,f,e,d,c,b){b=function(){d=h.createElement(g);c=h.getElementsByTagName(g)[0];d.src=e;d.charset="utf-8";d.async=1;c.parentNode.insertBefore(d,c)};a["SeniverseWeatherWidgetObject"]=f;a[f]||(a[f]=function(){(a[f].q=a[f].q||[]).push(arguments)});a[f].l=+new Date();if(a.attachEvent){a.attachEvent("onload",b)}else{a.addEventListener("load",b,false)}}(window,document,"script","SeniverseWeatherWidget","//cdn.sencdn.com/widget2/static/js/bundle.js?t="+parseInt((new Date().getTime() / 100000000).toString(),10)));
+            window.SeniverseWeatherWidget('show', {
+                flavor: "slim",
+                location: "WWGQDCW6TBW1",
+                geolocation: false,
+                language: "zh-Hans",
+                unit: "c",
+                theme: "auto",
+                token: "eed09165-75ff-4200-a394-6e69a741b7aa",
+                hover: "enabled",
+                container: "tp-weather-widget"
+            })
+		</script>
+
 		<!-- <script language="javascript">
         //防止页面后退
         history.pushState(null, null, document.URL);

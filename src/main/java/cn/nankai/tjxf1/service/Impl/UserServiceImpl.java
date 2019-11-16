@@ -15,38 +15,40 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDao userDao;
-	
-	public User checkLogin(String username, String password) {
+
+	@Override
+	public boolean checkLogin(Integer id, String password) {
 		
-		User user = userDao.findByUsername(username);
+		User user = userDao.findById(id);
 		if(user != null && user.getPassword().equals(password)){
-		
-			return user;
+			return true;
 		}
-		return null;
+		return false;
 	}
 
 	@Override
-	public boolean addUser(User user) {
+	public Integer addUser(User user) {
 		// TODO Auto-generated method stub
 		
-		if(userDao.register(user)==1){
-			return true;
+		if(userDao.insertUser(user)==1){
+			return 0;
 		}
 		else{
-			return false;
+			return -1;
 		}
 		//System.out.println("插入的对象主键为："+user.getId());
 	}
-	
+
+	@Override
+	public User findUserById(Integer id) {
+		return userDao.findById(id);
+	}
+
 	@Override
 	//添加方法registerNameOnly传入表单中的用户名，用来判断数据库中是否已经存在该用户名
-    public boolean registerNameOnly(String username){
-        User user = new User();
-        user.setUsername(username);
-        List<User> userList = new ArrayList<User>();
-        userList =  userDao.loginFindNamePwd(username);
-        if(userList == null || userList.size()==0){
+    public boolean registerIdOnly(Integer id){
+		 User user =  userDao.findById(id);
+        if(user != null && user.getUsername() != null ){
             return true; 
         }else{
             return false;

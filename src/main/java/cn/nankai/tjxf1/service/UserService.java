@@ -6,10 +6,12 @@ import cn.nankai.tjxf1.entity.User;
 public interface UserService {
 	
 	//检验用户登录
-	User checkLogin(String username, String password);
+	boolean checkLogin(Integer id , String password);
   //检验注册用户名是否已存在
-	boolean registerNameOnly(String username);
+	boolean registerIdOnly(Integer id);
 
-	boolean addUser(User user);
+	Integer addUser(User user);
+
+	User findUserById(Integer id);
 
 }

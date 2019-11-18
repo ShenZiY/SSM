@@ -24,9 +24,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<link rel="stylesheet" href="${APP_PATH}/WeAdmin-master/static/css/weadmin.css">
 		<script type="text/javascript" src="${APP_PATH}/WeAdmin-master/lib/layui/layui.js" charset="utf-8"></script>
         <script type="text/javascript" src="${APP_PATH}/ok-admin/js/okadmin.js" charset="utf-8"></script>
-
-
 	</head>
+
 
 	<body >
 		<!-- 顶部开始 -->
@@ -314,13 +313,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 		</div>
-		<div class="page-content-bg"></div>
 		<!-- 右侧主体结束 -->
 		<!-- 中部结束 -->
 		<!-- 底部开始 -->
-		<%--<div class="footer">
-			<div class="copyright">Copyright © 天津市消防研究所 All Rights Reserved</div>
-		</div>--%>
+		<div class="footer">
+			<div class="copyright" >Copyright © 天津市消防研究所 All Rights Reserved</div>
+		</div>
 		<!-- 底部结束 -->
 		<script type="text/javascript">
 //			layui扩展模块的两种加载方式-示例
@@ -369,15 +367,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 container: "tp-weather-widget"
             })
 		</script>
-
-		<!-- <script language="javascript">
-        //防止页面后退
-        history.pushState(null, null, document.URL);
-        window.addEventListener('popstate', function () {
-            history.pushState(null, null, document.URL);
-        });
-        </script> -->
 	</body>
+
 	<!--Tab菜单右键弹出菜单-->
 	<ul class="rightMenu" id="rightMenu">
         <li data-type="fresh">刷新</li>

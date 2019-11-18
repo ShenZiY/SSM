@@ -186,7 +186,8 @@ layui.define(['jquery', 'form', 'layer', 'element'], function(exports) {
 				//console.log("<0");
 				element.tabAdd('wenav_tab', {
 					title: title,
-					content: '<iframe tab-id="' + id + '" frameborder="0" src="' + url + '" scrolling="yes" class="weIframe"></iframe>',
+					content: '<iframe tab-id="' + id + '" frameborder="0" src="' + url + '" scrolling="yes" style="height: 100%' +
+					'"></iframe>',
 					id: id
 				});
 				//当前窗口内容
@@ -281,7 +282,7 @@ layui.define(['jquery', 'form', 'layer', 'element'], function(exports) {
 	 * @todo 重新计算iframe高度
 	 */
 	function FrameWH() {
-		var h = $(window).height() - 164;
+		var h = $(window).height() - 120;
 		$("iframe").css("height", h + "px");
 	}
 	$(window).resize(function() {

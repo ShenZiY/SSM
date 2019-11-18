@@ -468,12 +468,21 @@ body {
   overflow: hidden;
 }
 .page-content .layui-tab-content .layui-tab-item {
-  width: 100%;
+
   height: 100%;
+  width: 100%;
 }
-.page-content .layui-tab-content .layui-tab-item iframe {
-  width: 100%;
+.page-content .layui-tab-content .layui-tab-item  iframe {
+
   height: 100%;
+  width: 100%;
+
+}
+.page-content .layui-tab-content .layui-tab-item  .weIframe{
+
+  height: 100%;
+  width: 100%;
+
 }
 .welcome-footer {
   padding: 30px 0;
@@ -506,7 +515,7 @@ table td {
   /*padding-left: 10px;*/
 }
 .footer .copyright {
-  margin-left: 10px;
+  text-align: center;
 }
 @media screen and (max-width: 768px) {
   .fast-add {

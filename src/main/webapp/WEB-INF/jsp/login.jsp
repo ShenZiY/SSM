@@ -48,6 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <!-- <hr class="hr15"> -->
         <!-- <input name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input"> -->
         <!-- <hr class="hr15"> -->
+
         <input class="loginin" value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
         <%--<div class="layui-input-inline login-btn">
             <button lay-submit lay-filter="login" class="layui-btn layui-btn-blue layui-btn-lg" >登录</button>

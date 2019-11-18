@@ -26,7 +26,7 @@
 
 </head>
 
-<body>
+<body >
 <div class="weadmin-body">
     <blockquote class="layui-elem-quote"><div id="nowTime"></div></blockquote>
     <%--<div class="layui-fluid" style="overflow: hidden;">

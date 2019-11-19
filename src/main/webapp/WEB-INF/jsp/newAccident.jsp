@@ -40,17 +40,23 @@
     <div class="layui-carousel" id="stepForm" lay-filter="stepForm" style="margin: 0 auto; padding-top: 50px;">
         <div carousel-item>
             <div>
-                <form class="layui-form" style="margin: 0 auto;max-width: 460px;text-align:center;padding-top: 40px;">
+                <form  action="/keepAccId" class="layui-form" style="margin: 0 auto;max-width: 460px;text-align:center;padding-top: 40px;">
                     <div class="layui-form-item">
                         <label class="layui-form-label">事故编码</label>
                         <div class="layui-input-block">
-                            <input type="text"  class="layui-input" lay-verify="number" required />
+                            <input type="text" name="accId" id="accId" class="layui-input" lay-verify="number" required />
                         </div>
                     </div>
 
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <button class="layui-btn" lay-submit lay-filter="formStep" >
+                            <button class="layui-btn" lay-submit lay-filter="formStep" type="submit">
+                                &emsp;保存&emsp;
+                            </button>
+                           <%-- <button class="layui-btn" lay-submit lay-filter="keepAccId" type="submit">
+                                &emsp;保存&emsp;
+                            </button>--%>
+                            <button class="layui-btn" lay-submit lay-filter="formStep2" type="submit">
                                 &emsp;下一步&emsp;
                             </button>
                         </div>
@@ -91,19 +97,19 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">报警时间</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="aleartTime" id ="aleartTime" lay-verify="required" placeholder="年-月-日 时-分" autocomplete="off" class="layui-input">
+                            <input type="text" name="timeFind" id ="timeFind" lay-verify="required" placeholder="年-月-日 时-分" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">涉及车辆数</label>
                         <div class="layui-input-inline">
-                            <input type="number" name="" id="carNumber" lay-verify="number"  autocomplete="off" class="layui-input">
+                            <input type="number" name="carNum" id="carNum" lay-verify="number"  autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">伤亡人数</label>
                         <div class="layui-input-inline">
-                            <input type="number" name="hurtNumber" lay-verify="number" autocomplete="off" class="layui-input">
+                            <input type="number" name="hurtNum" id = "hurtNum" lay-verify="number" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -114,19 +120,19 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">涉及人员数</label>
                             <div class="layui-input-inline">
-                                <input type="number" name="peopleNumber" id ="peopleNumber" lay-verify="required|number"  autocomplete="off" class="layui-input">
+                                <input type="number" name="peopleNum" id ="peopleNum" lay-verify="required|number"  autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
                             <label class="layui-form-label">采集人</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="" id="govCj" lay-verify="required"  autocomplete="off" class="layui-input">
+                                <input type="text" name="govCJ" id="govCJ" lay-verify="required"  autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
                             <label class="layui-form-label">信息录入人</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="govLr" lay-verify="required" autocomplete="off" class="layui-input">
+                                <input type="text" name="govLR" id = "govLR" lay-verify="required" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                     </div>
@@ -201,13 +207,59 @@
                     <div class="layui-form-item">
                         <div class="layui-input-block">
                             <button type="button" class="layui-btn layui-btn-primary pre ">上一步</button>
-                            <button class="layui-btn" lay-submit lay-filter="formStep">
+                            <button class="layui-btn" lay-submit lay-filter="newAcc">
+                                &emsp;保存&emsp;
+                            </button>
+                            <button class="layui-btn" lay-submit lay-filter="formStep2">
                                 &emsp;下一步&emsp;
                             </button>
                         </div>
                     </div>
                 </form>
             </div>
+
+            <div>
+                <form class="layui-form" style="margin: 0 auto;text-align:center;padding-top: 40px;">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">现场保护</label>
+                            <div class="layui-input-inline">
+                                <select name="xcbh">
+                                    <option value=""></option>
+                                    <option value="采取措施">采取措施</option>
+                                    <option value="没有采取措施" >没有采取措施</option>
+                                    <option value="其他">其他</option>
+                                    <option value="未知">未知</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">车辆保护</label>
+                            <div class="layui-input-inline">
+                                <select name="clbh">
+                                    <option value=""></option>
+                                    <option value="采取措施">采取措施</option>
+                                    <option value="没有采取措施" >没有采取措施</option>
+                                    <option value="其他">其他</option>
+                                    <option value="未知">未知</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button type="button" class="layui-btn layui-btn-primary pre ">上一步</button>
+                            <button class="layui-btn" lay-submit lay-filter="formStep2" >
+                                &emsp;下一步&emsp;
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
             <div>
                 <form class="layui-form" style="margin: 0 auto;text-align:center;padding-top: 40px;">
                     <div class="layui-form-item">
@@ -351,22 +403,15 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">温度</label>
                                 <div class="layui-input-inline">
-                                    <input type="number" name="pd" id ="wd"    autocomplete="off" class="layui-input">
+                                    <input type="number" name="wd" id ="wd"    autocomplete="off" class="layui-input">
                                 </div>
                             </div>
                         </div>
-
-
-
                     </div>
-
-
-
-
                     <div class="layui-form-item">
                         <div class="layui-input-block">
                             <button type="button" class="layui-btn layui-btn-primary pre ">上一步</button>
-                            <button class="layui-btn" lay-submit lay-filter="formStep" >
+                            <button class="layui-btn" lay-submit lay-filter="formStep2" >
                                 &emsp;下一步&emsp;
                             </button>
                         </div>
@@ -374,46 +419,7 @@
                 </form>
             </div>
 
-            <div>
-                <form class="layui-form" style="margin: 0 auto;text-align:center;padding-top: 40px;">
-                    <div class="layui-form-item">
-                        <div class="layui-inline">
-                        <label class="layui-form-label">现场保护</label>
-                        <div class="layui-input-inline">
-                            <select name="xcbh">
-                                <option value=""></option>
-                                <option value="采取措施">采取措施</option>
-                                <option value="没有采取措施" >没有采取措施</option>
-                                <option value="其他">其他</option>
-                                <option value="未知">未知</option>
-                            </select>
-                        </div>
-                        </div>
 
-                        <div class="layui-inline">
-                        <label class="layui-form-label">车辆保护</label>
-                        <div class="layui-input-inline">
-                            <select name="clbh">
-                                <option value=""></option>
-                                <option value="采取措施">采取措施</option>
-                                <option value="没有采取措施" >没有采取措施</option>
-                                <option value="其他">其他</option>
-                                <option value="未知">未知</option>
-                            </select>
-                        </div>
-                        </div>
-                    </div>
-
-                    <div class="layui-form-item">
-                        <div class="layui-input-block">
-                            <button type="button" class="layui-btn layui-btn-primary pre ">上一步</button>
-                            <button class="layui-btn" lay-submit lay-filter="formStep" >
-                                &emsp;下一步&emsp;
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
 
             <div>
                 <div style="text-align: center;margin-top: 90px;">
@@ -425,7 +431,7 @@
                     <div style="font-size: 14px;color: #666;margin-top: 20px;">点击确认进行提交</div>
                 </div>
                 <div style="text-align: center;margin-top: 50px;">
-                    <button class="layui-btn">确认提交</button>
+                    <button class="layui-btn next">再次填报</button>
                     <button type="button" class="layui-btn layui-btn-primary pre ">上一步</button>
                 </div>
             </div>
@@ -439,6 +445,7 @@
 <script src="${APP_PATH }/static/js/area.js" type="text/javascript"></script>
 <script src="${APP_PATH }/static/js/select.js" type="text/javascript"></script>
 <script src="${APP_PATH }/static/js/jquery.min.js" type="text/javascript"></script>
+
 
 <script>
     var newDate = '';
@@ -491,36 +498,36 @@
             laydate = layui.laydate;
 
         laydate.render({
-            elem: '#aleartTime' //指定元素
+            elem: '#timeFind' //指定元素
             ,type:'datetime'
             ,format:'yyyy-MM-dd HH:mm:ss'
             ,isInitValue:false
         });
         laydate.render({
             elem: '#timePolice' //指定元素
-            ,type:'time'
-            ,format:'北京时间：HH点mm分'
+            ,type:'datetime'
+            ,format:'yyyy-MM-dd HH:mm:ss'
             ,isInitValue:false
             ,trigger: 'click'
         });
         laydate.render({
             elem: '#timeInvest' //指定元素
-            ,format:'北京时间：HH点mm分'
-            ,type:'time'
+            ,format:'yyyy-MM-dd HH:mm:ss'
+            ,type:'datetime'
             ,isInitValue:false
             ,trigger: 'click'
         });
         laydate.render({
             elem: '#timeAmbu' //指定元素
-            ,format:'北京时间：HH点mm分'
-            ,type:'time'
+            ,format:'yyyy-MM-dd HH:mm:ss'
+            ,type:'datetime'
             ,isInitValue:false
             ,trigger: 'click'
         });
         laydate.render({
             elem: '#timeFireTru' //指定元素
-            ,format:'北京时间：HH点mm分'
-            ,type:'time'
+            ,format:'yyyy-MM-dd HH:mm:ss'
+            ,type:'datetime'
             ,isInitValue:false
             ,trigger: 'click'
         });
@@ -536,25 +543,23 @@
             }, {
                 title: '时间地点人员'
             }, {
-                title: '事故地点环境条件'
-            }, {
                 title: '现场保护措施'
+            }, {
+                title: '事故地点环境条件'
             }, {
                 title: '完成'
             }]
         });
 
-
-        form.on('submit(formStep)', function (data) {
+       /* form.on('submit(formStep)', function (data) {
             step.next('#stepForm');
             return false;
-        });
+        });*/
 
         form.on('submit(formStep2)', function (data) {
             step.next('#stepForm');
             return false;
         });
-
         $('.pre').click(function () {
             step.pre('#stepForm');
         });
@@ -563,6 +568,57 @@
             step.next('#stepForm');
         });
     })
+
+</script>
+
+<script type="text/javascript">
+    layui.use(['form', 'jquery', 'layer'], function () {
+        var form = layui.form;
+        var $ = layui.jquery;
+
+        //添加表单监听事件,提交注册信息
+        form.on('submit(formStep)', function (form) {
+            $.post('/insertBaseInfoId', form.field, function (result) {
+                handlerResult(result,Done);
+            });
+            //防止页面跳转
+            return false;
+        });
+
+        form.on('submit(newAcc)', function (form) {
+            $.post('/addBaseInfo', form.field, function (result) {
+                handlerResult(result,Done);
+            });
+            //防止页面跳转
+            return false;
+        });
+    });
+
+    function Done(data) {
+        layer.msg("保存成功!", {
+            icon: 1,
+            time: 1000
+        });
+    }
+
+
+    function showError(msg) {
+        layer.msg(msg, {icon: 2});
+    }
+
+    /**
+     * 处理 ajax 请求结果
+     * @param result： ajax 返回的结果
+     * @param fn： 成功的处理函数 ( 传入data: fn(result.data) )
+     */
+    function handlerResult(result,fn) {
+        // 成功执行操作，失败提示原因
+        if (result.code === 0) {
+            fn(result.data);
+        } else {
+            showError(result.msg);
+        }
+    }
 </script>
 
 </html>

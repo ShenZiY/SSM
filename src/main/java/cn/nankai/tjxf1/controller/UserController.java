@@ -74,8 +74,6 @@ public class UserController {
 	@RequestMapping("/checkLogin")
 	@ResponseBody
 	public ResultBean checkLogin(Integer id, String password,HttpServletRequest request,HttpServletResponse response,HttpSession session) throws Exception{
-
-		System.out.println("239000000");
 		boolean isOnly = userServivce.registerIdOnly(id);
 		if(isOnly == false ){
 			return ResultBean.error("用户ID不存在！");
@@ -104,7 +102,6 @@ public class UserController {
     @RequestMapping("/registerId")
     @ResponseBody
     public boolean registerUserName(Integer  userId , Model model,HttpServletRequest request,HttpServletResponse response) throws IOException{
-        System.out.println("beitaioy");
         boolean tof = userServivce.registerIdOnly(userId);
         /*if(tOf == true){
             resultMap.put("result", "success");

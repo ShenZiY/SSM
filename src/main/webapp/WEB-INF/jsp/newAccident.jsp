@@ -35,7 +35,7 @@
 <body style="background-color: rgba(171,176,215,0.36); ">
 <div class="weadmin-body">
     <div style="margin-top: 20px">
-    <blockquote class="layui-elem-quote"><div id="nowTime"></div></blockquote>
+        <blockquote class="layui-elem-quote"><div id="nowTime"></div></blockquote>
     </div>
     <div class="layui-carousel" id="stepForm" lay-filter="stepForm" style="margin: 0 auto; padding-top: 50px;">
         <div carousel-item>
@@ -44,20 +44,20 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">事故编码</label>
                         <div class="layui-input-block">
-                            <input type="text" name="accId" id="accId" class="layui-input" lay-verify="number" required />
+                            <input type="text" name="accId" id="accId" class="layui-input" lay-verify="required|number" required />
                         </div>
                     </div>
 
                     <div class="layui-form-item">
                         <div class="layui-input-block">
                             <button class="layui-btn" lay-submit lay-filter="formStep" type="submit">
-                                &emsp;保存&emsp;
+                                保存
                             </button>
-                           <%-- <button class="layui-btn" lay-submit lay-filter="keepAccId" type="submit">
-                                &emsp;保存&emsp;
-                            </button>--%>
+                            <%-- <button class="layui-btn" lay-submit lay-filter="keepAccId" type="submit">
+                                 &emsp;保存&emsp;
+                             </button>--%>
                             <button class="layui-btn" lay-submit lay-filter="formStep2" type="submit">
-                                &emsp;下一步&emsp;
+                                继续
                             </button>
                         </div>
                     </div>
@@ -65,54 +65,59 @@
             </div>
             <div>
                 <form class="layui-form" style="margin: 0 auto;text-align:center; padding-top: 40px;">
-                        <div class="layui-form-item">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">事故地点</label>
                             <div class="layui-inline">
-                                <label class="layui-form-label">事故地点</label>
-                                <div class="layui-inline">
-                                    <select name="province" id="province" lay-verify="required" lay-search lay-filter="province">
-                                        <option value="">省份</option>
-                                    </select>
-                                </div>
-                                <div class="layui-inline">
-                                    <select name="city" id="city" lay-verify="required" lay-search lay-filter="city">
-                                        <option value="">地级市</option>
-                                    </select>
-                                </div>
-                                <div class="layui-inline">
-                                    <select name="district" id="district" lay-verify="required" lay-search>
-                                        <option value="">县/区</option>
-                                    </select>
-                                </div>
+                                <select name="province" id="province" lay-verify="required" lay-search lay-filter="province">
+                                    <option value="">省份</option>
+                                </select>
                             </div>
-
                             <div class="layui-inline">
-                                <label class="layui-form-label ">详细地址</label>
-                                <div class="layui-input-inline">
-                                    <input type="text" name="locDetail" id ="locDetail" lay-verify="required"  autocomplete="off" class="layui-input">
-                                </div>
+                                <select name="city" id="city" lay-verify="required" lay-search lay-filter="city">
+                                    <option value="">地级市</option>
+                                </select>
+                            </div>
+                            <div class="layui-inline">
+                                <select name="district" id="district" lay-verify="required" lay-search>
+                                    <option value="">县/区</option>
+                                </select>
                             </div>
                         </div>
+                        <%--<div class="layui-inline">
+                            <label class="layui-form-label">详细地址</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="locDetail" id="locDetail" lay-verify="required"  autocomplete="off" class="layui-input">
+                            </div>
+                        </div>--%>
+                        <div class="layui-inline">
+                            <label class="layui-form-label ">详细地址</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="locDetail" id ="locDetail" lay-verify="required"  autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
 
-                        <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">报警时间</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="timeFind" id ="timeFind" lay-verify="required" placeholder="年-月-日 时-分" autocomplete="off" class="layui-input">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">报警时间</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="timeFind" id ="timeFind" lay-verify="required"  autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">涉及车辆数</label>
+                            <div class="layui-input-inline">
+                                <input type="number" name="carNum" id="carNum" lay-verify="number"  autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">伤亡人数</label>
+                            <div class="layui-input-inline">
+                                <input type="number" name="hurtNum" id = "hurtNum" lay-verify="number" autocomplete="off" class="layui-input">
+                            </div>
                         </div>
                     </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">涉及车辆数</label>
-                        <div class="layui-input-inline">
-                            <input type="number" name="carNum" id="carNum" lay-verify="number"  autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">伤亡人数</label>
-                        <div class="layui-input-inline">
-                            <input type="number" name="hurtNum" id = "hurtNum" lay-verify="number" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
 
 
 
@@ -208,10 +213,10 @@
                         <div class="layui-input-block">
                             <button type="button" class="layui-btn layui-btn-primary pre ">上一步</button>
                             <button class="layui-btn" lay-submit lay-filter="newAcc">
-                                &emsp;保存&emsp;
+                                保存
                             </button>
                             <button class="layui-btn" lay-submit lay-filter="formStep2">
-                                &emsp;下一步&emsp;
+                                继续
                             </button>
                         </div>
                     </div>
@@ -251,8 +256,11 @@
                     <div class="layui-form-item">
                         <div class="layui-input-block">
                             <button type="button" class="layui-btn layui-btn-primary pre ">上一步</button>
+                            <button class="layui-btn" lay-submit lay-filter="saveEnvInfo">
+                                保存
+                            </button>
                             <button class="layui-btn" lay-submit lay-filter="formStep2" >
-                                &emsp;下一步&emsp;
+                                继续
                             </button>
                         </div>
                     </div>
@@ -263,40 +271,40 @@
             <div>
                 <form class="layui-form" style="margin: 0 auto;text-align:center;padding-top: 40px;">
                     <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">事故地点</label>
-                        <div class="layui-input-inline">
-                            <select name="location">
-                                <option value=""></option>
-                                <option value="城区">城区</option>
-                                <option value="村庄" >村庄</option>
-                                <option value="高速公路">高速公路</option>
-                                <option value="野外">野外</option>
-                                <option value="车库">车库</option>
-                                <option value="其他">其他</option>
-                                <option value="未知">未知</option>
-                            </select>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">事故地点</label>
+                            <div class="layui-input-inline">
+                                <select name="location">
+                                    <option value=""></option>
+                                    <option value="城区">城区</option>
+                                    <option value="村庄" >村庄</option>
+                                    <option value="高速公路">高速公路</option>
+                                    <option value="野外">野外</option>
+                                    <option value="车库">车库</option>
+                                    <option value="其他">其他</option>
+                                    <option value="未知">未知</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">道路趋势</label>
+                            <div class="layui-input-inline">
+                                <select name="ctqs">
+                                    <option value=""></option>
+                                    <option value="平坦的">平坦的</option>
+                                    <option value="上升" >上升</option>
+                                    <option value="下降">下降</option>
+                                    <option value="未知">未知</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">坡度</label>
+                            <div class="layui-input-inline">
+                                <input type="number" name="pd" id ="pd"   autocomplete="off" class="layui-input">
+                            </div>
                         </div>
                     </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">道路趋势</label>
-                        <div class="layui-input-inline">
-                            <select name="ctqs">
-                                <option value=""></option>
-                                <option value="平坦的">平坦的</option>
-                                <option value="上升" >上升</option>
-                                <option value="下降">下降</option>
-                                <option value="未知">未知</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">坡度</label>
-                        <div class="layui-input-inline">
-                            <input type="number" name="pd" id ="pd"   autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
 
 
                     <div class="layui-form-item">
@@ -374,12 +382,12 @@
                                 </select>
                             </div>
                         </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">风速</label>
-                        <div class="layui-input-inline">
-                            <input type="number" name="fs" id ="fs"    autocomplete="off" class="layui-input">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">风速</label>
+                            <div class="layui-input-inline">
+                                <input type="number" name="fs" id ="fs"    autocomplete="off" class="layui-input">
+                            </div>
                         </div>
-                    </div>
 
 
                         <div class="layui-form-item">
@@ -411,8 +419,11 @@
                     <div class="layui-form-item">
                         <div class="layui-input-block">
                             <button type="button" class="layui-btn layui-btn-primary pre ">上一步</button>
+                            <button class="layui-btn" lay-submit lay-filter="addEnvInfo">
+                                保存
+                            </button>
                             <button class="layui-btn" lay-submit lay-filter="formStep2" >
-                                &emsp;下一步&emsp;
+                                继续
                             </button>
                         </div>
                     </div>
@@ -428,11 +439,10 @@
                     <div style="font-size: 24px;color: #333;font-weight: 500;margin-top: 30px;">
                         填写完成
                     </div>
-                    <div style="font-size: 14px;color: #666;margin-top: 20px;">点击确认进行提交</div>
                 </div>
                 <div style="text-align: center;margin-top: 50px;">
-                    <button class="layui-btn next">再次填报</button>
-                    <button type="button" class="layui-btn layui-btn-primary pre ">上一步</button>
+                    <button class="layui-btn  layui-btn-primary pre"  >上一步</button>
+                    <button class="layui-btn  layui-btn-danger" id = "refresh" >再次填报</button>
                 </div>
             </div>
 
@@ -446,10 +456,16 @@
 <script src="${APP_PATH }/static/js/select.js" type="text/javascript"></script>
 <script src="${APP_PATH }/static/js/jquery.min.js" type="text/javascript"></script>
 
-
+<script>
+    okLoading.close();
+</script>
 <script>
     var newDate = '';
     var curUserName= '<%=session.getAttribute("curUserName")%>';
+    var todayAccNum =  '<%=request.getAttribute("todayAccNum")%>';
+    var num =  '<%=request.getAttribute("num")%>';
+    <%--var num =  '<%=session.getAttribute("num")%>';--%>
+    <%--var num = '<%=(Integer)session.getAttribute("todayAccNum")+1%>';--%>
     getLangDate();
     function dateFilter(date){
         if(date < 10){return "0"+date;}
@@ -467,7 +483,7 @@
         var d =Math.ceil((today.valueOf()- firstDay.valueOf())/ 86400000);
         var result =Math.ceil(d/7);
         return result+1;
-    };
+    }
     function getLangDate(){
         var dateObj = new Date(); //表示当前系统时间的Date对象
         var year = dateObj.getFullYear(); //当前系统时间的完整年份值
@@ -480,16 +496,14 @@
 
         var week = weeks[day]; //根据星期值，从数组中获取对应的星期字符串
         var zhous = getWeekOfYear();
-        okLoading.close();
         newDate = dateFilter(year)+"年"+dateFilter(month)+"月"+dateFilter(date)+"日 ";
         document.getElementById("nowTime").innerHTML = "亲爱的"+curUserName+"！  今天是  "+newDate+"&nbsp&nbsp"+week+
-            "&nbsp&nbsp第"+zhous+"周"+"&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"+"建议事故编号开头 : "+year+zhous+weekNumber;
+            "&nbsp&nbsp第"+zhous+"周"+"&nbsp&nbsp&nbsp"
+            +"数据库今日已录入案件"+todayAccNum+"起"+"&nbsp&nbsp&nbsp"+"建议事故编号: "+year+zhous+weekNumber+num;
         setTimeout("getLangDate()",1000);
     }
-
-
-
 </script>
+
 <script>
     layui.use([ 'form', 'step','laydate'], function () {
         var $ = layui.$,
@@ -551,10 +565,10 @@
             }]
         });
 
-       /* form.on('submit(formStep)', function (data) {
-            step.next('#stepForm');
-            return false;
-        });*/
+        /* form.on('submit(formStep)', function (data) {
+             step.next('#stepForm');
+             return false;
+         });*/
 
         form.on('submit(formStep2)', function (data) {
             step.next('#stepForm');
@@ -576,9 +590,34 @@
         var form = layui.form;
         var $ = layui.jquery;
 
+        // $.ajax({
+        //     url: "/accNum",        //获取当天已经新建的事故
+        //     type: "POST",
+        //     dataType: 'json'
+        // });
+
+        $("#refresh").click(function () {
+            setTimeout('window.location.reload()',0);
+        });
+
         //添加表单监听事件,提交注册信息
         form.on('submit(formStep)', function (form) {
             $.post('/insertBaseInfoId', form.field, function (result) {
+                handlerResult(result,Done);
+            });
+            //防止页面跳转
+            return false;
+        });
+
+        form.on('submit(saveEnvInfo)', function (form) {
+            $.post('/saveEnvInfo', form.field, function (result) {
+                handlerResult(result,Done);
+            });
+            //防止页面跳转
+            return false;
+        });
+        form.on('submit(addEnvInfo)', function (form) {
+            $.post('/addEnvInfo', form.field, function (result) {
                 handlerResult(result,Done);
             });
             //防止页面跳转
@@ -620,6 +659,10 @@
         }
     }
 </script>
+
+
+
+
 
 </html>
 

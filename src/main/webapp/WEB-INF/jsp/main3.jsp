@@ -23,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<link rel="stylesheet" href="${APP_PATH}/WeAdmin-master/static/css/font.css">
 		<link rel="stylesheet" href="${APP_PATH}/WeAdmin-master/static/css/weadmin.css">
 		<script type="text/javascript" src="${APP_PATH}/WeAdmin-master/lib/layui/layui.js" charset="utf-8"></script>
-        <script type="text/javascript" src="${APP_PATH}/ok-admin/js/okadmin.js" charset="utf-8"></script>
+        <%--<script type="text/javascript" src="${APP_PATH}/ok-admin/js/okadmin.js" charset="utf-8"></script>--%>
 	</head>
 
 

@@ -164,19 +164,27 @@
                 </div>
                 <!--<legend>信息统计</legend>-->
                 <blockquote class="layui-elem-quote font16">工作进展</blockquote>
-                <div class="">
-                    <table class="layui-table" lay-even>
-                        <thead>
+                <div >
+                    <table class="layui-table" lay-even style="text-align: center">
+                        <%--<thead>
                         <tr>
-                            <th>统计</th>
-                            <th>建档案件</th>
-                            <th>表格数据</th>
-                            <th>图片数据</th>
-                            <th>案件报告</th>
-                            <th>案件上传</th>
+                            <th >统计</th>
+                            <th>创建案件</th>
+                            <th>上传EXCEL</th>
+                            <th>上传图片</th>
+                            <th>处理图片</th>
+                            <th>处理完毕</th>
                         </tr>
-                        </thead>
+                        </thead>--%>
                         <tbody>
+                        <tr>
+                            <td>统计</td>
+                            <td>创建案件</td>
+                            <td>上传EXCEL</td>
+                            <td>上传图片</td>
+                            <td>处理图片</td>
+                            <td>处理完毕</td>
+                        </tr>
                         <tr>
                             <td>总数</td>
                             <td>92</td>
@@ -187,14 +195,6 @@
                         </tr>
                         <tr>
                             <td>今日</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td>昨日</td>
                             <td>0</td>
                             <td>0</td>
                             <td>0</td>

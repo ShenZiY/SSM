@@ -1,3 +1,4 @@
+<%--
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8"%>
 
@@ -22,111 +23,15 @@
     <link rel="stylesheet" href="${APP_PATH }/ok-admin/css/oksub.css" media="all"/>
     <script type="text/javascript" src="${APP_PATH }/ok-admin/js/okLoading.js"></script>
     <script src="${APP_PATH }/WeAdmin-master/lib/layui/layui.js" charset="utf-8"></script>
+    <script src="${APP_PATH }/WeAdmin-master/static/js/echarts.min.js"></script>
 
 
 </head>
 
-<body >
-<div class="weadmin-body">
+<body class="weadmin-body" >
+<div >
     <blockquote class="layui-elem-quote"><div id="nowTime"></div></blockquote>
-    <%--<div class="layui-fluid" style="overflow: hidden;">
-        <div class="layui-row layui-col-space15">
-            <div class="layui-col-md8">
-                <div class="layui-card">
-                    <div class="layui-card-header">快捷方式</div>
-                    <div class="layui-card-body">
-                        <div class="layui-carousel weadmin-shortcut" lay-filter="shortcut" lay-indicator="inside" lay-arrow="none" style="width: 100%; height: 280px;">
-                            <div carousel-item="">
-                                <ul class="layui-row layui-col-space10 layui-this">
-                                    <li class="layui-col-xs3">
-                                        <a href="http://www.layui.com/doc/" target="_blank">
-                                            <i class="layui-icon">&#xe705;</i>
-                                            <cite>Layui文档</cite>
-                                            <p><span>Layui作者一个字节一个字节撸出来的精华，数以万计用户的指明灯</span></p>
-                                        </a>
-                                    </li>
-                                    <li class="layui-col-xs3">
-                                        <a href="http://www.layui.com/admin/" target="_blank">
-                                            <i class="layui-icon">&#xe735;</i>
-                                            <cite>LayuiAdmin</cite>
-                                            <p><span>Layui官方出品的专业后台管理模板</span></p>
-                                        </a>
-                                    </li>
-                                    <li class="layui-col-xs3">
-                                        <a href="http://layim.layui.com/" target="_blank">
-                                            <i class="layui-icon">&#xe606;</i>
-                                            <cite>LayIM</cite>
-                                            <p><span>Layui官方出品的一款Web即时通讯前端解决方案</span></p>
-                                        </a>
-                                    </li>
-                                    <li class="layui-col-xs3">
-                                        <a href="http://fly.layui.com/case/u/777504" target="_blank">
-                                            <i class="layui-icon">&#xe6c6;</i>
-                                            <cite>案例点赞</cite>
-                                            <p><span>谢谢关注，更欢迎提意见，虽然我不一定能做好~~</span></p>
-                                        </a>
-                                    </li>
 
-
-                                </ul>
-                                <ul class="layui-row layui-col-space10">
-                                    <li class="layui-col-xs3">
-                                        <a href="https://github.com/WangEn/WeAdmin" target="_blank">
-                                            <i class="layui-icon">&#xe600;</i>
-                                            <cite>Github下载</cite>
-                                        </a>
-                                    </li>
-
-                                    <li class="layui-col-xs3">
-                                        <a href="https://gitee.com/lovetime/WeAdmin" target="_blank">
-                                            <i class="layui-icon">&#xe62c;</i>
-                                            <cite>码云下载</cite>
-                                        </a>
-                                    </li>
-                                    <li class="layui-col-xs3">
-                                        <a href="javascript:;" target="_blank">
-                                            <i class="layui-icon layui-icon-set"></i>
-                                            <cite>设置</cite>
-                                        </a>
-                                    </li>
-                                    <li class="layui-col-xs3">
-                                        <a href="javascript:;" target="_blank">
-                                            <i class="layui-icon layui-icon-set"></i>
-                                            <cite>设置</cite>
-                                        </a>
-                                    </li>
-
-                                </ul>
-
-                            </div>
-                            <div class="layui-carousel-ind">
-                                <ul>
-                                    <li class="layui-this"></li>
-                                    <li></li>
-                                </ul>
-                            </div>
-                            <!--<button class="layui-icon layui-carousel-arrow" lay-type="sub"></button>
-                            <button class="layui-icon layui-carousel-arrow" lay-type="add"></button>-->
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="layui-col-md4">
-                <div class="layui-card">
-                    <div class="layui-card-header">
-                        作者叨叨
-                        <i class="layui-icon" style="color: #FF5722;">&#xe756;</i>
-                    </div>
-                    <div class="layui-card-body layui-text weadmin-text">
-                        <p>Layui发版以来一直受到不少猿的推崇，作为其中的小白，我也一直在推崇和学习中挣扎，WeAdmin无他，也只是小白实操的一个记录。</p>
-                        <p>更多的疑难解答，建议移步查看<a href="http://www.layui.com/doc/" target="_blank">layui文档</a>或者进入<a href="http://fly.layui.com/" target="_blank">Fly社区</a>搜索。</p>
-                        <p>更完善的商业使用，强烈建议移步<a href="http://www.layui.com/admin/" target="_blank">layuiAdmin</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>--%>
     <div class="layui-col-lg12 layui-collapse" style="border: none;">
         <div class="layui-col-lg6 layui-col-md12">
 
@@ -166,16 +71,6 @@
                 <blockquote class="layui-elem-quote font16">工作进展</blockquote>
                 <div >
                     <table class="layui-table" lay-even style="text-align: center">
-                        <%--<thead>
-                        <tr>
-                            <th >统计</th>
-                            <th>创建案件</th>
-                            <th>上传EXCEL</th>
-                            <th>上传图片</th>
-                            <th>处理图片</th>
-                            <th>处理完毕</th>
-                        </tr>
-                        </thead>--%>
                         <tbody>
                         <tr>
                             <td>统计</td>
@@ -186,73 +81,36 @@
                             <td>处理完毕</td>
                         </tr>
                         <tr>
-                            <td>总数</td>
-                            <td>92</td>
-                            <td>9</td>
-                            <td>0</td>
-                            <td>8</td>
-                            <td>20</td>
+                            <td >总数</td>
+                            <td >${statusTotal[0]}</td>
+                            <td>${statusTotal[1]}</td>
+                            <td>${statusTotal[2]}</td>
+                            <td>${statusTotal[3]}</td>
+                            <td>${statusTotal[4]}</td>
                         </tr>
                         <tr>
                             <td>今日</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
+                            <td>${statusToday[0]}</td>
+                            <td>${statusToday[1]}</td>
+                            <td>${statusToday[2]}</td>
+                            <td>${statusToday[3]}</td>
+                            <td>${statusToday[4]}</td>
                         </tr>
                         <tr>
                             <td>本周</td>
-                            <td>2</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
+                            <td>${statusWeek[0]}</td>
+                            <td>${statusWeek[1]}</td>
+                            <td>${statusWeek[2]}</td>
+                            <td>${statusWeek[3]}</td>
+                            <td>${statusWeek[4]}</td>
                         </tr>
                         <tr>
                             <td>本月</td>
-                            <td>2</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <table class="layui-table">
-                        <thead>
-                        <tr>
-                            <th colspan="2" scope="col">服务器信息</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th width="30%">服务器计算机名</th>
-                            <td><span id="lbServerName">http://127.0.0.1/</span></td>
-                        </tr>
-                        <tr>
-                            <td>服务器IP地址</td>
-                            <td>192.168.1.1</td>
-                        </tr>
-                        <tr>
-                            <td>服务器域名</td>
-                            <td>github.com</td>
-                        </tr>
-                        <tr>
-                            <td>服务器端口 </td>
-                            <td>80</td>
-                        </tr>
-                        <tr>
-                            <td>本文件所在文件夹 </td>
-                            <td>D:\Web\WeAdmin\</td>
-                        </tr>
-                        <tr>
-                            <td>WeAdmin时间 </td>
-                            <td id="firstTime">2018-01-01 13:14:00</td>
-                        </tr>
-                        <tr>
-                            <td>上次更新时间 </td>
-                            <td id="lastTime">7210分钟</td>
+                            <td>${statusMonth[0]}</td>
+                            <td>${statusMonth[1]}</td>
+                            <td>${statusMonth[2]}</td>
+                            <td>${statusMonth[3]}</td>
+                            <td>${statusMonth[4]}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -262,8 +120,8 @@
         <div class="layui-col-lg6 layui-col-md12">
             <fieldset class="layui-elem-field we-changelog" style="padding: 5px;">
                 <!--更新日志-->
-                <blockquote class="layui-elem-quote font16">发展历程&amp;更新日志</blockquote>
-                <ul class="layui-timeline" style="height: 729px; overflow-y: auto;">
+                <blockquote class="layui-elem-quote font16">最近7天新建案件信息</blockquote>
+                <ul class="layui-timeline" style="height: 400px; overflow-y: auto;">
                     <!--<li class="layui-timeline-item">
                         <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
                         <div class="layui-timeline-content layui-text">
@@ -388,14 +246,80 @@
             </fieldset>
         </div>
     </div>
+
     <div style="clear: both;overflow: hidden; margin-top: 10px;">
-        <blockquote class="layui-elem-quote">Copyright © 2019
+        &lt;%&ndash;<blockquote class="layui-elem-quote">Copyright © 2019
             <a href="http://www.tfri.com.cn/manage/html/index.html" target="_blank">应急管理部天津市消防研究所</a>
-        </blockquote>
+        </blockquote>&ndash;%&gt;
     </div>
+    <blockquote class="layui-elem-quote">近期工作统计</blockquote>
+    <div id="main" style="width: 90%;height:500px;position: absolute;left:5%;margin-bottom: 2%"></div>
 </div>
+
+
 </body>
+
 <script type="text/javascript" src="../lib/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    // 指定图表的配置项和数据
+    var option = {
+        title: {
+            text: ''
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data:['新建案件','处理完毕']
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        toolbox: {
+            feature: {
+                saveAsImage: {}
+            },
+
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+
+            data:["${date[0]}","${date[1]}","${date[2]}","${date[3]}","${date[4]}"]
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [
+           {
+                name:'新建案件',
+                type:'line',
+                /*stack: '总量',*/
+                data:["${newAcc[0]}","${newAcc[1]}","${newAcc[2]}","${newAcc[3]}","${newAcc[4]}"]
+            },
+            {
+                name:'处理完毕',
+                type:'line',
+                /*stack: '总量',*/
+
+                data:["${done[0]}","${done[1]}","${done[2]}","${done[3]}","${done[4]}"]
+            }
+        ]
+    };
+
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
+</script>
+
+
 <script type="text/javascript">
     layui.extend({
         admin: '{/}../static/js/admin',
@@ -456,12 +380,9 @@
         var timeValue = "" +((hour >= 12) ? (hour >= 18) ? ", 晚上" : ", 下午" : ", 上午" ); //当前时间属于上午、晚上还是下午
         okLoading.close();
         newDate = dateFilter(year)+"年"+dateFilter(month)+"月"+dateFilter(date)+"日 "+" "+dateFilter(hour)+":"+dateFilter(minute)+":"+dateFilter(second);
-        document.getElementById("nowTime").innerHTML = "亲爱的"+curUserName+timeValue+"好！";
+        document.getElementById("nowTime").innerHTML = "尊敬的"+curUserName+timeValue+"好！";
         setTimeout("getLangDate()",1000);
     }
-
-
-
 </script>
-
 </html>
+--%>

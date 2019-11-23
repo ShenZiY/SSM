@@ -497,7 +497,7 @@
         var week = weeks[day]; //根据星期值，从数组中获取对应的星期字符串
         var zhous = getWeekOfYear();
         newDate = dateFilter(year)+"年"+dateFilter(month)+"月"+dateFilter(date)+"日 ";
-        document.getElementById("nowTime").innerHTML = "亲爱的"+curUserName+"！  今天是  "+newDate+"&nbsp&nbsp"+week+
+        document.getElementById("nowTime").innerHTML = "尊敬的"+curUserName+"！  今天是  "+newDate+"&nbsp&nbsp"+week+
             "&nbsp&nbsp第"+zhous+"周"+"&nbsp&nbsp&nbsp"
             +"数据库今日已录入案件"+todayAccNum+"起"+"&nbsp&nbsp&nbsp"+"建议事故编号: "+year+zhous+weekNumber+num;
         setTimeout("getLangDate()",1000);

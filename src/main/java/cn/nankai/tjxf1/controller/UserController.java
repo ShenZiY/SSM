@@ -2,12 +2,15 @@ package cn.nankai.tjxf1.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import cn.nankai.tjxf1.service.BaseInfoService;
 import cn.nankai.tjxf1.util.ResultBean;
+import com.fasterxml.jackson.databind.ser.Serializers;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +28,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService userServivce;
+
+	@Autowired
+	private BaseInfoService baseInfoService;
 	
 	/*//正常访问login页面
 	@RequestMapping("/login")
@@ -149,7 +155,25 @@ public class UserController {
     }
 
 	@RequestMapping("/welcome")
-	public String welcome() {
+	public String welcome(Model model,HttpSession session) {
+		Integer id = (Integer) session.getAttribute("curUserId");
+
+
+		String[] date = new String[]{"周一","周二","周三","周四","周五"};
+		int[] newAcc = new int[]{2,3,4,5,6};
+		int[] done = new int[]{1,2,4,5,6};
+		int[] statusTotal = baseInfoService.countStatusById(id);
+		int[] statusToday = baseInfoService.countTodayStatusById(id);
+		int[] statusWeek = baseInfoService.countWeekStatusById(id);
+		int[] statusMonth = baseInfoService.countMonthStatusById(id);
+		model.addAttribute("statusTotal",statusTotal);
+		model.addAttribute("statusToday",statusToday);
+		model.addAttribute("statusWeek",statusWeek);
+		model.addAttribute("statusMonth",statusMonth);
+		model.addAttribute("date",date);
+		model.addAttribute("newAcc",newAcc);
+		model.addAttribute("done",done);
+
 		return "welcome";
 	}
 

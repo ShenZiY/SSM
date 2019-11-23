@@ -44,6 +44,7 @@
 			<mvc:exclude-mapping path="/**/*.jpeg"/>
 			<mvc:exclude-mapping path="/**/font/**" />
 			<mvc:exclude-mapping path="/**/*.css" />
+			<mvc:exclude-mapping path="/**/*.json" />
 			<mvc:exclude-mapping path="/**/protocal.html" />
 			<mvc:exclude-mapping path="/WeAdmin-master/**/*" />
 

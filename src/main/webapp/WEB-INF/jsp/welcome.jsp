@@ -1,4 +1,3 @@
-<%--
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8"%>
 
@@ -24,6 +23,7 @@
     <script type="text/javascript" src="${APP_PATH }/ok-admin/js/okLoading.js"></script>
     <script src="${APP_PATH }/WeAdmin-master/lib/layui/layui.js" charset="utf-8"></script>
     <script src="${APP_PATH }/WeAdmin-master/static/js/echarts.min.js"></script>
+    <script src="${APP_PATH }/WeAdmin-master/static/js/list.js"></script>
 
 
 </head>
@@ -120,8 +120,14 @@
         <div class="layui-col-lg6 layui-col-md12">
             <fieldset class="layui-elem-field we-changelog" style="padding: 5px;">
                 <!--更新日志-->
-                <blockquote class="layui-elem-quote font16">最近7天新建案件信息</blockquote>
-                <ul class="layui-timeline" style="height: 400px; overflow-y: auto;">
+                <blockquote class="layui-elem-quote font16">最近7天案件信息</blockquote>
+                <div style="height: 380px;overflow-y: auto;width: 96%;margin-left: 1%">
+                    <table id="demo" style="text-align: center"></table>
+
+
+                </div>
+
+                <%--<ul class="layui-timeline" style="height: 400px; overflow-y: auto;">
                     <!--<li class="layui-timeline-item">
                         <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
                         <div class="layui-timeline-content layui-text">
@@ -242,15 +248,15 @@
 
                         </div>
                     </li>
-                </ul>
+                </ul>--%>
             </fieldset>
         </div>
     </div>
 
     <div style="clear: both;overflow: hidden; margin-top: 10px;">
-        &lt;%&ndash;<blockquote class="layui-elem-quote">Copyright © 2019
+        <%--<blockquote class="layui-elem-quote">Copyright © 2019
             <a href="http://www.tfri.com.cn/manage/html/index.html" target="_blank">应急管理部天津市消防研究所</a>
-        </blockquote>&ndash;%&gt;
+        </blockquote>--%>
     </div>
     <blockquote class="layui-elem-quote">近期工作统计</blockquote>
     <div id="main" style="width: 90%;height:500px;position: absolute;left:5%;margin-bottom: 2%"></div>
@@ -260,6 +266,37 @@
 </body>
 
 <script type="text/javascript" src="../lib/layui/layui.js" charset="utf-8"></script>
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+
+        //第一个实例
+        table.render({
+            elem: '#demo'
+            ,url: '/jsp/data' //数据接口*/
+            /*,skin: 'line' //行边框风格*/
+            ,even: true //开启隔行背景
+            ,page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+                layout: ['limit', 'count', 'prev', 'page', 'next'] //自定义分页布局
+                //,curr: 5 //设定初始在第 5 页
+                ,groups: 5 //只显示 1 个连续页码
+                ,first: false //不显示首页
+                ,last: false //不显示尾页
+
+            }
+            ,cols: [[ //表头
+                {field: 'accId', title: '事故编码',  sort: true, fixed: 'left',align:'center'}
+                ,{field: 'timeInvest', title: '调查时间',sort: true ,align:'center' }
+                ,{field: 'loc', title: '事故地点',align:'center' }
+                ,{field: 'Status', title: '处理状态',align:'center' }
+                ,{field: 'govLr', title: '录入人',align:'center' }
+            ]]
+           /* data:[{"timeInvest":"Wed Nov 20 10:58:37 CST 2019","govLr":"李明","locSheng":"重庆","accId":20194731,"status":3}]*/
+        });
+
+    });
+</script>
+
 <script type="text/javascript">
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main'));
@@ -273,7 +310,7 @@
             trigger: 'axis'
         },
         legend: {
-            data:['新建案件','处理完毕']
+            data:['案件','处理完毕','处理中']
         },
         grid: {
             left: '3%',
@@ -291,24 +328,30 @@
             type: 'category',
             boundaryGap: false,
 
-            data:["${date[0]}","${date[1]}","${date[2]}","${date[3]}","${date[4]}"]
+            data:["${date[6]}","${date[5]}","${date[4]}","${date[3]}","${date[2]}","${date[1]}","${date[0]}"]
         },
         yAxis: {
             type: 'value'
         },
         series: [
            {
-                name:'新建案件',
+                name:'案件',
                 type:'line',
                 /*stack: '总量',*/
-                data:["${newAcc[0]}","${newAcc[1]}","${newAcc[2]}","${newAcc[3]}","${newAcc[4]}"]
+                data:["${newAcc[6]}","${newAcc[5]}","${newAcc[4]}","${newAcc[3]}","${newAcc[2]}","${newAcc[1]}","${newAcc[0]}"]
+            },
+            {
+                name:'处理中',
+                type:'line',
+                /*stack: '总量',*/
+                data:["${doing[6]}","${doing[5]}","${doing[4]}","${doing[3]}","${doing[2]}","${doing[1]}","${doing[0]}"]
             },
             {
                 name:'处理完毕',
                 type:'line',
                 /*stack: '总量',*/
 
-                data:["${done[0]}","${done[1]}","${done[2]}","${done[3]}","${done[4]}"]
+                data:["${done[0]}","${done[1]}","${done[2]}","${done[3]}","${done[4]}","${done[4]}","${done[4]}"]
             }
         ]
     };
@@ -385,4 +428,4 @@
     }
 </script>
 </html>
---%>
+

@@ -20,6 +20,15 @@
   </properties>
 
   <dependencies>
+
+    <!--json-->
+    <!-- https://mvnrepository.com/artifact/org.json/json -->
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>20160810</version>
+    </dependency>
+
     <!-- 单元测试 -->
     <dependency>
       <groupId>junit</groupId>

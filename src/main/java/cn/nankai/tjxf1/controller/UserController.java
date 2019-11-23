@@ -2,16 +2,20 @@ package cn.nankai.tjxf1.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import cn.nankai.tjxf1.entity.BaseInfo;
 import cn.nankai.tjxf1.service.BaseInfoService;
 import cn.nankai.tjxf1.util.ResultBean;
 import com.fasterxml.jackson.databind.ser.Serializers;
 import org.apache.ibatis.annotations.Param;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -159,9 +163,16 @@ public class UserController {
 		Integer id = (Integer) session.getAttribute("curUserId");
 
 
-		String[] date = new String[]{"周一","周二","周三","周四","周五"};
-		int[] newAcc = new int[]{2,3,4,5,6};
-		int[] done = new int[]{1,2,4,5,6};
+		String[] date = test1(7);
+		int[] newAcc = new int[7];
+		int[] done = new int[7];
+		int[] doing = new int[7];
+		for (int i = 0,j=0; i < 7&&j>-7; i++,j--) {
+			int[] temp = baseInfoService.countStatusByDay(id,j);
+			newAcc[i] = temp[0];
+			doing[i] = temp[1];
+			done[i] =temp[2];
+		}
 		int[] statusTotal = baseInfoService.countStatusById(id);
 		int[] statusToday = baseInfoService.countTodayStatusById(id);
 		int[] statusWeek = baseInfoService.countWeekStatusById(id);
@@ -173,8 +184,26 @@ public class UserController {
 		model.addAttribute("date",date);
 		model.addAttribute("newAcc",newAcc);
 		model.addAttribute("done",done);
-
+		model.addAttribute("doing",doing);
 		return "welcome";
+	}
+
+	public static String[] test1(int intervals ) {
+		String[] result = new String[7];
+		for (int i = 0; i <intervals; i++) {
+			result[i]=getPastDate(i);
+		}
+		return result;
+	}
+
+
+	public static String getPastDate(int past) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.DAY_OF_YEAR, calendar.get(Calendar.DAY_OF_YEAR) - past);
+		Date today = calendar.getTime();
+		SimpleDateFormat format = new SimpleDateFormat("MM月dd日");
+		String result = format.format(today);
+		return result;
 	}
 
 }

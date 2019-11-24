@@ -45,6 +45,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public boolean updatePwd(Integer id, String pwd) {
+		if(userDao.updatePwd(id,pwd)==1)
+			return true;
+		return false;
+	}
+
+	@Override
 	//添加方法registerNameOnly传入表单中的用户名，用来判断数据库中是否已经存在该用户名
     public boolean registerIdOnly(Integer id){
 		 User user =  userDao.findById(id);

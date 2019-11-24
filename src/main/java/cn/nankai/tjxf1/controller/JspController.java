@@ -21,6 +21,12 @@ import java.util.*;
 public class JspController {
     @Resource
     private BaseInfoService baseInfoService;
+
+    @RequestMapping("/updatePassword")
+    public String updatePassword (){
+        return "updatePassword";
+    }
+
     @RequestMapping("/newAccident")
     public String newAccident(Model model) {
         int todayAccNum = baseInfoService.countAccNum();
@@ -56,7 +62,7 @@ public class JspController {
             BaseInfo baseInfoTemp = resultList.get(i);
             String accId = Integer.toString(baseInfoTemp.getAccId()) ;
             String 	govLr = baseInfoTemp.getGovLr();
-            String loc = baseInfoTemp.getLocSheng()+baseInfoTemp.getLocXian()+baseInfoTemp.getLocDetail();
+            String loc = baseInfoTemp.getLocSheng()+baseInfoTemp.getLocShi()+baseInfoTemp.getLocXian()+baseInfoTemp.getLocDetail();
             String timeInvest = handleDate(baseInfoTemp.getTimeInvest().toString());
             String Status = handleStatus(baseInfoTemp.getStatus());
             Map<String,String> map = new HashMap<>();
@@ -77,6 +83,8 @@ public class JspController {
             json.put("msg","");
             json.put("count", count);
             json.put("data", res);
+        }else{
+            json.put("error","查询列表为空");
         }
         System.out.println(json.toString());
         return json.toString();

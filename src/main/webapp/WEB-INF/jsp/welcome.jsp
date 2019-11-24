@@ -2,9 +2,7 @@
          pageEncoding="utf-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-    pageContext.setAttribute("APP_PATH", request.getContextPath());
-%>
+
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -16,14 +14,14 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <link rel="shortcut icon" href="${APP_PATH }/static/logo.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="${APP_PATH }/WeAdmin-master/static/css/font.css">
-    <link rel="stylesheet" href="${APP_PATH }/WeAdmin-master/static/css/weadmin.css">
-    <link rel="stylesheet" href="${APP_PATH }/ok-admin/css/oksub.css" media="all"/>
-    <script type="text/javascript" src="${APP_PATH }/ok-admin/js/okLoading.js"></script>
-    <script src="${APP_PATH }/WeAdmin-master/lib/layui/layui.js" charset="utf-8"></script>
-    <script src="${APP_PATH }/WeAdmin-master/static/js/echarts.min.js"></script>
-    <script src="${APP_PATH }/WeAdmin-master/static/js/list.js"></script>
+    <link rel="shortcut icon" href="/static/logo.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/WeAdmin-master/static/css/font.css">
+    <link rel="stylesheet" href="/WeAdmin-master/static/css/weadmin.css">
+    <link rel="stylesheet" href="/ok-admin/css/oksub.css" media="all"/>
+    <script type="text/javascript" src="/ok-admin/js/okLoading.js"></script>
+    <script src="/WeAdmin-master/lib/layui/layui.js" charset="utf-8"></script>
+    <script src="/WeAdmin-master/static/js/echarts.min.js"></script>
+    <script src="/WeAdmin-master/static/js/list.js"></script>
 
 
 </head>
@@ -118,11 +116,11 @@
             </fieldset>
         </div>
         <div class="layui-col-lg6 layui-col-md12">
-            <fieldset class="layui-elem-field we-changelog" style="padding: 5px;">
+            <fieldset class="layui-elem-field " style="padding: 5px;">
                 <!--更新日志-->
-                <blockquote class="layui-elem-quote font16">最近7天案件信息</blockquote>
-                <div style="height: 380px;overflow-y: auto;width: 96%;margin-left: 1%">
-                    <table id="demo" style="text-align: center"></table>
+                <blockquote class="layui-elem-quote font16">本周案件信息</blockquote>
+                <div style="height: 380px;overflow-y: auto;width: 96%;margin-left: 1%;padding: 5px;">
+                    <table id="demo" style="text-align: center;"></table>
 
 
                 </div>

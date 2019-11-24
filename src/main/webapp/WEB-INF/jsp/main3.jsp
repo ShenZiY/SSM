@@ -50,10 +50,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<dl class="layui-nav-child">
 						<!-- 二级菜单 -->
 						<dd>
-							<a onclick="WeAdminShow('个人信息','http://www.baidu.com')">个人信息</a>
+							<a onclick="WeAdminShow('我的资料','/user/userInfo',600,450)">我的资料</a>
 						</dd>
 						<dd>
-							<a onclick="WeAdminShow('修改密码','./login.html')">修改密码</a>
+							<a onclick="WeAdminShow('修改密码','/jsp/updatePassword',600,600)">修改密码</a>
+						</dd>
+						<dd>
+							<a onclick="WeAdminShow('百度一下','http://www.baidu.com')">百度一下</a>
 						</dd>
 					</dl>
 				</li>
@@ -105,7 +108,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</a>
 							</li>
 							<li>
-								<a _href="./pages/article/category.html">
+								<a _href="/user">
 									<i class="iconfont">&#xe6a7;</i>
 									<cite>管理事故</cite>
 								</a>

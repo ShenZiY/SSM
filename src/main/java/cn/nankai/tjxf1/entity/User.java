@@ -1,5 +1,7 @@
 package cn.nankai.tjxf1.entity;
 
+import java.util.Date;
+
 public class User {
 	private Integer id;
 
@@ -10,6 +12,16 @@ public class User {
 	private String mail;
 
 	private String phone;
+
+	public Date getRegisterTime() {
+		return registerTime;
+	}
+
+	public void setRegisterTime(Date registerTime) {
+		this.registerTime = registerTime;
+	}
+
+	private Date registerTime;
 
 	public Integer getId() {
 		return id;

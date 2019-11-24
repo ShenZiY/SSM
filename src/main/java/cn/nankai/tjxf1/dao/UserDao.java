@@ -2,6 +2,7 @@ package cn.nankai.tjxf1.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import cn.nankai.tjxf1.entity.User;
@@ -17,6 +18,8 @@ public interface UserDao {
 
 	
 	int insertUser(User user);
+
+	int updatePwd (@Param("id") Integer id,@Param("newPwd") String newPwd);
 	
 
 

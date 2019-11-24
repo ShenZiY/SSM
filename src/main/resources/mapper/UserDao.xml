@@ -9,11 +9,12 @@
 		<result column="password" jdbcType="VARCHAR" property="password" />
 		<result column="mail" jdbcType="VARCHAR" property="mail" />
 		<result column="phone" jdbcType="VARCHAR" property="phone" />
+		<result column="Register_Time" jdbcType="TIMESTAMP" property="registerTime" />
 	</resultMap>
 	<insert id="insertUser" parameterType="cn.nankai.tjxf1.entity.User">
-     insert into user (id, username, password,mail, phone)
+     insert into user (id, username, password,mail, phone,Register_Time)
       values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
-      #{mail,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR})
+      #{mail,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},#{registerTime,jdbcType=TIMESTAMP})
     </insert>
 
 	
@@ -24,6 +25,10 @@
 		select * from user where id = #{id}
 			
 	</select>
+
+	<update id="updatePwd" >
+		update user set password = #{newPwd} where id = #{id}
+	</update>
 
 
 </mapper>	

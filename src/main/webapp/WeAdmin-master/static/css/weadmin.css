@@ -83,15 +83,36 @@ body {
   font-weight: 300;
   color: #ccc;
 }
-.login-bg {
+.updatepwd-bg {
   /*background: #eeeeee 0 0 no-repeat;*/
-  background: url(../images/bg.png) no-repeat center;
+  background: url(../images/bg1.png) no-repeat center;
   background-size: auto;
   overflow: hidden;
 }
-.login {
+
+.updatepwd {
   margin: 120px auto 0 auto;
   min-height: 420px;
+  max-width: 420px;
+  padding: 40px;
+  background-color: #ffffff;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 4px;
+  /* overflow-x: hidden; */
+  box-sizing: border-box;
+}
+
+.login-bg {
+   /*background: #eeeeee 0 0 no-repeat;*/
+   background: url(../images/bg.png) no-repeat center;
+   background-size: auto;
+   overflow: hidden;
+ }
+
+.login {
+  margin: 120px auto 0 auto;
+  min-height: 240px;
   max-width: 420px;
   padding: 40px;
   background-color: #ffffff;
@@ -119,6 +140,7 @@ body {
 .login .layui-form-item {position:relative;}
 .login .layui-form-item label {position:absolute;padding-left:5px;top:6px;width:10px;line-height:36px;text-align:center;color: rgba(53, 53, 53, 0.88);}
 .login .layui-form-item input {padding-left:360px;}
+.login .layui-form-item input::placeholder { color: #189F92;}
 
 .login #darkbannerwrap {
   background: url(../images/aiwrap.png);

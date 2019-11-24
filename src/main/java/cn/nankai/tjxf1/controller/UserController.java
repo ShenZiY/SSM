@@ -45,9 +45,16 @@ public class UserController {
 	//注册功能
 	@RequestMapping("/signup")
     @ResponseBody
-	public ResultBean signup(User user, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public ResultBean signup(@RequestParam(value="id") Integer id,@RequestParam(value="password") String password,@RequestParam(value="username") String username,@RequestParam(value="phone") String phone,@RequestParam(value="mail") String mail, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception{
+		User user = new User();
+		user.setId(id);
+		user.setPassword(password);
+		user.setPhone(phone);
+		user.setMail(mail);
+		user.setUsername(username);
+		Date date = new Date();// 获取当前时间
+		user.setRegisterTime(date);
 
-	    Integer id = user.getId();
 	    boolean isOnly = userServivce.registerIdOnly(id);
 	    if(isOnly == true )
 	        return ResultBean.error("用户ID已经存在！");
@@ -206,4 +213,41 @@ public class UserController {
 		return result;
 	}
 
+	@RequestMapping("/userInfo")
+	public String userInfo(Model model,HttpSession session) throws ParseException {
+		Integer id = (Integer) session.getAttribute("curUserId");
+		User user = userServivce.findUserById(id);
+		int[] statusTotal = baseInfoService.countStatusById(id);
+		String registerTime = handleDate(user.getRegisterTime().toString());
+		model.addAttribute("statusTotal",statusTotal);
+		model.addAttribute("user",user);
+		model.addAttribute("registerTime",registerTime);
+
+		return "userInfo";
+	}
+
+	@RequestMapping("/updatePwd")
+	@ResponseBody
+	public ResultBean updatePwd(HttpSession session,String oldPassword, String newPassword){
+		Integer id = (Integer) session.getAttribute("curUserId");
+		boolean res = userServivce.checkLogin(id , oldPassword);
+		if(res){
+			if(userServivce.updatePwd(id,newPassword)){
+				System.out.println("修改密码成功");
+				return ResultBean.success("修改密码成功");
+			}else{
+				return ResultBean.error("异常！请重新操作");
+			}
+		}else{
+			return ResultBean.error("旧密码错误！");
+		}
+	}
+
+
+	public static String handleDate (String str) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
+		Date d = sdf.parse(str);
+		String formatDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(d);
+		return formatDate;
+	}
 }

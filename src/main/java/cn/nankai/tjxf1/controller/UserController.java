@@ -11,20 +11,30 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import cn.nankai.tjxf1.entity.BaseInfo;
+import cn.nankai.tjxf1.entity.PeolpleInfo;
 import cn.nankai.tjxf1.service.BaseInfoService;
+import cn.nankai.tjxf1.service.PeopleInfoService;
 import cn.nankai.tjxf1.util.ResultBean;
 import com.fasterxml.jackson.databind.ser.Serializers;
+import com.google.common.collect.Lists;
+import com.wuwenze.poi.ExcelKit;
+import com.wuwenze.poi.handler.ExcelReadHandler;
+import com.wuwenze.poi.pojo.ExcelErrorField;
+import org.apache.commons.collections.MapUtils;
 import org.apache.ibatis.annotations.Param;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import cn.nankai.tjxf1.entity.User;
 import cn.nankai.tjxf1.service.UserService;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/user")
@@ -35,12 +45,106 @@ public class UserController {
 
 	@Autowired
 	private BaseInfoService baseInfoService;
+
+	@Autowired
+	private PeopleInfoService peopleInfoService;
 	
 	/*//正常访问login页面
 	@RequestMapping("/login")
 	public String login(){
 		return "login";
 	}*/
+
+	@RequestMapping(value = "/import", method = RequestMethod.POST)
+	public ResponseEntity<?> importUser(@RequestParam MultipartFile file)
+			throws IOException {
+
+		System.out.println("进入controller" );
+		long beginMillis = System.currentTimeMillis();
+
+		List<PeolpleInfo> successList = Lists.newArrayList();
+		List<Map<String, Object>> errorList = Lists.newArrayList();
+
+		List<User> successList1 = Lists.newArrayList();
+
+		ExcelKit.$Import(PeolpleInfo.class)
+				.readXlsx(file.getInputStream(), new ExcelReadHandler<PeolpleInfo>() {
+
+					@Override
+					public void onSuccess(int sheetIndex, int rowIndex, PeolpleInfo entity) {
+						if(sheetIndex == 0){
+							System.out.println(entity.toString());
+							successList.add(entity); // 单行读取成功，加入入库队列。
+						}
+
+					}
+
+					@Override
+					public void onError(int sheetIndex, int rowIndex,
+										List<ExcelErrorField> errorFields) {
+						// 读取数据失败，记录了当前行所有失败的数据
+						Map<String, Object> map = new HashMap<>();
+						map.put("sheetIndex", sheetIndex);
+						map.put("rowIndex", rowIndex);
+						map.put("errorFields", errorFields);
+						errorList.add(map);
+					}
+				});
+
+		ExcelKit.$Import(User.class)
+				.readXlsx(file.getInputStream(), new ExcelReadHandler<User>() {
+
+					@Override
+					public void onSuccess(int sheetIndex, int rowIndex, User entity) {
+						if(sheetIndex == 1){
+							System.out.println(sheetIndex);
+							System.out.println(entity.toString());
+							successList1.add(entity); // 单行读取成功，加入入库队列。
+						}
+					}
+
+					@Override
+					public void onError(int sheetIndex, int rowIndex,
+										List<ExcelErrorField> errorFields) {
+						// 读取数据失败，记录了当前行所有失败的数据
+						Map<String, Object> map = new HashMap<>();
+						map.put("sheetIndex", sheetIndex);
+						map.put("rowIndex", rowIndex);
+						map.put("errorFields", errorFields);
+						errorList.add(map);
+					}
+				});
+
+		for (int i = 0; i < successList1.size(); i++) {
+			User user = successList1.get(i);
+			Date date = new Date();// 获取当前时间
+			user.setRegisterTime(date);
+			userServivce.addUser(user);
+		}
+
+		// TODO: 执行successList的入库操作。
+		int flag = peopleInfoService.insertSelective(successList);
+		boolean haveError = errorList.isEmpty();
+		Map<String, Object> map1 = new HashMap<>();
+		map1.put("data", successList);
+		map1.put("haveError", haveError);
+		map1.put("error", errorList);
+		map1.put("timeConsuming", (System.currentTimeMillis() - beginMillis) / 1000L);
+		map1.put("flag", flag);
+
+		return ResponseEntity.ok(map1);
+	}
+
+
+
+    @RequestMapping(value = "/downTemplate", method = RequestMethod.GET)
+    public void downTemplate(HttpServletResponse response) {
+    	User user = userServivce.findUserById(1006);
+    	List<User> userList = new ArrayList<>();
+    	userList.add(user);
+		ExcelKit.$Export(User.class, response).downXlsx(userList, true);
+
+    }
 	
 	//注册功能
 	@RequestMapping("/signup")

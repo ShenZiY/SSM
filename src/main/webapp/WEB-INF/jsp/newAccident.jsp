@@ -616,6 +616,7 @@
             //防止页面跳转
             return false;
         });
+
         form.on('submit(addEnvInfo)', function (form) {
             $.post('/addEnvInfo', form.field, function (result) {
                 handlerResult(result,Done);

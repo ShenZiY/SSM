@@ -21,12 +21,31 @@
 
   <dependencies>
 
+    <dependency>
+      <groupId>xml-apis</groupId>
+      <artifactId>xml-apis</artifactId>
+      <version>1.4.01</version>
+    </dependency>
+      <dependency>
+          <groupId>org.apache.commons</groupId>
+          <artifactId>commons-collections4</artifactId>
+          <version>4.2</version>
+      </dependency>
+
+
     <!--json-->
     <!-- https://mvnrepository.com/artifact/org.json/json -->
     <dependency>
       <groupId>org.json</groupId>
       <artifactId>json</artifactId>
       <version>20160810</version>
+    </dependency>
+
+    <!--excel-->
+    <dependency>
+      <groupId>com.wuwenze</groupId>
+      <artifactId>ExcelKit</artifactId>
+      <version>2.0.72</version>
     </dependency>
 
     <!-- 单元测试 -->

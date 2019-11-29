@@ -72,16 +72,51 @@
             <div class="layui-upload-list" id="imgs">
             </div>
         </blockquote>
+
+
+
         <div class="mark_button">
+            <button type="button" class="layui-btn" id="test3"><i class="layui-icon"></i>导入Excel</button>
             <button type="button" class="layui-btn layui-btn-normal" id="sele_imgs">选择文件</button>
             <button type="button" class="layui-btn" id="upload_imgs" disabled>开始上传</button>
  
             <button type="button" class="layui-btn layui-btn-danger" id="dele_imgs">删除选中图片</button>
         </div>
- 
+
+
+
     </div>
  
     <script type="text/javascript" src="${APP_PATH}/layui/layui.all.js"></script>
+
+    <script>
+        layui.use('upload', function(){
+            var $ = layui.jquery
+                ,upload = layui.upload;
+
+
+            upload.render({
+                elem: '#test3'
+                ,url: '<%= request.getContextPath() %>/user/import'
+                ,accept: 'file' //普通文件
+                ,exts: 'xls|xlsx' //允许上传的文件后缀
+                ,done: function(res){//返回值接收
+                    if(res.flag=="1"){
+                        layer.msg('导入成功！', {
+                        }, function(){
+                            location.reload();
+                        });
+                    }else{
+                        layer.msg('导入失败！', {
+                        }, function(){
+                            location.reload();
+                        });
+                    }
+                }
+            });
+
+        });
+    </script>
  
     <script id="img_template" type="text/html">
         <div class="upload-img" filename="{{ d.index }}">
@@ -89,7 +124,35 @@
             <img src="{{  d.result }}" alt="{{ d.name }}" class="layui-upload-img">
         </div>
     </script>
- 
+
+    <script>
+        //导入 用layui upload插件
+        layui.use([ "element", "laypage", "layer", "upload"], function() {
+            var element = layui.element;
+            var laypage = layui.laypage;
+            var layer = layui.layer;
+            var upload = layui.upload;//主要是这个
+            layui.upload.render({
+                elem: "#importData",//导入id
+                url: "/user/import",
+                size: '3072',
+                accept: "file",
+                exts: 'xls|xlsx|xlsm|xlt|xltx|xltm',
+                done: function (result) {
+                    if (result.status == 0) {
+                        refreshTable()
+                    }
+                    if (result.message != null) {
+                        refreshTable();
+                        layer.msg(result.message)
+                    }
+                }
+            });
+            refreshTable()
+        });
+
+    </script>
+
  
     <script>
  
@@ -170,8 +233,9 @@
                     top.layer.msg("上传失败！");
  
                 }
+
             });
- 
+
         });
     </script>
  

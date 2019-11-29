@@ -1,15 +1,26 @@
 package cn.nankai.tjxf1.entity;
 
+import com.wuwenze.poi.annotation.Excel;
+import com.wuwenze.poi.annotation.ExcelField;
+
 import java.util.Date;
 
+
+
 public class User {
+
+
 	private Integer id;
+
 
 	private String username;
 
+
 	private String password;
 
+
 	private String mail;
+
 
 	private String phone;
 
@@ -61,5 +72,17 @@ public class User {
 
 	public void setPhone(String phone) {
 		this.phone = phone == null ? null : phone.trim();
+	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"id=" + id +
+				", username='" + username + '\'' +
+				", password='" + password + '\'' +
+				", mail='" + mail + '\'' +
+				", phone='" + phone + '\'' +
+				", registerTime=" + registerTime +
+				'}';
 	}
 }

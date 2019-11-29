@@ -108,7 +108,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</a>
 							</li>
 							<li>
-								<a _href="/user/downTemplate">
+								<a _href="/downTemplate">
 									<i class="iconfont">&#xe6a7;</i>
 									<cite>导出模板</cite>
 								</a>

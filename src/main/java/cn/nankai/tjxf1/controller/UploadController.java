@@ -302,7 +302,7 @@ public class UploadController {
 
                     @Override
                     public void onSuccess(int sheetIndex, int rowIndex, B5OuterInfo entity) {
-                        if(sheetIndex == 11){
+                        if(sheetIndex == 10){
                             System.out.println(sheetIndex);
                             System.out.println(entity.toString());
                             b5OuterInfoList.add(entity); // 单行读取成功，加入入库队列。
@@ -327,7 +327,7 @@ public class UploadController {
 
                     @Override
                     public void onSuccess(int sheetIndex, int rowIndex, B5InnerInfo entity) {
-                        if(sheetIndex == 10){
+                        if(sheetIndex == 11){
                             System.out.println(sheetIndex);
                             System.out.println(entity.toString());
                             b5InnerInfoList.add(entity); // 单行读取成功，加入入库队列。
@@ -399,9 +399,19 @@ public class UploadController {
 
 
 
-
+        System.out.println("error"+errorList.size());
         // TODO: 执行successList的入库操作。
-       /* uploadService.insertB1InnerInfoSelective(b1InnerInfoList);
+        uploadService.insertFireLocInfo(fireLocInfoList);//这个有问题
+        uploadService.insertEnvBurnInfoSelective(envBurnInfoList);
+
+        if(!b1InnerInfoList.isEmpty()){
+            uploadService.insertB1InnerInfoSelective(b1InnerInfoList);
+        }
+
+        if(!b1OuterInfoList.isEmpty()){
+            uploadService.insertB1OuterInfoSelective(b1OuterInfoList);
+        }
+
         uploadService.insertB1OuterInfoSelective(b1OuterInfoList);
         uploadService.insertPeopleInfoSelective(peolpleInfoList);
         uploadService.insertCarInfoSelective(carInfoList);
@@ -412,11 +422,11 @@ public class UploadController {
         uploadService.insertB4InnerInfoSelective(b4InnerInfoList);
         uploadService.insertB4OuterInfoSelective(b4OuterInfoList);
         uploadService.insertB5InnerInfoSelective(b5InnerInfoList);
-        uploadService.insertB5OuterInfoSelective(b5OuterInfoList);
-        uploadService.insertEnvBurnInfoSelective(envBurnInfoList);
-        uploadService.insertFireLocInfo(fireLocInfoList);*/
-       uploadService.insertExcel(peolpleInfoList,carInfoList,b1InnerInfoList,b1OuterInfoList,b2InnerInfoList,b2OuterInfoList,b3InnerInfoList,b3OuterInfoList,b4InnerInfoList,b4OuterInfoList
-                                    ,b5InnerInfoList,b5OuterInfoList,envBurnInfoList,fireLocInfoList);
+        uploadService.insertB5OuterInfoSelective(b5OuterInfoList);//这个有问题
+
+       /*uploadService.insertExcel(peolpleInfoList,carInfoList,b1InnerInfoList,b1OuterInfoList,b2InnerInfoList,b2OuterInfoList,b3InnerInfoList,b3OuterInfoList,b4InnerInfoList,b4OuterInfoList
+                                    ,b5InnerInfoList,b5OuterInfoList,envBurnInfoList,fireLocInfoList);*/
+        System.out.println("error"+errorList.size());
         boolean haveError = errorList.isEmpty();
         Map<String, Object> map1 = new HashMap<>();
         map1.put("data", peolpleInfoList);

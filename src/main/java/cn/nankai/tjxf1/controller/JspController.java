@@ -27,6 +27,11 @@ public class JspController {
         return "updatePassword";
     }
 
+    @RequestMapping("/uploadExcel")
+    public String uploadExcel (){
+        return "uploadExcel";
+    }
+
     @RequestMapping("/newAccident")
     public String newAccident(Model model) {
         int todayAccNum = baseInfoService.countAccNum();
@@ -76,6 +81,59 @@ public class JspController {
         }
 
         int count =baseInfoService.getPageTotalCount(paramMap);
+
+        if(!resultList.isEmpty()) {
+
+            json.put("code", 0);
+            json.put("msg","");
+            json.put("count", count);
+            json.put("data", res);
+        }else{
+            json.put("error","查询列表为空");
+        }
+        System.out.println(json.toString());
+        return json.toString();
+    }
+
+    @RequestMapping ("/dataExcel")
+    @ResponseBody
+    public String dataExcel(HttpSession session, @RequestParam(value="page") String pageno, @RequestParam (value="limit") String pagesize ) throws ParseException {
+        Integer id = (Integer) session.getAttribute("curUserId");
+        System.out.println("userId:"+id+"|| pageno:"+pageno+"||pagesize:"+pagesize);
+        JSONObject json = new JSONObject();
+        //当前页
+        Integer page = Integer.parseInt(pageno.trim());
+        //每页的数量
+        Integer size = Integer.parseInt(pagesize.trim());
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("id", id);
+        paramMap.put("start", (page - 1) * size);
+        paramMap.put("size", size);
+
+        System.out.println("zhiqina1 ");
+
+        List<BaseInfo> resultList = baseInfoService.getPageListInfoExcel(paramMap);
+
+        ArrayList<Map<String,String>> res = new ArrayList<>() ;
+
+        for (int i = 0; i < resultList.size(); i++) {
+            BaseInfo baseInfoTemp = resultList.get(i);
+            String accId = Integer.toString(baseInfoTemp.getAccId()) ;
+            String 	govLr = baseInfoTemp.getGovLr();
+            String loc = baseInfoTemp.getLocSheng()+baseInfoTemp.getLocShi()+baseInfoTemp.getLocXian()+baseInfoTemp.getLocDetail();
+            String timeInvest = handleDate(baseInfoTemp.getTimeInvest().toString());
+            String Status = handleStatus(baseInfoTemp.getStatus());
+            Map<String,String> map = new HashMap<>();
+            map.put("accId",accId);
+            map.put("govLr",govLr);
+            map.put("loc",loc);
+            map.put("timeInvest",timeInvest);
+            map.put("Status",Status);
+            System.out.println(map.toString());
+            res.add(map);
+        }
+
+        int count =baseInfoService.getPageTotalCountExcel(paramMap);
 
         if(!resultList.isEmpty()) {
 

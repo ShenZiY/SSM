@@ -6,22 +6,22 @@ import com.wuwenze.poi.annotation.ExcelField;
 import java.util.Date;
 
 
-
+@Excel("用户表")
 public class User {
 
-
+    @ExcelField("用户ID")
 	private Integer id;
 
-
+	@ExcelField("用户名")
 	private String username;
 
-
+	@ExcelField("密码")
 	private String password;
 
-
+	@ExcelField("邮箱")
 	private String mail;
 
-
+	@ExcelField("电话")
 	private String phone;
 
 	public Date getRegisterTime() {

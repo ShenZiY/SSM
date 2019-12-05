@@ -108,15 +108,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</a>
 							</li>
 							<li>
-								<a _href="/downTemplate">
+								<a _href="/aa">
 									<i class="iconfont">&#xe6a7;</i>
-									<cite>导出模板</cite>
+									<cite>删除事故</cite>
+								</a>
+							</li>
+						</ul>
+					</li>
+
+					<li>
+						<a href="javascript:;">
+							<i class="iconfont">&#xe723;</i>
+							<cite>表格数据管理</cite>
+							<i class="iconfont nav_right">&#xe697;</i>
+						</a>
+						<ul class="sub-menu">
+							<li>
+								<a _href="/jsp/uploadExcel">
+									<i class="iconfont">&#xe6a7;</i>
+									<cite>数据导入</cite>
 								</a>
 							</li>
 							<li>
-								<a _href="/user/">
+								<a _href="/user/import">
 									<i class="iconfont">&#xe6a7;</i>
-									<cite>导入数据</cite>
+									<cite>数据删除</cite>
+								</a>
+							</li>
+							<li>
+								<a _href="./pages/article/category.html">
+									<i class="iconfont">&#xe6a7;</i>
+									<cite>预览和导出</cite>
 								</a>
 							</li>
 						</ul>
@@ -124,8 +146,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					
 					<li>
 						<a href="javascript:;">
-							<i class="iconfont">&#xe6b8;</i>
-							<cite>图片管理</cite>
+							<i class="iconfont">&#xe6ce;</i>
+							<cite>图片数据管理</cite>
 							<i class="iconfont nav_right">&#xe697;</i>
 						</a>
 						<ul class="sub-menu">
@@ -172,27 +194,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</li>--%>
 						</ul>
 					</li>
-					<li>
-						<a href="javascript:;">
-							<i class="iconfont">&#xe705;</i>
-							<cite>采集数据管理</cite>
-							<i class="iconfont nav_right">&#xe697;</i>
-						</a>
-						<ul class="sub-menu">
-							<li>
-								<a _href="./pages/article/list.html">
-									<i class="iconfont">&#xe6a7;</i>
-									<cite>数据导入</cite>
-								</a>
-							</li>
-							<li>
-								<a _href="./pages/article/category.html">
-									<i class="iconfont">&#xe6a7;</i>
-									<cite>数据导出</cite>
-								</a>
-							</li>
-						</ul>
-					</li>
+
 					<%--<li>
 						<a href="javascript:;">
 							<i class="iconfont">&#xe723;</i>

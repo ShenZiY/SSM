@@ -67,30 +67,6 @@ public class UserController {
 
 		List<User> successList1 = Lists.newArrayList();
 
-		ExcelKit.$Import(PeolpleInfo.class)
-				.readXlsx(file.getInputStream(), new ExcelReadHandler<PeolpleInfo>() {
-
-					@Override
-					public void onSuccess(int sheetIndex, int rowIndex, PeolpleInfo entity) {
-						if(sheetIndex == 0){
-							System.out.println(entity.toString());
-							successList.add(entity); // 单行读取成功，加入入库队列。
-						}
-
-					}
-
-					@Override
-					public void onError(int sheetIndex, int rowIndex,
-										List<ExcelErrorField> errorFields) {
-						// 读取数据失败，记录了当前行所有失败的数据
-						Map<String, Object> map = new HashMap<>();
-						map.put("sheetIndex", sheetIndex);
-						map.put("rowIndex", rowIndex);
-						map.put("errorFields", errorFields);
-						errorList.add(map);
-					}
-				});
-
 		ExcelKit.$Import(User.class)
 				.readXlsx(file.getInputStream(), new ExcelReadHandler<User>() {
 
@@ -115,6 +91,33 @@ public class UserController {
 					}
 				});
 
+		ExcelKit.$Import(PeolpleInfo.class)
+				.readXlsx(file.getInputStream(), new ExcelReadHandler<PeolpleInfo>() {
+
+					@Override
+					public void onSuccess(int sheetIndex, int rowIndex, PeolpleInfo entity) {
+						if(sheetIndex == 0){
+							System.out.println(sheetIndex);
+							System.out.println(entity.toString());
+							successList.add(entity); // 单行读取成功，加入入库队列。
+						}
+
+					}
+
+					@Override
+					public void onError(int sheetIndex, int rowIndex,
+										List<ExcelErrorField> errorFields) {
+						// 读取数据失败，记录了当前行所有失败的数据
+						Map<String, Object> map = new HashMap<>();
+						map.put("sheetIndex", sheetIndex);
+						map.put("rowIndex", rowIndex);
+						map.put("errorFields", errorFields);
+						errorList.add(map);
+					}
+				});
+
+
+
 		for (int i = 0; i < successList1.size(); i++) {
 			User user = successList1.get(i);
 			Date date = new Date();// 获取当前时间
@@ -137,7 +140,8 @@ public class UserController {
 
 
 
-    @RequestMapping(value = "/downTemplate", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/downTemplate", method = RequestMethod.GET)
     public void downTemplate(HttpServletResponse response) {
     	User user = userServivce.findUserById(1006);
     	List<User> userList = new ArrayList<>();

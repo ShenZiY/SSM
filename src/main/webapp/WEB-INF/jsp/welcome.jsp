@@ -286,7 +286,16 @@
                 {field: 'accId', title: '事故编码',  sort: true, fixed: 'left',align:'center'}
                 ,{field: 'timeInvest', title: '调查时间',sort: true ,align:'center' }
                 ,{field: 'loc', title: '事故地点',align:'center' }
-                ,{field: 'Status', title: '处理状态',align:'center' }
+                ,{field: 'Status', title: '处理状态',align:'center' ,
+                    templet: function (d) {
+                        if (d.Status == "处理完毕") {
+                            return '<span style="color:#008000;">' + d.Status + '</span>'
+                        }else{
+                            return '<span style="color:orangered;">' + d.Status + '</span>'
+                        }
+
+                    }
+                }
                 ,{field: 'govLr', title: '录入人',align:'center' }
             ]]
            /* data:[{"timeInvest":"Wed Nov 20 10:58:37 CST 2019","govLr":"李明","locSheng":"重庆","accId":20194731,"status":3}]*/

@@ -67,9 +67,6 @@
 		<property name="basePackage" value="cn.nankai.tjxf1.dao" /> 
 	</bean>
 	<!--  <context:component-scan base-package="cn.nankai.tjxf1.service"/> -->
-	
-	
 
-	
 	
 </beans>

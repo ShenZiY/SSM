@@ -79,9 +79,9 @@
                     ,url: '/import'
                     ,accept: 'file' //普通文件
                     ,exts: 'xls|xlsx' //允许上传的文件后缀
-                    /*,before: function(obj){
+                    ,before: function(obj){
                         this.data={'accId1':data.accId};//关键代码
-                    }*/
+                    }
                     ,done: function(res){//返回值接收
                         if(res.flag=="1"){
                             layer.msg('成功导入'+ data.accId+'的表格数据！' , {

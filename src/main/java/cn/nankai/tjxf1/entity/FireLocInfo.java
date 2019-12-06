@@ -15,7 +15,6 @@ public class FireLocInfo {
     public void setCarId(Integer carId) {
         this.carId = carId;
     }
-
     @ExcelField(value = "车辆识别代码")
     private String vin;
     @ExcelField(value = "事故编码")

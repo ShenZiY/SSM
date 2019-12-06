@@ -66,7 +66,7 @@ public class UploadServiceImpl implements UploadService {
 	        imageDao.insert(image);
 	    }
 
-
+		@Transactional
 		@Override
 		public void insertPeopleInfoSelective(List<PeolpleInfo> list) {
 			if(list != null && list.size()!=0){
@@ -77,7 +77,7 @@ public class UploadServiceImpl implements UploadService {
 			}
 		}
 
-
+		@Transactional
 		@Override
 		public void insertCarInfoSelective(List<CarInfo> list) {
 			if(list != null && list.size()!=0){
@@ -87,7 +87,7 @@ public class UploadServiceImpl implements UploadService {
 				}
 			}
 		}
-
+		@Transactional
 		@Override
 		public void insertB1InnerInfoSelective(List<B1InnerInfo> list) {
 			if(list != null && list.size()!=0){
@@ -98,7 +98,7 @@ public class UploadServiceImpl implements UploadService {
 			}
 		}
 
-
+	@Transactional
 	@Override
 	public void insertB1OuterInfoSelective(List<B1OuterInfo> list) {
 		if(list != null && list.size()!=0){
@@ -108,7 +108,7 @@ public class UploadServiceImpl implements UploadService {
 			}
 		}
 	}
-
+	@Transactional
 	@Override
 	public void insertB2InnerInfoSelective(List<B2InnerInfo> list) {
 		if(list != null && list.size()!=0){
@@ -118,7 +118,7 @@ public class UploadServiceImpl implements UploadService {
 			}
 		}
 	}
-
+	@Transactional
 	@Override
 	public void insertB2OuterInfoSelective(List<B2OuterInfo> list) {
 		if(list != null && list.size()!=0){
@@ -128,7 +128,7 @@ public class UploadServiceImpl implements UploadService {
 			}
 		}
 	}
-
+	@Transactional(propagation=Propagation.REQUIRED)
 	@Override
 	public void insertB3InnerInfoSelective(List<B3InnerInfo> list) {
 		if(list != null && list.size()!=0){
@@ -138,7 +138,7 @@ public class UploadServiceImpl implements UploadService {
 			}
 		}
 	}
-
+	@Transactional
 	@Override
 	public void insertB3OuterInfoSelective(List<B3OuterInfo> list) {
 		if(list != null && list.size()!=0){
@@ -148,7 +148,7 @@ public class UploadServiceImpl implements UploadService {
 			}
 		}
 	}
-
+	@Transactional
 	@Override
 	public void insertB4InnerInfoSelective(List<B4InnerInfo> list) {
 		if(list != null && list.size()!=0){
@@ -158,7 +158,7 @@ public class UploadServiceImpl implements UploadService {
 			}
 		}
 	}
-
+	@Transactional
 	@Override
 	public void insertB4OuterInfoSelective(List<B4OuterInfo> list) {
 		if(list != null && list.size()!=0){
@@ -168,7 +168,7 @@ public class UploadServiceImpl implements UploadService {
 			}
 		}
 	}
-
+	@Transactional
 	@Override
 	public void insertB5InnerInfoSelective(List<B5InnerInfo> list) {
 		if(list != null && list.size()!=0){
@@ -178,7 +178,7 @@ public class UploadServiceImpl implements UploadService {
 			}
 		}
 	}
-
+	@Transactional
 	@Override
 	public void insertB5OuterInfoSelective(List<B5OuterInfo> list) {
 		if(list != null && list.size()!=0){
@@ -188,7 +188,7 @@ public class UploadServiceImpl implements UploadService {
 			}
 		}
 	}
-
+	@Transactional
 	@Override
 	public void insertEnvBurnInfoSelective(List<EnvBurnInfo> list) {
 		if(list != null && list.size()!=0){
@@ -198,7 +198,7 @@ public class UploadServiceImpl implements UploadService {
 			}
 		}
 	}
-
+	@Transactional
 	@Override
 	public void insertFireLocInfo(List<FireLocInfo> list) {
 		if(list != null && list.size()!=0){
@@ -208,7 +208,7 @@ public class UploadServiceImpl implements UploadService {
 			}
 		}
 	}
-
+	@Transactional
 	@Override
 	public void insertExcel(List<PeolpleInfo> peolpleInfoList, List<CarInfo> carInfoList, List<B1InnerInfo> b1InnerInfoList, List<B1OuterInfo> b1OuterInfoList, List<B2InnerInfo> b2InnerInfoList, List<B2OuterInfo> b2OuterInfoList,
 							List<B3InnerInfo> b3InnerInfoList, List<B3OuterInfo> b3OuterInfoList, List<B4InnerInfo> b4InnerInfoList, List<B4OuterInfo> b4OuterInfoList, List<B5InnerInfo> b5InnerInfoList, List<B5OuterInfo> b5OuterInfoList,List<EnvBurnInfo> envBurnInfoList,List<FireLocInfo> fireLocInfoList) {

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.nankai.tjxf1.dao.EnvInfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.nankai.tjxf1.entity.EnvInfo" >
+    <result column="Acc_ID" property="accId" jdbcType="INTEGER" />
+    <result column="Location" property="location" jdbcType="VARCHAR" />
+    <result column="RoadInfo_CT" property="roadinfoCt" jdbcType="VARCHAR" />
+    <result column="RoadInfo_PD" property="roadinfoPd" jdbcType="INTEGER" />
+    <result column="RoadInfo_CZ" property="roadinfoCz" jdbcType="VARCHAR" />
+    <result column="RoadInfo_ZK" property="roadinfoZk" jdbcType="VARCHAR" />
+    <result column="RoadInfo_JK" property="roadinfoJk" jdbcType="VARCHAR" />
+    <result column="WeaInfo_TQ" property="weainfoTq" jdbcType="VARCHAR" />
+    <result column="WeaInfo_FX" property="weainfoFx" jdbcType="VARCHAR" />
+    <result column="WeaInfo_FL" property="weainfoFl" jdbcType="VARCHAR" />
+    <result column="WeaInfo_WD" property="weainfoWd" jdbcType="INTEGER" />
+    <result column="Protect_XC" property="protectXc" jdbcType="VARCHAR" />
+    <result column="Protect_CL" property="protectCl" jdbcType="VARCHAR" />
+    <result column="WeaInfo_FS" property="weainfoFs" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Acc_ID, Location, RoadInfo_CT, RoadInfo_PD, RoadInfo_CZ, RoadInfo_ZK, RoadInfo_JK, 
+    WeaInfo_TQ, WeaInfo_FX, WeaInfo_FL, WeaInfo_WD, Protect_XC, Protect_CL, WeaInfo_FS
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.nankai.tjxf1.entity.EnvInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from a12_envinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <insert id="insert" parameterType="cn.nankai.tjxf1.entity.EnvInfo" >
+    insert into a12_envinfo (Acc_ID, Location, RoadInfo_CT, 
+      RoadInfo_PD, RoadInfo_CZ, RoadInfo_ZK, 
+      RoadInfo_JK, WeaInfo_TQ, WeaInfo_FX, 
+      WeaInfo_FL, WeaInfo_WD, Protect_XC, 
+      Protect_CL, WeaInfo_FS)
+    values (#{accId,jdbcType=INTEGER}, #{location,jdbcType=VARCHAR}, #{roadinfoCt,jdbcType=VARCHAR}, 
+      #{roadinfoPd,jdbcType=INTEGER}, #{roadinfoCz,jdbcType=VARCHAR}, #{roadinfoZk,jdbcType=VARCHAR}, 
+      #{roadinfoJk,jdbcType=VARCHAR}, #{weainfoTq,jdbcType=VARCHAR}, #{weainfoFx,jdbcType=VARCHAR}, 
+      #{weainfoFl,jdbcType=VARCHAR}, #{weainfoWd,jdbcType=INTEGER}, #{protectXc,jdbcType=VARCHAR}, 
+      #{protectCl,jdbcType=VARCHAR}, #{weainfoFs,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.nankai.tjxf1.entity.EnvInfo" >
+    insert into a12_envinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="accId != null" >
+        Acc_ID,
+      </if>
+      <if test="location != null" >
+        Location,
+      </if>
+      <if test="roadinfoCt != null" >
+        RoadInfo_CT,
+      </if>
+      <if test="roadinfoPd != null" >
+        RoadInfo_PD,
+      </if>
+      <if test="roadinfoCz != null" >
+        RoadInfo_CZ,
+      </if>
+      <if test="roadinfoZk != null" >
+        RoadInfo_ZK,
+      </if>
+      <if test="roadinfoJk != null" >
+        RoadInfo_JK,
+      </if>
+      <if test="weainfoTq != null" >
+        WeaInfo_TQ,
+      </if>
+      <if test="weainfoFx != null" >
+        WeaInfo_FX,
+      </if>
+      <if test="weainfoFl != null" >
+        WeaInfo_FL,
+      </if>
+      <if test="weainfoWd != null" >
+        WeaInfo_WD,
+      </if>
+      <if test="protectXc != null" >
+        Protect_XC,
+      </if>
+      <if test="protectCl != null" >
+        Protect_CL,
+      </if>
+      <if test="weainfoFs != null" >
+        WeaInfo_FS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="accId != null" >
+        #{accId,jdbcType=INTEGER},
+      </if>
+      <if test="location != null" >
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="roadinfoCt != null" >
+        #{roadinfoCt,jdbcType=VARCHAR},
+      </if>
+      <if test="roadinfoPd != null" >
+        #{roadinfoPd,jdbcType=INTEGER},
+      </if>
+      <if test="roadinfoCz != null" >
+        #{roadinfoCz,jdbcType=VARCHAR},
+      </if>
+      <if test="roadinfoZk != null" >
+        #{roadinfoZk,jdbcType=VARCHAR},
+      </if>
+      <if test="roadinfoJk != null" >
+        #{roadinfoJk,jdbcType=VARCHAR},
+      </if>
+      <if test="weainfoTq != null" >
+        #{weainfoTq,jdbcType=VARCHAR},
+      </if>
+      <if test="weainfoFx != null" >
+        #{weainfoFx,jdbcType=VARCHAR},
+      </if>
+      <if test="weainfoFl != null" >
+        #{weainfoFl,jdbcType=VARCHAR},
+      </if>
+      <if test="weainfoWd != null" >
+        #{weainfoWd,jdbcType=INTEGER},
+      </if>
+      <if test="protectXc != null" >
+        #{protectXc,jdbcType=VARCHAR},
+      </if>
+      <if test="protectCl != null" >
+        #{protectCl,jdbcType=VARCHAR},
+      </if>
+      <if test="weainfoFs != null" >
+        #{weainfoFs,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.nankai.tjxf1.entity.EnvInfoExample" resultType="java.lang.Integer" >
+    select count(*) from a12_envinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+</mapper>

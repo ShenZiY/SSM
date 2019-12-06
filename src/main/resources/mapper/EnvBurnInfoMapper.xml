@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.nankai.tjxf1.dao.EnvBurnInfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.nankai.tjxf1.entity.EnvBurnInfo" >
+    <result column="Car_Id" property="carId" jdbcType="INTEGER" />
+    <result column="VIN" property="vin" jdbcType="VARCHAR" />
+    <result column="Acc_ID" property="accId" jdbcType="INTEGER" />
+    <result column="Front1" property="front1" jdbcType="VARCHAR" />
+    <result column="Front1_Burn" property="front1Burn" jdbcType="VARCHAR" />
+    <result column="Left1" property="left1" jdbcType="VARCHAR" />
+    <result column="Left1_Burn" property="left1Burn" jdbcType="VARCHAR" />
+    <result column="Right1" property="right1" jdbcType="VARCHAR" />
+    <result column="Right1_Burn" property="right1Burn" jdbcType="VARCHAR" />
+    <result column="Up1" property="up1" jdbcType="VARCHAR" />
+    <result column="Up1_Burn" property="up1Burn" jdbcType="VARCHAR" />
+    <result column="Down1" property="down1" jdbcType="VARCHAR" />
+    <result column="Down1_Burn" property="down1Burn" jdbcType="VARCHAR" />
+    <result column="Front2" property="front2" jdbcType="VARCHAR" />
+    <result column="Front2_Burn" property="front2Burn" jdbcType="VARCHAR" />
+    <result column="Left2" property="left2" jdbcType="VARCHAR" />
+    <result column="Left2_Burn" property="left2Burn" jdbcType="VARCHAR" />
+    <result column="Right2" property="right2" jdbcType="VARCHAR" />
+    <result column="Right2_Burn" property="right2Burn" jdbcType="VARCHAR" />
+    <result column="Up2" property="up2" jdbcType="VARCHAR" />
+    <result column="Up2_Burn" property="up2Burn" jdbcType="VARCHAR" />
+    <result column="Down2" property="down2" jdbcType="VARCHAR" />
+    <result column="Down2_Burn" property="down2Burn" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="selectAll" resultType="cn.nankai.tjxf1.entity.EnvBurnInfo">
+    select * from b_envburninfo where Acc_ID = 20191006
+  </select>
+  <insert id="insert" parameterType="cn.nankai.tjxf1.entity.EnvBurnInfo" >
+    insert into b_envburninfo (VIN, Acc_ID, Front1, 
+      Front1_Burn, Left1, Left1_Burn, 
+      Right1, Right1_Burn, Up1, 
+      Up1_Burn, Down1, Down1_Burn, 
+      Front2, Front2_Burn, Left2, 
+      Left2_Burn, Right2, Right2_Burn, 
+      Up2, Up2_Burn, Down2, 
+      Down2_Burn)
+    values (#{carId,jdbcType=INTEGER},#{vin,jdbcType=VARCHAR}, #{accId,jdbcType=INTEGER}, #{front1,jdbcType=VARCHAR},
+      #{front1Burn,jdbcType=VARCHAR}, #{left1,jdbcType=VARCHAR}, #{left1Burn,jdbcType=VARCHAR}, 
+      #{right1,jdbcType=VARCHAR}, #{right1Burn,jdbcType=VARCHAR}, #{up1,jdbcType=VARCHAR}, 
+      #{up1Burn,jdbcType=VARCHAR}, #{down1,jdbcType=VARCHAR}, #{down1Burn,jdbcType=VARCHAR}, 
+      #{front2,jdbcType=VARCHAR}, #{front2Burn,jdbcType=VARCHAR}, #{left2,jdbcType=VARCHAR}, 
+      #{left2Burn,jdbcType=VARCHAR}, #{right2,jdbcType=VARCHAR}, #{right2Burn,jdbcType=VARCHAR}, 
+      #{up2,jdbcType=VARCHAR}, #{up2Burn,jdbcType=VARCHAR}, #{down2,jdbcType=VARCHAR}, 
+      #{down2Burn,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.nankai.tjxf1.entity.EnvBurnInfo" >
+    insert into b_envburninfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="carId != null" >
+        Car_Id,
+      </if>
+      <if test="vin != null" >
+        VIN,
+      </if>
+      <if test="accId != null" >
+        Acc_ID,
+      </if>
+      <if test="front1 != null" >
+        Front1,
+      </if>
+      <if test="front1Burn != null" >
+        Front1_Burn,
+      </if>
+      <if test="left1 != null" >
+        Left1,
+      </if>
+      <if test="left1Burn != null" >
+        Left1_Burn,
+      </if>
+      <if test="right1 != null" >
+        Right1,
+      </if>
+      <if test="right1Burn != null" >
+        Right1_Burn,
+      </if>
+      <if test="up1 != null" >
+        Up1,
+      </if>
+      <if test="up1Burn != null" >
+        Up1_Burn,
+      </if>
+      <if test="down1 != null" >
+        Down1,
+      </if>
+      <if test="down1Burn != null" >
+        Down1_Burn,
+      </if>
+      <if test="front2 != null" >
+        Front2,
+      </if>
+      <if test="front2Burn != null" >
+        Front2_Burn,
+      </if>
+      <if test="left2 != null" >
+        Left2,
+      </if>
+      <if test="left2Burn != null" >
+        Left2_Burn,
+      </if>
+      <if test="right2 != null" >
+        Right2,
+      </if>
+      <if test="right2Burn != null" >
+        Right2_Burn,
+      </if>
+      <if test="up2 != null" >
+        Up2,
+      </if>
+      <if test="up2Burn != null" >
+        Up2_Burn,
+      </if>
+      <if test="down2 != null" >
+        Down2,
+      </if>
+      <if test="down2Burn != null" >
+        Down2_Burn,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="carId != null" >
+        #{carId,jdbcType=INTEGER},
+      </if>
+      <if test="vin != null" >
+        #{vin,jdbcType=VARCHAR},
+      </if>
+      <if test="accId != null" >
+        #{accId,jdbcType=INTEGER},
+      </if>
+      <if test="front1 != null" >
+        #{front1,jdbcType=VARCHAR},
+      </if>
+      <if test="front1Burn != null" >
+        #{front1Burn,jdbcType=VARCHAR},
+      </if>
+      <if test="left1 != null" >
+        #{left1,jdbcType=VARCHAR},
+      </if>
+      <if test="left1Burn != null" >
+        #{left1Burn,jdbcType=VARCHAR},
+      </if>
+      <if test="right1 != null" >
+        #{right1,jdbcType=VARCHAR},
+      </if>
+      <if test="right1Burn != null" >
+        #{right1Burn,jdbcType=VARCHAR},
+      </if>
+      <if test="up1 != null" >
+        #{up1,jdbcType=VARCHAR},
+      </if>
+      <if test="up1Burn != null" >
+        #{up1Burn,jdbcType=VARCHAR},
+      </if>
+      <if test="down1 != null" >
+        #{down1,jdbcType=VARCHAR},
+      </if>
+      <if test="down1Burn != null" >
+        #{down1Burn,jdbcType=VARCHAR},
+      </if>
+      <if test="front2 != null" >
+        #{front2,jdbcType=VARCHAR},
+      </if>
+      <if test="front2Burn != null" >
+        #{front2Burn,jdbcType=VARCHAR},
+      </if>
+      <if test="left2 != null" >
+        #{left2,jdbcType=VARCHAR},
+      </if>
+      <if test="left2Burn != null" >
+        #{left2Burn,jdbcType=VARCHAR},
+      </if>
+      <if test="right2 != null" >
+        #{right2,jdbcType=VARCHAR},
+      </if>
+      <if test="right2Burn != null" >
+        #{right2Burn,jdbcType=VARCHAR},
+      </if>
+      <if test="up2 != null" >
+        #{up2,jdbcType=VARCHAR},
+      </if>
+      <if test="up2Burn != null" >
+        #{up2Burn,jdbcType=VARCHAR},
+      </if>
+      <if test="down2 != null" >
+        #{down2,jdbcType=VARCHAR},
+      </if>
+      <if test="down2Burn != null" >
+        #{down2Burn,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

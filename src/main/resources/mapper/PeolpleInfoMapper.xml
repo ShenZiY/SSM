@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.nankai.tjxf1.dao.PeolpleInfoMapper">
+  <resultMap id="BaseResultMap" type="cn.nankai.tjxf1.entity.PeolpleInfo">
+    <result column="People_ID" jdbcType="INTEGER" property="peopleId" />
+    <result column="Acc_ID" jdbcType="INTEGER" property="accId" />
+    <result column="People_Type" jdbcType="VARCHAR" property="peopleType" />
+    <result column="People_Sex" jdbcType="VARCHAR" property="peopleSex" />
+    <result column="People_Age" jdbcType="INTEGER" property="peopleAge" />
+    <result column="Invest_Loc" jdbcType="VARCHAR" property="investLoc" />
+    <result column="Invest_Method" jdbcType="VARCHAR" property="investMethod" />
+    <result column="If_Smoke" jdbcType="VARCHAR" property="ifSmoke" />
+    <result column="If_Drink" jdbcType="VARCHAR" property="ifDrink" />
+    <result column="If_Injury" jdbcType="VARCHAR" property="ifInjury" />
+    <result column="Injury_Loc" jdbcType="VARCHAR" property="injuryLoc" />
+    <result column="Car_Perform" jdbcType="VARCHAR" property="carPerform" />
+    <result column="Measure1" jdbcType="VARCHAR" property="measure1" />
+    <result column="Fire_Find_Loc" jdbcType="VARCHAR" property="fireFindLoc" />
+    <result column="Distance" jdbcType="DOUBLE" property="distance" />
+    <result column="Phenomenon" jdbcType="VARCHAR" property="phenomenon" />
+    <result column="Measure2" jdbcType="VARCHAR" property="measure2" />
+    <result column="Fire_Loc" jdbcType="VARCHAR" property="fireLoc" />
+    <result column="Fire_Height" jdbcType="VARCHAR" property="fireHeight" />
+    <result column="Fire_HeightAll" jdbcType="DOUBLE" property="fireHeightall" />
+    <result column="Fog_Loc" jdbcType="VARCHAR" property="fogLoc" />
+    <result column="Fog_Color" jdbcType="VARCHAR" property="fogColor" />
+    <result column="Fog_Height" jdbcType="VARCHAR" property="fogHeight" />
+    <result column="Fog_HeightAll" jdbcType="DOUBLE" property="fogHeightall" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <delete id="deleteByExample" parameterType="cn.nankai.tjxf1.entity.PeolpleInfoExample">
+    delete from c_peopleinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.nankai.tjxf1.entity.PeolpleInfo">
+    insert into c_peopleinfo (People_ID, Acc_ID, People_Type, 
+      People_Sex, People_Age, Invest_Loc, 
+      Invest_Method, If_Smoke, If_Drink, 
+      If_Injury, Injury_Loc, Car_Perform, 
+      Measure1, Fire_Find_Loc, Distance, 
+      Phenomenon, Measure2, Fire_Loc, 
+      Fire_Height, Fire_HeightAll, Fog_Loc, 
+      Fog_Color, Fog_Height, Fog_HeightAll
+      )
+    values (#{peopleId,jdbcType=INTEGER}, #{accId,jdbcType=INTEGER}, #{peopleType,jdbcType=VARCHAR}, 
+      #{peopleSex,jdbcType=VARCHAR}, #{peopleAge,jdbcType=INTEGER}, #{investLoc,jdbcType=VARCHAR}, 
+      #{investMethod,jdbcType=VARCHAR}, #{ifSmoke,jdbcType=VARCHAR}, #{ifDrink,jdbcType=VARCHAR}, 
+      #{ifInjury,jdbcType=VARCHAR}, #{injuryLoc,jdbcType=VARCHAR}, #{carPerform,jdbcType=VARCHAR}, 
+      #{measure1,jdbcType=VARCHAR}, #{fireFindLoc,jdbcType=VARCHAR}, #{distance,jdbcType=DOUBLE}, 
+      #{phenomenon,jdbcType=VARCHAR}, #{measure2,jdbcType=VARCHAR}, #{fireLoc,jdbcType=VARCHAR}, 
+      #{fireHeight,jdbcType=VARCHAR}, #{fireHeightall,jdbcType=DOUBLE}, #{fogLoc,jdbcType=VARCHAR}, 
+      #{fogColor,jdbcType=VARCHAR}, #{fogHeight,jdbcType=VARCHAR}, #{fogHeightall,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.nankai.tjxf1.entity.PeolpleInfo">
+    insert into c_peopleinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="peopleId != null">
+        People_ID,
+      </if>
+      <if test="accId != null">
+        Acc_ID,
+      </if>
+      <if test="peopleType != null">
+        People_Type,
+      </if>
+      <if test="peopleSex != null">
+        People_Sex,
+      </if>
+      <if test="peopleAge != null">
+        People_Age,
+      </if>
+      <if test="investLoc != null">
+        Invest_Loc,
+      </if>
+      <if test="investMethod != null">
+        Invest_Method,
+      </if>
+      <if test="ifSmoke != null">
+        If_Smoke,
+      </if>
+      <if test="ifDrink != null">
+        If_Drink,
+      </if>
+      <if test="ifInjury != null">
+        If_Injury,
+      </if>
+      <if test="injuryLoc != null">
+        Injury_Loc,
+      </if>
+      <if test="carPerform != null">
+        Car_Perform,
+      </if>
+      <if test="measure1 != null">
+        Measure1,
+      </if>
+      <if test="fireFindLoc != null">
+        Fire_Find_Loc,
+      </if>
+      <if test="distance != null">
+        Distance,
+      </if>
+      <if test="phenomenon != null">
+        Phenomenon,
+      </if>
+      <if test="measure2 != null">
+        Measure2,
+      </if>
+      <if test="fireLoc != null">
+        Fire_Loc,
+      </if>
+      <if test="fireHeight != null">
+        Fire_Height,
+      </if>
+      <if test="fireHeightall != null">
+        Fire_HeightAll,
+      </if>
+      <if test="fogLoc != null">
+        Fog_Loc,
+      </if>
+      <if test="fogColor != null">
+        Fog_Color,
+      </if>
+      <if test="fogHeight != null">
+        Fog_Height,
+      </if>
+      <if test="fogHeightall != null">
+        Fog_HeightAll,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="peopleId != null">
+        #{peopleId,jdbcType=INTEGER},
+      </if>
+      <if test="accId != null">
+        #{accId,jdbcType=INTEGER},
+      </if>
+      <if test="peopleType != null">
+        #{peopleType,jdbcType=VARCHAR},
+      </if>
+      <if test="peopleSex != null">
+        #{peopleSex,jdbcType=VARCHAR},
+      </if>
+      <if test="peopleAge != null">
+        #{peopleAge,jdbcType=INTEGER},
+      </if>
+      <if test="investLoc != null">
+        #{investLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="investMethod != null">
+        #{investMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="ifSmoke != null">
+        #{ifSmoke,jdbcType=VARCHAR},
+      </if>
+      <if test="ifDrink != null">
+        #{ifDrink,jdbcType=VARCHAR},
+      </if>
+      <if test="ifInjury != null">
+        #{ifInjury,jdbcType=VARCHAR},
+      </if>
+      <if test="injuryLoc != null">
+        #{injuryLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="carPerform != null">
+        #{carPerform,jdbcType=VARCHAR},
+      </if>
+      <if test="measure1 != null">
+        #{measure1,jdbcType=VARCHAR},
+      </if>
+      <if test="fireFindLoc != null">
+        #{fireFindLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="distance != null">
+        #{distance,jdbcType=DOUBLE},
+      </if>
+      <if test="phenomenon != null">
+        #{phenomenon,jdbcType=VARCHAR},
+      </if>
+      <if test="measure2 != null">
+        #{measure2,jdbcType=VARCHAR},
+      </if>
+      <if test="fireLoc != null">
+        #{fireLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="fireHeight != null">
+        #{fireHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="fireHeightall != null">
+        #{fireHeightall,jdbcType=DOUBLE},
+      </if>
+      <if test="fogLoc != null">
+        #{fogLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="fogColor != null">
+        #{fogColor,jdbcType=VARCHAR},
+      </if>
+      <if test="fogHeight != null">
+        #{fogHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="fogHeightall != null">
+        #{fogHeightall,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByExampleSelective" parameterType="map">
+    update c_peopleinfo
+    <set>
+      <if test="record.peopleId != null">
+        People_ID = #{record.peopleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.accId != null">
+        Acc_ID = #{record.accId,jdbcType=INTEGER},
+      </if>
+      <if test="record.peopleType != null">
+        People_Type = #{record.peopleType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.peopleSex != null">
+        People_Sex = #{record.peopleSex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.peopleAge != null">
+        People_Age = #{record.peopleAge,jdbcType=INTEGER},
+      </if>
+      <if test="record.investLoc != null">
+        Invest_Loc = #{record.investLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.investMethod != null">
+        Invest_Method = #{record.investMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ifSmoke != null">
+        If_Smoke = #{record.ifSmoke,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ifDrink != null">
+        If_Drink = #{record.ifDrink,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ifInjury != null">
+        If_Injury = #{record.ifInjury,jdbcType=VARCHAR},
+      </if>
+      <if test="record.injuryLoc != null">
+        Injury_Loc = #{record.injuryLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carPerform != null">
+        Car_Perform = #{record.carPerform,jdbcType=VARCHAR},
+      </if>
+      <if test="record.measure1 != null">
+        Measure1 = #{record.measure1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fireFindLoc != null">
+        Fire_Find_Loc = #{record.fireFindLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.distance != null">
+        Distance = #{record.distance,jdbcType=DOUBLE},
+      </if>
+      <if test="record.phenomenon != null">
+        Phenomenon = #{record.phenomenon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.measure2 != null">
+        Measure2 = #{record.measure2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fireLoc != null">
+        Fire_Loc = #{record.fireLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fireHeight != null">
+        Fire_Height = #{record.fireHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fireHeightall != null">
+        Fire_HeightAll = #{record.fireHeightall,jdbcType=DOUBLE},
+      </if>
+      <if test="record.fogLoc != null">
+        Fog_Loc = #{record.fogLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fogColor != null">
+        Fog_Color = #{record.fogColor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fogHeight != null">
+        Fog_Height = #{record.fogHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fogHeightall != null">
+        Fog_HeightAll = #{record.fogHeightall,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update c_peopleinfo
+    set People_ID = #{record.peopleId,jdbcType=INTEGER},
+      Acc_ID = #{record.accId,jdbcType=INTEGER},
+      People_Type = #{record.peopleType,jdbcType=VARCHAR},
+      People_Sex = #{record.peopleSex,jdbcType=VARCHAR},
+      People_Age = #{record.peopleAge,jdbcType=INTEGER},
+      Invest_Loc = #{record.investLoc,jdbcType=VARCHAR},
+      Invest_Method = #{record.investMethod,jdbcType=VARCHAR},
+      If_Smoke = #{record.ifSmoke,jdbcType=VARCHAR},
+      If_Drink = #{record.ifDrink,jdbcType=VARCHAR},
+      If_Injury = #{record.ifInjury,jdbcType=VARCHAR},
+      Injury_Loc = #{record.injuryLoc,jdbcType=VARCHAR},
+      Car_Perform = #{record.carPerform,jdbcType=VARCHAR},
+      Measure1 = #{record.measure1,jdbcType=VARCHAR},
+      Fire_Find_Loc = #{record.fireFindLoc,jdbcType=VARCHAR},
+      Distance = #{record.distance,jdbcType=DOUBLE},
+      Phenomenon = #{record.phenomenon,jdbcType=VARCHAR},
+      Measure2 = #{record.measure2,jdbcType=VARCHAR},
+      Fire_Loc = #{record.fireLoc,jdbcType=VARCHAR},
+      Fire_Height = #{record.fireHeight,jdbcType=VARCHAR},
+      Fire_HeightAll = #{record.fireHeightall,jdbcType=DOUBLE},
+      Fog_Loc = #{record.fogLoc,jdbcType=VARCHAR},
+      Fog_Color = #{record.fogColor,jdbcType=VARCHAR},
+      Fog_Height = #{record.fogHeight,jdbcType=VARCHAR},
+      Fog_HeightAll = #{record.fogHeightall,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

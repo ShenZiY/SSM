@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.nankai.tjxf1.dao.CarInfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.nankai.tjxf1.entity.CarInfo" >
+    <result column="Car_Id" property="carId" jdbcType="INTEGER" />
+    <result column="VIN" property="vin" jdbcType="VARCHAR" />
+    <result column="Acc_ID" property="accId" jdbcType="INTEGER" />
+    <result column="Brand" property="brand" jdbcType="VARCHAR" />
+    <result column="Register_Time" property="registerTime" jdbcType="TIMESTAMP" />
+    <result column="Car_Property" property="carProperty" jdbcType="VARCHAR" />
+    <result column="Car_Miles" property="carMiles" jdbcType="VARCHAR" />
+    <result column="Befo_RunDis" property="befoRundis" jdbcType="VARCHAR" />
+    <result column="Befo_RunTime" property="befoRuntime" jdbcType="VARCHAR" />
+    <result column="Befo_StopTime" property="befoStoptime" jdbcType="VARCHAR" />
+    <result column="State" property="state" jdbcType="VARCHAR" />
+    <result column="AftLoc" property="aftloc" jdbcType="VARCHAR" />
+    <result column="Trans_Method" property="transMethod" jdbcType="VARCHAR" />
+    <result column="If_Modify" property="ifModify" jdbcType="VARCHAR" />
+    <result column="Modify_Time" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="Modify_Part" property="modifyPart" jdbcType="VARCHAR" />
+    <result column="Modify_Pos" property="modifyPos" jdbcType="VARCHAR" />
+    <result column="Maintain_Time" property="maintainTime" jdbcType="TIMESTAMP" />
+    <result column="Maintain_Purpose" property="maintainPurpose" jdbcType="VARCHAR" />
+    <result column="Maintain_Content" property="maintainContent" jdbcType="VARCHAR" />
+    <result column="Insurance" property="insurance" jdbcType="VARCHAR" />
+    <result column="Insurance_Time" property="insuranceTime" jdbcType="TIMESTAMP" />
+    <result column="Insurance_Type" property="insuranceType" jdbcType="VARCHAR" />
+    <result column="MYQS" property="myqs" jdbcType="VARCHAR" />
+    <result column="QHBW" property="qhbw" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="selectAll" resultType="cn.nankai.tjxf1.entity.CarInfo">
+    select * from b_carinfo where Acc_Id = 20191006;
+  </select>
+  <insert id="insert" parameterType="cn.nankai.tjxf1.entity.CarInfo" >
+    insert into b_carinfo (Car_Id,VIN, Acc_ID, Brand,
+      Register_Time, Car_Property, Car_Miles, 
+      Befo_RunDis, Befo_RunTime, Befo_StopTime, 
+      State, AftLoc, Trans_Method, 
+      If_Modify, Modify_Time, Modify_Part, 
+      Modify_Pos, Maintain_Time, Maintain_Purpose, 
+      Maintain_Content, Insurance, Insurance_Time, 
+      Insurance_Type, MYQS, QHBW
+      )
+    values (#{carId,jdbcType=INTEGER},#{vin,jdbcType=VARCHAR}, #{accId,jdbcType=INTEGER}, #{brand,jdbcType=VARCHAR},
+      #{registerTime,jdbcType=TIMESTAMP}, #{carProperty,jdbcType=VARCHAR}, #{carMiles,jdbcType=VARCHAR}, 
+      #{befoRundis,jdbcType=VARCHAR}, #{befoRuntime,jdbcType=VARCHAR}, #{befoStoptime,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR}, #{aftloc,jdbcType=VARCHAR}, #{transMethod,jdbcType=VARCHAR}, 
+      #{ifModify,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP}, #{modifyPart,jdbcType=VARCHAR}, 
+      #{modifyPos,jdbcType=VARCHAR}, #{maintainTime,jdbcType=TIMESTAMP}, #{maintainPurpose,jdbcType=VARCHAR}, 
+      #{maintainContent,jdbcType=VARCHAR}, #{insurance,jdbcType=VARCHAR}, #{insuranceTime,jdbcType=TIMESTAMP}, 
+      #{insuranceType,jdbcType=VARCHAR}, #{myqs,jdbcType=VARCHAR}, #{qhbw,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.nankai.tjxf1.entity.CarInfo" >
+    insert into b_carinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="accId != null" >
+        Car_Id,
+      </if>
+      <if test="vin != null" >
+        VIN,
+      </if>
+      <if test="accId != null" >
+        Acc_ID,
+      </if>
+      <if test="brand != null" >
+        Brand,
+      </if>
+      <if test="registerTime != null" >
+        Register_Time,
+      </if>
+      <if test="carProperty != null" >
+        Car_Property,
+      </if>
+      <if test="carMiles != null" >
+        Car_Miles,
+      </if>
+      <if test="befoRundis != null" >
+        Befo_RunDis,
+      </if>
+      <if test="befoRuntime != null" >
+        Befo_RunTime,
+      </if>
+      <if test="befoStoptime != null" >
+        Befo_StopTime,
+      </if>
+      <if test="state != null" >
+        State,
+      </if>
+      <if test="aftloc != null" >
+        AftLoc,
+      </if>
+      <if test="transMethod != null" >
+        Trans_Method,
+      </if>
+      <if test="ifModify != null" >
+        If_Modify,
+      </if>
+      <if test="modifyTime != null" >
+        Modify_Time,
+      </if>
+      <if test="modifyPart != null" >
+        Modify_Part,
+      </if>
+      <if test="modifyPos != null" >
+        Modify_Pos,
+      </if>
+      <if test="maintainTime != null" >
+        Maintain_Time,
+      </if>
+      <if test="maintainPurpose != null" >
+        Maintain_Purpose,
+      </if>
+      <if test="maintainContent != null" >
+        Maintain_Content,
+      </if>
+      <if test="insurance != null" >
+        Insurance,
+      </if>
+      <if test="insuranceTime != null" >
+        Insurance_Time,
+      </if>
+      <if test="insuranceType != null" >
+        Insurance_Type,
+      </if>
+      <if test="myqs != null" >
+        MYQS,
+      </if>
+      <if test="qhbw != null" >
+        QHBW,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="carId != null" >
+        #{carId,jdbcType=INTEGER},
+      </if>
+      <if test="vin != null" >
+        #{vin,jdbcType=VARCHAR},
+      </if>
+      <if test="accId != null" >
+        #{accId,jdbcType=INTEGER},
+      </if>
+      <if test="brand != null" >
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null" >
+        #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="carProperty != null" >
+        #{carProperty,jdbcType=VARCHAR},
+      </if>
+      <if test="carMiles != null" >
+        #{carMiles,jdbcType=VARCHAR},
+      </if>
+      <if test="befoRundis != null" >
+        #{befoRundis,jdbcType=VARCHAR},
+      </if>
+      <if test="befoRuntime != null" >
+        #{befoRuntime,jdbcType=VARCHAR},
+      </if>
+      <if test="befoStoptime != null" >
+        #{befoStoptime,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="aftloc != null" >
+        #{aftloc,jdbcType=VARCHAR},
+      </if>
+      <if test="transMethod != null" >
+        #{transMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="ifModify != null" >
+        #{ifModify,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyPart != null" >
+        #{modifyPart,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyPos != null" >
+        #{modifyPos,jdbcType=VARCHAR},
+      </if>
+      <if test="maintainTime != null" >
+        #{maintainTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="maintainPurpose != null" >
+        #{maintainPurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="maintainContent != null" >
+        #{maintainContent,jdbcType=VARCHAR},
+      </if>
+      <if test="insurance != null" >
+        #{insurance,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceTime != null" >
+        #{insuranceTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="insuranceType != null" >
+        #{insuranceType,jdbcType=VARCHAR},
+      </if>
+      <if test="myqs != null" >
+        #{myqs,jdbcType=VARCHAR},
+      </if>
+      <if test="qhbw != null" >
+        #{qhbw,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.nankai.tjxf1.dao.BaseInfoMapper">
+  <resultMap id="BaseResultMap" type="cn.nankai.tjxf1.entity.BaseInfo">
+    <result column="Acc_ID" jdbcType="INTEGER" property="accId" />
+    <result column="Time_Find" jdbcType="TIMESTAMP" property="timeFind" />
+    <result column="Car_Num" jdbcType="INTEGER" property="carNum" />
+    <result column="Hurt_Num" jdbcType="INTEGER" property="hurtNum" />
+    <result column="Loc_Sheng" jdbcType="VARCHAR" property="locSheng" />
+    <result column="Loc_Shi" jdbcType="VARCHAR" property="locShi" />
+    <result column="Loc_Xian" jdbcType="VARCHAR" property="locXian" />
+    <result column="Loc_Detail" jdbcType="VARCHAR" property="locDetail" />
+    <result column="People_Num" jdbcType="INTEGER" property="peopleNum" />
+    <result column="Gov_CJ" jdbcType="VARCHAR" property="govCj" />
+    <result column="Gov_LR" jdbcType="VARCHAR" property="govLr" />
+    <result column="Time_Police" jdbcType="TIMESTAMP" property="timePolice" />
+    <result column="Time_Invest" jdbcType="TIMESTAMP" property="timeInvest" />
+    <result column="Fire_Tru" jdbcType="VARCHAR" property="fireTru" />
+    <result column="Time_FireTru" jdbcType="TIMESTAMP" property="timeFiretru" />
+    <result column="Ambulance" jdbcType="VARCHAR" property="ambulance" />
+    <result column="Time_Ambu" jdbcType="TIMESTAMP" property="timeAmbu" />
+    <result column="State" jdbcType="VARCHAR" property="state" />
+    <result column="Status" jdbcType="INTEGER" property="status" />
+    <result column="id" jdbcType="INTEGER" property="id" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    Acc_ID, Time_Find, Car_Num, Hurt_Num, Loc_Sheng, Loc_Shi, Loc_Xian, Loc_Detail, People_Num, 
+    Gov_CJ, Gov_LR, Time_Police, Time_Invest, Fire_Tru, Time_FireTru, Ambulance, Time_Ambu, 
+    State, Status, id
+  </sql>
+
+  <select id="getPageListInfoExcel" resultMap="BaseResultMap">
+     SELECT  Acc_ID, Time_Find, Car_Num, Hurt_Num,  Loc_Shi, Loc_Xian, Loc_Detail, People_Num,
+    Gov_CJ, Gov_LR, Time_Police, Time_Invest, Fire_Tru, Time_FireTru, Ambulance, Time_Ambu,
+    State, id,Loc_Sheng ,status
+    FROM a11_baseinfo WHERE id = #{id} and status = 0 order by Time_Invest desc limit #{start},#{size}
+  </select>
+  <select id="getPageListInfo" resultMap="BaseResultMap">
+     SELECT  Acc_ID, Time_Find, Car_Num, Hurt_Num,  Loc_Shi, Loc_Xian, Loc_Detail, People_Num,
+    Gov_CJ, Gov_LR, Time_Police, Time_Invest, Fire_Tru, Time_FireTru, Ambulance, Time_Ambu,
+    State, id,Loc_Sheng ,status
+    FROM a11_baseinfo WHERE id = #{id} and YEARWEEK( date_format(  Time_Invest,'%Y-%m-%d' ),1 ) = YEARWEEK( now(),1 ) order by Time_Invest desc limit #{start},#{size}
+  </select>
+
+  <select id="getTotalCount" resultType="Integer">
+      SELECT count(*) FROM  a11_baseinfo WHERE id = #{id} and YEARWEEK( date_format(  Time_Invest,'%Y-%m-%d' ),1 ) = YEARWEEK( now(),1 ) ;
+  </select>
+  <select id="getTotalCountExcel" resultType="Integer">
+      SELECT count(*) FROM  a11_baseinfo WHERE id = #{id} and  status = 0 ;
+  </select>
+
+  <!--Echarts-->
+  <select id="countStatusByDay" resultType="Integer" parameterType="Integer">
+          SELECT status FROM a11_baseinfo WHERE id = #{id} and DATEDIFF(Time_Find,NOW())= #{diff};
+  </select>
+
+  <!--表格-->
+  <select id="countStatusById" resultType="Integer" parameterType="Integer">
+          select status from a11_baseinfo where id = #{id}
+  </select>
+
+  <select id="countTodayStatusById" resultType="Integer" parameterType="Integer">
+          select status from a11_baseinfo where id = #{id} and Time_Invest >= date(now())
+  </select>
+
+  <select id="countWeekStatusById" resultType="Integer" parameterType="Integer">
+          SELECT status FROM  a11_baseinfo WHERE id = #{id} and YEARWEEK( date_format(  Time_Invest,'%Y-%m-%d' ),1 ) = YEARWEEK( now(),1 ) ;
+  </select>
+
+  <select id="countMonthStatusById" resultType="Integer" parameterType="Integer">
+          SELECT status FROM  a11_baseinfo WHERE id = #{id} and DATE_FORMAT( Time_Invest, '%Y%m' ) = DATE_FORMAT( CURDATE( ) ,'%Y%m' ) ;
+  </select>
+
+
+
+  <select id = "findByAccId" resultType="cn.nankai.tjxf1.entity.BaseInfo" parameterType="Integer">
+      select * from a11_baseinfo where Acc_ID = #{accId}
+  </select>
+
+  <select id="countToday" resultType="Integer">
+    select count(*) as countRes from a11_baseinfo
+    where Time_Invest >= date(now())
+  </select>
+
+
+
+  <select id="selectByExample" parameterType="cn.nankai.tjxf1.entity.BaseInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from a11_baseinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <insert id="insert" parameterType="cn.nankai.tjxf1.entity.BaseInfo">
+    insert into a11_baseinfo (Acc_ID, Time_Find, Car_Num, 
+      Hurt_Num, Loc_Sheng, Loc_Shi, 
+      Loc_Xian, Loc_Detail, People_Num, 
+      Gov_CJ, Gov_LR, Time_Police, 
+      Time_Invest, Fire_Tru, Time_FireTru, 
+      Ambulance, Time_Ambu, State, 
+      Status,id)
+    values (#{accId,jdbcType=INTEGER}, #{timeFind,jdbcType=TIMESTAMP}, #{carNum,jdbcType=TINYINT}, 
+      #{hurtNum,jdbcType=TINYINT}, #{locSheng,jdbcType=VARCHAR}, #{locShi,jdbcType=VARCHAR}, 
+      #{locXian,jdbcType=VARCHAR}, #{locDetail,jdbcType=VARCHAR}, #{peopleNum,jdbcType=TINYINT}, 
+      #{govCj,jdbcType=VARCHAR}, #{govLr,jdbcType=VARCHAR}, #{timePolice,jdbcType=TIMESTAMP}, 
+      #{timeInvest,jdbcType=TIMESTAMP}, #{fireTru,jdbcType=VARCHAR}, #{timeFiretru,jdbcType=TIMESTAMP}, 
+      #{ambulance,jdbcType=VARCHAR}, #{timeAmbu,jdbcType=TIMESTAMP}, #{state,jdbcType=VARCHAR}, 
+      #{status,jdbcType=TINYINT},#{id,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.nankai.tjxf1.entity.BaseInfo">
+    insert into a11_baseinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="accId != null">
+        Acc_ID,
+      </if>
+      <if test="timeFind != null">
+        Time_Find,
+      </if>
+      <if test="carNum != null">
+        Car_Num,
+      </if>
+      <if test="hurtNum != null">
+        Hurt_Num,
+      </if>
+      <if test="locSheng != null">
+        Loc_Sheng,
+      </if>
+      <if test="locShi != null">
+        Loc_Shi,
+      </if>
+      <if test="locXian != null">
+        Loc_Xian,
+      </if>
+      <if test="locDetail != null">
+        Loc_Detail,
+      </if>
+      <if test="peopleNum != null">
+        People_Num,
+      </if>
+      <if test="govCj != null">
+        Gov_CJ,
+      </if>
+      <if test="govLr != null">
+        Gov_LR,
+      </if>
+      <if test="timePolice != null">
+        Time_Police,
+      </if>
+      <if test="timeInvest != null">
+        Time_Invest,
+      </if>
+      <if test="fireTru != null">
+        Fire_Tru,
+      </if>
+      <if test="timeFiretru != null">
+        Time_FireTru,
+      </if>
+      <if test="ambulance != null">
+        Ambulance,
+      </if>
+      <if test="timeAmbu != null">
+        Time_Ambu,
+      </if>
+      <if test="state != null">
+        State,
+      </if>
+      <if test="status != null">
+        Status,
+      </if>
+      <if test="id != null">
+        id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="accId != null">
+        #{accId,jdbcType=INTEGER},
+      </if>
+      <if test="timeFind != null">
+        #{timeFind,jdbcType=TIMESTAMP},
+      </if>
+      <if test="carNum != null">
+        #{carNum,jdbcType=TINYINT},
+      </if>
+      <if test="hurtNum != null">
+        #{hurtNum,jdbcType=TINYINT},
+      </if>
+      <if test="locSheng != null">
+        #{locSheng,jdbcType=VARCHAR},
+      </if>
+      <if test="locShi != null">
+        #{locShi,jdbcType=VARCHAR},
+      </if>
+      <if test="locXian != null">
+        #{locXian,jdbcType=VARCHAR},
+      </if>
+      <if test="locDetail != null">
+        #{locDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="peopleNum != null">
+        #{peopleNum,jdbcType=TINYINT},
+      </if>
+      <if test="govCj != null">
+        #{govCj,jdbcType=VARCHAR},
+      </if>
+      <if test="govLr != null">
+        #{govLr,jdbcType=VARCHAR},
+      </if>
+      <if test="timePolice != null">
+        #{timePolice,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeInvest != null">
+        #{timeInvest,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fireTru != null">
+        #{fireTru,jdbcType=VARCHAR},
+      </if>
+      <if test="timeFiretru != null">
+        #{timeFiretru,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ambulance != null">
+        #{ambulance,jdbcType=VARCHAR},
+      </if>
+      <if test="timeAmbu != null">
+        #{timeAmbu,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="id != null">
+        #{id,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.nankai.tjxf1.entity.BaseInfoExample" resultType="java.lang.Integer">
+    select count(*) from a11_baseinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update a11_baseinfo
+    <set>
+      <if test="record.accId != null">
+        Acc_ID = #{record.accId,jdbcType=INTEGER},
+      </if>
+      <if test="record.timeFind != null">
+        Time_Find = #{record.timeFind,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.carNum != null">
+        Car_Num = #{record.carNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.hurtNum != null">
+        Hurt_Num = #{record.hurtNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.locSheng != null">
+        Loc_Sheng = #{record.locSheng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.locShi != null">
+        Loc_Shi = #{record.locShi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.locXian != null">
+        Loc_Xian = #{record.locXian,jdbcType=VARCHAR},
+      </if>
+      <if test="record.locDetail != null">
+        Loc_Detail = #{record.locDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.peopleNum != null">
+        People_Num = #{record.peopleNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.govCj != null">
+        Gov_CJ = #{record.govCj,jdbcType=VARCHAR},
+      </if>
+      <if test="record.govLr != null">
+        Gov_LR = #{record.govLr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timePolice != null">
+        Time_Police = #{record.timePolice,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.timeInvest != null">
+        Time_Invest = #{record.timeInvest,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fireTru != null">
+        Fire_Tru = #{record.fireTru,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timeFiretru != null">
+        Time_FireTru = #{record.timeFiretru,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ambulance != null">
+        Ambulance = #{record.ambulance,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timeAmbu != null">
+        Time_Ambu = #{record.timeAmbu,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.state != null">
+        State = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        Status = #{record.status,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update a11_baseinfo
+    set Acc_ID = #{record.accId,jdbcType=INTEGER},
+      Time_Find = #{record.timeFind,jdbcType=TIMESTAMP},
+      Car_Num = #{record.carNum,jdbcType=TINYINT},
+      Hurt_Num = #{record.hurtNum,jdbcType=TINYINT},
+      Loc_Sheng = #{record.locSheng,jdbcType=VARCHAR},
+      Loc_Shi = #{record.locShi,jdbcType=VARCHAR},
+      Loc_Xian = #{record.locXian,jdbcType=VARCHAR},
+      Loc_Detail = #{record.locDetail,jdbcType=VARCHAR},
+      People_Num = #{record.peopleNum,jdbcType=TINYINT},
+      Gov_CJ = #{record.govCj,jdbcType=VARCHAR},
+      Gov_LR = #{record.govLr,jdbcType=VARCHAR},
+      Time_Police = #{record.timePolice,jdbcType=TIMESTAMP},
+      Time_Invest = #{record.timeInvest,jdbcType=TIMESTAMP},
+      Fire_Tru = #{record.fireTru,jdbcType=VARCHAR},
+      Time_FireTru = #{record.timeFiretru,jdbcType=TIMESTAMP},
+      Ambulance = #{record.ambulance,jdbcType=VARCHAR},
+      Time_Ambu = #{record.timeAmbu,jdbcType=TIMESTAMP},
+      State = #{record.state,jdbcType=VARCHAR},
+      Status = #{record.status,jdbcType=TINYINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+
+</mapper>

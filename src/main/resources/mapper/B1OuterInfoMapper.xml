@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.nankai.tjxf1.dao.B1OuterInfoMapper">
+  <resultMap id="BaseResultMap" type="cn.nankai.tjxf1.entity.B1OuterInfo">
+    <result column="Car_Id" jdbcType="INTEGER" property="carId" />
+    <result column="Acc_ID" jdbcType="INTEGER" property="accId" />
+    <result column="VIN" jdbcType="VARCHAR" property="vin" />
+    <result column="LT_ZQ" jdbcType="VARCHAR" property="ltZq" />
+    <result column="LT_YQ" jdbcType="VARCHAR" property="ltYq" />
+    <result column="LT_ZH" jdbcType="VARCHAR" property="ltZh" />
+    <result column="LT_YH" jdbcType="VARCHAR" property="ltYh" />
+    <result column="LW_ZQ" jdbcType="VARCHAR" property="lwZq" />
+    <result column="LW_YQ" jdbcType="VARCHAR" property="lwYq" />
+    <result column="LW_ZH" jdbcType="VARCHAR" property="lwZh" />
+    <result column="LW_YH" jdbcType="VARCHAR" property="lwYh" />
+    <result column="CM_ZQ" jdbcType="VARCHAR" property="cmZq" />
+    <result column="CM_YQ" jdbcType="VARCHAR" property="cmYq" />
+    <result column="CM_ZH" jdbcType="VARCHAR" property="cmZh" />
+    <result column="CM_YH" jdbcType="VARCHAR" property="cmYh" />
+    <result column="CC_ZQ" jdbcType="VARCHAR" property="ccZq" />
+    <result column="CC_YQ" jdbcType="VARCHAR" property="ccYq" />
+    <result column="CC_ZH" jdbcType="VARCHAR" property="ccZh" />
+    <result column="CC_YH" jdbcType="VARCHAR" property="ccYh" />
+    <result column="YZB_ZQ" jdbcType="VARCHAR" property="yzbZq" />
+    <result column="YZB_YQ" jdbcType="VARCHAR" property="yzbYq" />
+    <result column="YZB_ZH" jdbcType="VARCHAR" property="yzbZh" />
+    <result column="YZB_YH" jdbcType="VARCHAR" property="yzbYh" />
+    <result column="CD_ZQ" jdbcType="VARCHAR" property="cdZq" />
+    <result column="CD_YQ" jdbcType="VARCHAR" property="cdYq" />
+    <result column="CD_ZH" jdbcType="VARCHAR" property="cdZh" />
+    <result column="CD_YH" jdbcType="VARCHAR" property="cdYh" />
+    <result column="HSJ_ZQ" jdbcType="VARCHAR" property="hsjZq" />
+    <result column="HSJ_YQ" jdbcType="VARCHAR" property="hsjYq" />
+    <result column="BXG_QB" jdbcType="VARCHAR" property="bxgQb" />
+    <result column="BXG_HB" jdbcType="VARCHAR" property="bxgHb" />
+    <result column="FDBO_QB" jdbcType="VARCHAR" property="fdboQb" />
+    <result column="FDBL_HB" jdbcType="VARCHAR" property="fdblHb" />
+    <result column="YGQ_QB" jdbcType="VARCHAR" property="ygqQb" />
+    <result column="YGQ_HB" jdbcType="VARCHAR" property="ygqHb" />
+    <result column="FDJCG" jdbcType="VARCHAR" property="fdjcg" />
+    <result column="DG" jdbcType="VARCHAR" property="dg" />
+    <result column="TC" jdbcType="VARCHAR" property="tc" />
+    <result column="HBXG" jdbcType="VARCHAR" property="hbxg" />
+    <result column="DP" jdbcType="VARCHAR" property="dp" />
+    <result column="PQG" jdbcType="VARCHAR" property="pqg" />
+    <result column="CHZHQ" jdbcType="VARCHAR" property="chzhq" />
+  </resultMap>
+  <select id="selectA" resultType="cn.nankai.tjxf1.entity.B1OuterInfo">
+       select * from b1_outerinfo where Acc_ID = 20191006
+  </select>
+  <insert id="insert" parameterType="cn.nankai.tjxf1.entity.B1OuterInfo">
+    insert into b1_outerinfo (Car_Id, Acc_ID, VIN, 
+      LT_ZQ, LT_YQ, LT_ZH, LT_YH, 
+      LW_ZQ, LW_YQ, LW_ZH, LW_YH, 
+      CM_ZQ, CM_YQ, CM_ZH, CM_YH, 
+      CC_ZQ, CC_YQ, CC_ZH, CC_YH, 
+      YZB_ZQ, YZB_YQ, YZB_ZH, 
+      YZB_YH, CD_ZQ, CD_YQ, 
+      CD_ZH, CD_YH, HSJ_ZQ, 
+      HSJ_YQ, BXG_QB, BXG_HB, 
+      FDBO_QB, FDBL_HB, YGQ_QB, 
+      YGQ_HB, FDJCG, DG, TC, 
+      HBXG, DP, PQG, CHZHQ
+      )
+    values (#{carId,jdbcType=INTEGER}, #{accId,jdbcType=INTEGER}, #{vin,jdbcType=VARCHAR}, 
+      #{ltZq,jdbcType=VARCHAR}, #{ltYq,jdbcType=VARCHAR}, #{ltZh,jdbcType=VARCHAR}, #{ltYh,jdbcType=VARCHAR}, 
+      #{lwZq,jdbcType=VARCHAR}, #{lwYq,jdbcType=VARCHAR}, #{lwZh,jdbcType=VARCHAR}, #{lwYh,jdbcType=VARCHAR}, 
+      #{cmZq,jdbcType=VARCHAR}, #{cmYq,jdbcType=VARCHAR}, #{cmZh,jdbcType=VARCHAR}, #{cmYh,jdbcType=VARCHAR}, 
+      #{ccZq,jdbcType=VARCHAR}, #{ccYq,jdbcType=VARCHAR}, #{ccZh,jdbcType=VARCHAR}, #{ccYh,jdbcType=VARCHAR}, 
+      #{yzbZq,jdbcType=VARCHAR}, #{yzbYq,jdbcType=VARCHAR}, #{yzbZh,jdbcType=VARCHAR}, 
+      #{yzbYh,jdbcType=VARCHAR}, #{cdZq,jdbcType=VARCHAR}, #{cdYq,jdbcType=VARCHAR}, 
+      #{cdZh,jdbcType=VARCHAR}, #{cdYh,jdbcType=VARCHAR}, #{hsjZq,jdbcType=VARCHAR}, 
+      #{hsjYq,jdbcType=VARCHAR}, #{bxgQb,jdbcType=VARCHAR}, #{bxgHb,jdbcType=VARCHAR}, 
+      #{fdboQb,jdbcType=VARCHAR}, #{fdblHb,jdbcType=VARCHAR}, #{ygqQb,jdbcType=VARCHAR}, 
+      #{ygqHb,jdbcType=VARCHAR}, #{fdjcg,jdbcType=VARCHAR}, #{dg,jdbcType=VARCHAR}, #{tc,jdbcType=VARCHAR}, 
+      #{hbxg,jdbcType=VARCHAR}, #{dp,jdbcType=VARCHAR}, #{pqg,jdbcType=VARCHAR}, #{chzhq,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.nankai.tjxf1.entity.B1OuterInfo">
+    insert into b1_outerinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="carId != null">
+        Car_Id,
+      </if>
+      <if test="accId != null">
+        Acc_ID,
+      </if>
+      <if test="vin != null">
+        VIN,
+      </if>
+      <if test="ltZq != null">
+        LT_ZQ,
+      </if>
+      <if test="ltYq != null">
+        LT_YQ,
+      </if>
+      <if test="ltZh != null">
+        LT_ZH,
+      </if>
+      <if test="ltYh != null">
+        LT_YH,
+      </if>
+      <if test="lwZq != null">
+        LW_ZQ,
+      </if>
+      <if test="lwYq != null">
+        LW_YQ,
+      </if>
+      <if test="lwZh != null">
+        LW_ZH,
+      </if>
+      <if test="lwYh != null">
+        LW_YH,
+      </if>
+      <if test="cmZq != null">
+        CM_ZQ,
+      </if>
+      <if test="cmYq != null">
+        CM_YQ,
+      </if>
+      <if test="cmZh != null">
+        CM_ZH,
+      </if>
+      <if test="cmYh != null">
+        CM_YH,
+      </if>
+      <if test="ccZq != null">
+        CC_ZQ,
+      </if>
+      <if test="ccYq != null">
+        CC_YQ,
+      </if>
+      <if test="ccZh != null">
+        CC_ZH,
+      </if>
+      <if test="ccYh != null">
+        CC_YH,
+      </if>
+      <if test="yzbZq != null">
+        YZB_ZQ,
+      </if>
+      <if test="yzbYq != null">
+        YZB_YQ,
+      </if>
+      <if test="yzbZh != null">
+        YZB_ZH,
+      </if>
+      <if test="yzbYh != null">
+        YZB_YH,
+      </if>
+      <if test="cdZq != null">
+        CD_ZQ,
+      </if>
+      <if test="cdYq != null">
+        CD_YQ,
+      </if>
+      <if test="cdZh != null">
+        CD_ZH,
+      </if>
+      <if test="cdYh != null">
+        CD_YH,
+      </if>
+      <if test="hsjZq != null">
+        HSJ_ZQ,
+      </if>
+      <if test="hsjYq != null">
+        HSJ_YQ,
+      </if>
+      <if test="bxgQb != null">
+        BXG_QB,
+      </if>
+      <if test="bxgHb != null">
+        BXG_HB,
+      </if>
+      <if test="fdboQb != null">
+        FDBO_QB,
+      </if>
+      <if test="fdblHb != null">
+        FDBL_HB,
+      </if>
+      <if test="ygqQb != null">
+        YGQ_QB,
+      </if>
+      <if test="ygqHb != null">
+        YGQ_HB,
+      </if>
+      <if test="fdjcg != null">
+        FDJCG,
+      </if>
+      <if test="dg != null">
+        DG,
+      </if>
+      <if test="tc != null">
+        TC,
+      </if>
+      <if test="hbxg != null">
+        HBXG,
+      </if>
+      <if test="dp != null">
+        DP,
+      </if>
+      <if test="pqg != null">
+        PQG,
+      </if>
+      <if test="chzhq != null">
+        CHZHQ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="carId != null">
+        #{carId,jdbcType=INTEGER},
+      </if>
+      <if test="accId != null">
+        #{accId,jdbcType=INTEGER},
+      </if>
+      <if test="vin != null">
+        #{vin,jdbcType=VARCHAR},
+      </if>
+      <if test="ltZq != null">
+        #{ltZq,jdbcType=VARCHAR},
+      </if>
+      <if test="ltYq != null">
+        #{ltYq,jdbcType=VARCHAR},
+      </if>
+      <if test="ltZh != null">
+        #{ltZh,jdbcType=VARCHAR},
+      </if>
+      <if test="ltYh != null">
+        #{ltYh,jdbcType=VARCHAR},
+      </if>
+      <if test="lwZq != null">
+        #{lwZq,jdbcType=VARCHAR},
+      </if>
+      <if test="lwYq != null">
+        #{lwYq,jdbcType=VARCHAR},
+      </if>
+      <if test="lwZh != null">
+        #{lwZh,jdbcType=VARCHAR},
+      </if>
+      <if test="lwYh != null">
+        #{lwYh,jdbcType=VARCHAR},
+      </if>
+      <if test="cmZq != null">
+        #{cmZq,jdbcType=VARCHAR},
+      </if>
+      <if test="cmYq != null">
+        #{cmYq,jdbcType=VARCHAR},
+      </if>
+      <if test="cmZh != null">
+        #{cmZh,jdbcType=VARCHAR},
+      </if>
+      <if test="cmYh != null">
+        #{cmYh,jdbcType=VARCHAR},
+      </if>
+      <if test="ccZq != null">
+        #{ccZq,jdbcType=VARCHAR},
+      </if>
+      <if test="ccYq != null">
+        #{ccYq,jdbcType=VARCHAR},
+      </if>
+      <if test="ccZh != null">
+        #{ccZh,jdbcType=VARCHAR},
+      </if>
+      <if test="ccYh != null">
+        #{ccYh,jdbcType=VARCHAR},
+      </if>
+      <if test="yzbZq != null">
+        #{yzbZq,jdbcType=VARCHAR},
+      </if>
+      <if test="yzbYq != null">
+        #{yzbYq,jdbcType=VARCHAR},
+      </if>
+      <if test="yzbZh != null">
+        #{yzbZh,jdbcType=VARCHAR},
+      </if>
+      <if test="yzbYh != null">
+        #{yzbYh,jdbcType=VARCHAR},
+      </if>
+      <if test="cdZq != null">
+        #{cdZq,jdbcType=VARCHAR},
+      </if>
+      <if test="cdYq != null">
+        #{cdYq,jdbcType=VARCHAR},
+      </if>
+      <if test="cdZh != null">
+        #{cdZh,jdbcType=VARCHAR},
+      </if>
+      <if test="cdYh != null">
+        #{cdYh,jdbcType=VARCHAR},
+      </if>
+      <if test="hsjZq != null">
+        #{hsjZq,jdbcType=VARCHAR},
+      </if>
+      <if test="hsjYq != null">
+        #{hsjYq,jdbcType=VARCHAR},
+      </if>
+      <if test="bxgQb != null">
+        #{bxgQb,jdbcType=VARCHAR},
+      </if>
+      <if test="bxgHb != null">
+        #{bxgHb,jdbcType=VARCHAR},
+      </if>
+      <if test="fdboQb != null">
+        #{fdboQb,jdbcType=VARCHAR},
+      </if>
+      <if test="fdblHb != null">
+        #{fdblHb,jdbcType=VARCHAR},
+      </if>
+      <if test="ygqQb != null">
+        #{ygqQb,jdbcType=VARCHAR},
+      </if>
+      <if test="ygqHb != null">
+        #{ygqHb,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcg != null">
+        #{fdjcg,jdbcType=VARCHAR},
+      </if>
+      <if test="dg != null">
+        #{dg,jdbcType=VARCHAR},
+      </if>
+      <if test="tc != null">
+        #{tc,jdbcType=VARCHAR},
+      </if>
+      <if test="hbxg != null">
+        #{hbxg,jdbcType=VARCHAR},
+      </if>
+      <if test="dp != null">
+        #{dp,jdbcType=VARCHAR},
+      </if>
+      <if test="pqg != null">
+        #{pqg,jdbcType=VARCHAR},
+      </if>
+      <if test="chzhq != null">
+        #{chzhq,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

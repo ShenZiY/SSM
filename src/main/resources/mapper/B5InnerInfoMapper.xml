@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.nankai.tjxf1.dao.B5InnerInfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.nankai.tjxf1.entity.B5InnerInfo" >
+    <result column="Car_Id" property="carId" jdbcType="INTEGER" />
+    <result column="Acc_ID" property="accId" jdbcType="INTEGER" />
+    <result column="VIN" property="vin" jdbcType="VARCHAR" />
+    <result column="XDC_WZ" property="xdcWz" jdbcType="VARCHAR" />
+    <result column="XDC_DY" property="xdcDy" jdbcType="VARCHAR" />
+    <result column="XDC_SSCD" property="xdcSscd" jdbcType="VARCHAR" />
+    <result column="DCC_DCCWZ" property="dccDccwz" jdbcType="VARCHAR" />
+    <result column="DCC_CDKWZ" property="dccCdkwz" jdbcType="VARCHAR" />
+    <result column="DCC_CDQWZ" property="dccCdqwz" jdbcType="VARCHAR" />
+    <result column="DCC_WKCZ" property="dccWkcz" jdbcType="VARCHAR" />
+    <result column="DCC_EDDY" property="dccEddy" jdbcType="VARCHAR" />
+    <result column="DCC_CZFS" property="dccCzfs" jdbcType="VARCHAR" />
+    <result column="DCC_EDRL" property="dccEdrl" jdbcType="VARCHAR" />
+    <result column="DCC_HDZT" property="dccHdzt" jdbcType="VARCHAR" />
+    <result column="DCC_SSCD" property="dccSscd" jdbcType="VARCHAR" />
+    <result column="DCC_DCLX" property="dccDclx" jdbcType="VARCHAR" />
+    <result column="DCC_DCXH" property="dccDcxh" jdbcType="VARCHAR" />
+    <result column="DCC_DCEDRL" property="dccDcedrl" jdbcType="VARCHAR" />
+    <result column="DCC_DCEDDY" property="dccDceddy" jdbcType="VARCHAR" />
+    <result column="DCGLXT_WZ" property="dcglxtWz" jdbcType="VARCHAR" />
+    <result column="DCGLXT_SSCD" property="dcglxtSscd" jdbcType="VARCHAR" />
+    <result column="FDJC_DDJ" property="fdjcDdj" jdbcType="VARCHAR" />
+    <result column="FDJC_ZKB" property="fdjcZkb" jdbcType="VARCHAR" />
+    <result column="FDJC_DJKZQ" property="fdjcDjkzq" jdbcType="VARCHAR" />
+    <result column="FDJC_SRQ" property="fdjcSrq" jdbcType="VARCHAR" />
+    <result column="FDJC_JSX" property="fdjcJsx" jdbcType="VARCHAR" />
+    <result column="FDJC_LQFS" property="fdjcLqfs" jdbcType="VARCHAR" />
+    <result column="FDJC_DYZHQ" property="fdjcDyzhq" jdbcType="VARCHAR" />
+    <result column="FDJC_ABS" property="fdjcAbs" jdbcType="VARCHAR" />
+    <result column="FDJC_PDH" property="fdjcPdh" jdbcType="VARCHAR" />
+    <result column="FDJC_ZQD" property="fdjcZqd" jdbcType="VARCHAR" />
+    <result column="FDJC_BXH" property="fdjcBxh" jdbcType="VARCHAR" />
+    <result column="FDJC_YQD" property="fdjcYqd" jdbcType="VARCHAR" />
+    <result column="FDJC_JQQG" property="fdjcJqqg" jdbcType="VARCHAR" />
+    <result column="FDJC_FDdongJ" property="fdjcFddongj" jdbcType="VARCHAR" />
+    <result column="FDJC_PQQG" property="fdjcPqqg" jdbcType="VARCHAR" />
+    <result column="FDJC_QDJ" property="fdjcQdj" jdbcType="VARCHAR" />
+    <result column="FDJC_BSQ_LHQ" property="fdjcBsqLhq" jdbcType="VARCHAR" />
+    <result column="FDJC_FDianJ" property="fdjcFdianj" jdbcType="VARCHAR" />
+    <result column="CYC_YBB" property="cycYbb" jdbcType="VARCHAR" />
+    <result column="CYC_BFQ" property="cycBfq" jdbcType="VARCHAR" />
+    <result column="CYC_JXH" property="cycJxh" jdbcType="VARCHAR" />
+    <result column="CYC_JSQ" property="cycJsq" jdbcType="VARCHAR" />
+    <result column="CYC_ZXP" property="cycZxp" jdbcType="VARCHAR" />
+    <result column="CYC_JSWZQ" property="cycJswzq" jdbcType="VARCHAR" />
+    <result column="CYC_DHKG" property="cycDhkg" jdbcType="VARCHAR" />
+    <result column="CYC_FJSZY" property="cycFjszy" jdbcType="VARCHAR" />
+    <result column="CYC_GFJ" property="cycGfj" jdbcType="VARCHAR" />
+    <result column="CYC_CKZQ" property="cycCkzq" jdbcType="VARCHAR" />
+    <result column="CYC_QBDB" property="cycQbdb" jdbcType="VARCHAR" />
+    <result column="CYC_HBDB" property="cycHbdb" jdbcType="VARCHAR" />
+    <result column="CYC_ZQCD" property="cycZqcd" jdbcType="VARCHAR" />
+    <result column="CYC_YQCD" property="cycYqcd" jdbcType="VARCHAR" />
+    <result column="CYC_ZHCD" property="cycZhcd" jdbcType="VARCHAR" />
+    <result column="CYC_YHCD" property="cycYhcd" jdbcType="VARCHAR" />
+    <result column="CYC_CMZ1" property="cycCmz1" jdbcType="VARCHAR" />
+    <result column="CYC_CMY1" property="cycCmy1" jdbcType="VARCHAR" />
+    <result column="CYC_CMY2" property="cycCmy2" jdbcType="VARCHAR" />
+    <result column="CYC_CMY3" property="cycCmy3" jdbcType="VARCHAR" />
+    <result column="CYC_ZYWP" property="cycZywp" jdbcType="VARCHAR" />
+    <result column="CYC_SSCD" property="cycSscd" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectA" resultType="cn.nankai.tjxf1.entity.B5InnerInfo">
+    select * from b5_innerinfo where Acc_ID = 2019
+  </select>
+  <insert id="insert" parameterType="cn.nankai.tjxf1.entity.B5InnerInfo" >
+    insert into b5_innerinfo (Car_Id, Acc_ID, VIN, 
+      XDC_WZ, XDC_DY, XDC_SSCD, 
+      DCC_DCCWZ, DCC_CDKWZ, DCC_CDQWZ, 
+      DCC_WKCZ, DCC_EDDY, DCC_CZFS, 
+      DCC_EDRL, DCC_HDZT, DCC_SSCD, 
+      DCC_DCLX, DCC_DCXH, DCC_DCEDRL, 
+      DCC_DCEDDY, DCGLXT_WZ, DCGLXT_SSCD, 
+      FDJC_DDJ, FDJC_ZKB, FDJC_DJKZQ, 
+      FDJC_SRQ, FDJC_JSX, FDJC_LQFS, 
+      FDJC_DYZHQ, FDJC_ABS, FDJC_PDH, 
+      FDJC_ZQD, FDJC_BXH, FDJC_YQD, 
+      FDJC_JQQG, FDJC_FDdongJ, FDJC_PQQG, 
+      FDJC_QDJ, FDJC_BSQ_LHQ, FDJC_FDianJ, 
+      CYC_YBB, CYC_BFQ, CYC_JXH, 
+      CYC_JSQ, CYC_ZXP, CYC_JSWZQ, 
+      CYC_DHKG, CYC_FJSZY, CYC_GFJ, 
+      CYC_CKZQ, CYC_QBDB, CYC_HBDB, 
+      CYC_ZQCD, CYC_YQCD, CYC_ZHCD, 
+      CYC_YHCD, CYC_CMZ1, CYC_CMY1, 
+      CYC_CMY2, CYC_CMY3, CYC_ZYWP, 
+      CYC_SSCD)
+    values (#{carId,jdbcType=INTEGER}, #{accId,jdbcType=INTEGER}, #{vin,jdbcType=VARCHAR}, 
+      #{xdcWz,jdbcType=VARCHAR}, #{xdcDy,jdbcType=VARCHAR}, #{xdcSscd,jdbcType=VARCHAR}, 
+      #{dccDccwz,jdbcType=VARCHAR}, #{dccCdkwz,jdbcType=VARCHAR}, #{dccCdqwz,jdbcType=VARCHAR}, 
+      #{dccWkcz,jdbcType=VARCHAR}, #{dccEddy,jdbcType=VARCHAR}, #{dccCzfs,jdbcType=VARCHAR}, 
+      #{dccEdrl,jdbcType=VARCHAR}, #{dccHdzt,jdbcType=VARCHAR}, #{dccSscd,jdbcType=VARCHAR}, 
+      #{dccDclx,jdbcType=VARCHAR}, #{dccDcxh,jdbcType=VARCHAR}, #{dccDcedrl,jdbcType=VARCHAR}, 
+      #{dccDceddy,jdbcType=VARCHAR}, #{dcglxtWz,jdbcType=VARCHAR}, #{dcglxtSscd,jdbcType=VARCHAR}, 
+      #{fdjcDdj,jdbcType=VARCHAR}, #{fdjcZkb,jdbcType=VARCHAR}, #{fdjcDjkzq,jdbcType=VARCHAR}, 
+      #{fdjcSrq,jdbcType=VARCHAR}, #{fdjcJsx,jdbcType=VARCHAR}, #{fdjcLqfs,jdbcType=VARCHAR}, 
+      #{fdjcDyzhq,jdbcType=VARCHAR}, #{fdjcAbs,jdbcType=VARCHAR}, #{fdjcPdh,jdbcType=VARCHAR}, 
+      #{fdjcZqd,jdbcType=VARCHAR}, #{fdjcBxh,jdbcType=VARCHAR}, #{fdjcYqd,jdbcType=VARCHAR}, 
+      #{fdjcJqqg,jdbcType=VARCHAR}, #{fdjcFddongj,jdbcType=VARCHAR}, #{fdjcPqqg,jdbcType=VARCHAR}, 
+      #{fdjcQdj,jdbcType=VARCHAR}, #{fdjcBsqLhq,jdbcType=VARCHAR}, #{fdjcFdianj,jdbcType=VARCHAR}, 
+      #{cycYbb,jdbcType=VARCHAR}, #{cycBfq,jdbcType=VARCHAR}, #{cycJxh,jdbcType=VARCHAR}, 
+      #{cycJsq,jdbcType=VARCHAR}, #{cycZxp,jdbcType=VARCHAR}, #{cycJswzq,jdbcType=VARCHAR}, 
+      #{cycDhkg,jdbcType=VARCHAR}, #{cycFjszy,jdbcType=VARCHAR}, #{cycGfj,jdbcType=VARCHAR}, 
+      #{cycCkzq,jdbcType=VARCHAR}, #{cycQbdb,jdbcType=VARCHAR}, #{cycHbdb,jdbcType=VARCHAR}, 
+      #{cycZqcd,jdbcType=VARCHAR}, #{cycYqcd,jdbcType=VARCHAR}, #{cycZhcd,jdbcType=VARCHAR}, 
+      #{cycYhcd,jdbcType=VARCHAR}, #{cycCmz1,jdbcType=VARCHAR}, #{cycCmy1,jdbcType=VARCHAR}, 
+      #{cycCmy2,jdbcType=VARCHAR}, #{cycCmy3,jdbcType=VARCHAR}, #{cycZywp,jdbcType=VARCHAR}, 
+      #{cycSscd,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.nankai.tjxf1.entity.B5InnerInfo" >
+    insert into b5_innerinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="carId != null" >
+        Car_Id,
+      </if>
+      <if test="accId != null" >
+        Acc_ID,
+      </if>
+      <if test="vin != null" >
+        VIN,
+      </if>
+      <if test="xdcWz != null" >
+        XDC_WZ,
+      </if>
+      <if test="xdcDy != null" >
+        XDC_DY,
+      </if>
+      <if test="xdcSscd != null" >
+        XDC_SSCD,
+      </if>
+      <if test="dccDccwz != null" >
+        DCC_DCCWZ,
+      </if>
+      <if test="dccCdkwz != null" >
+        DCC_CDKWZ,
+      </if>
+      <if test="dccCdqwz != null" >
+        DCC_CDQWZ,
+      </if>
+      <if test="dccWkcz != null" >
+        DCC_WKCZ,
+      </if>
+      <if test="dccEddy != null" >
+        DCC_EDDY,
+      </if>
+      <if test="dccCzfs != null" >
+        DCC_CZFS,
+      </if>
+      <if test="dccEdrl != null" >
+        DCC_EDRL,
+      </if>
+      <if test="dccHdzt != null" >
+        DCC_HDZT,
+      </if>
+      <if test="dccSscd != null" >
+        DCC_SSCD,
+      </if>
+      <if test="dccDclx != null" >
+        DCC_DCLX,
+      </if>
+      <if test="dccDcxh != null" >
+        DCC_DCXH,
+      </if>
+      <if test="dccDcedrl != null" >
+        DCC_DCEDRL,
+      </if>
+      <if test="dccDceddy != null" >
+        DCC_DCEDDY,
+      </if>
+      <if test="dcglxtWz != null" >
+        DCGLXT_WZ,
+      </if>
+      <if test="dcglxtSscd != null" >
+        DCGLXT_SSCD,
+      </if>
+      <if test="fdjcDdj != null" >
+        FDJC_DDJ,
+      </if>
+      <if test="fdjcZkb != null" >
+        FDJC_ZKB,
+      </if>
+      <if test="fdjcDjkzq != null" >
+        FDJC_DJKZQ,
+      </if>
+      <if test="fdjcSrq != null" >
+        FDJC_SRQ,
+      </if>
+      <if test="fdjcJsx != null" >
+        FDJC_JSX,
+      </if>
+      <if test="fdjcLqfs != null" >
+        FDJC_LQFS,
+      </if>
+      <if test="fdjcDyzhq != null" >
+        FDJC_DYZHQ,
+      </if>
+      <if test="fdjcAbs != null" >
+        FDJC_ABS,
+      </if>
+      <if test="fdjcPdh != null" >
+        FDJC_PDH,
+      </if>
+      <if test="fdjcZqd != null" >
+        FDJC_ZQD,
+      </if>
+      <if test="fdjcBxh != null" >
+        FDJC_BXH,
+      </if>
+      <if test="fdjcYqd != null" >
+        FDJC_YQD,
+      </if>
+      <if test="fdjcJqqg != null" >
+        FDJC_JQQG,
+      </if>
+      <if test="fdjcFddongj != null" >
+        FDJC_FDdongJ,
+      </if>
+      <if test="fdjcPqqg != null" >
+        FDJC_PQQG,
+      </if>
+      <if test="fdjcQdj != null" >
+        FDJC_QDJ,
+      </if>
+      <if test="fdjcBsqLhq != null" >
+        FDJC_BSQ_LHQ,
+      </if>
+      <if test="fdjcFdianj != null" >
+        FDJC_FDianJ,
+      </if>
+      <if test="cycYbb != null" >
+        CYC_YBB,
+      </if>
+      <if test="cycBfq != null" >
+        CYC_BFQ,
+      </if>
+      <if test="cycJxh != null" >
+        CYC_JXH,
+      </if>
+      <if test="cycJsq != null" >
+        CYC_JSQ,
+      </if>
+      <if test="cycZxp != null" >
+        CYC_ZXP,
+      </if>
+      <if test="cycJswzq != null" >
+        CYC_JSWZQ,
+      </if>
+      <if test="cycDhkg != null" >
+        CYC_DHKG,
+      </if>
+      <if test="cycFjszy != null" >
+        CYC_FJSZY,
+      </if>
+      <if test="cycGfj != null" >
+        CYC_GFJ,
+      </if>
+      <if test="cycCkzq != null" >
+        CYC_CKZQ,
+      </if>
+      <if test="cycQbdb != null" >
+        CYC_QBDB,
+      </if>
+      <if test="cycHbdb != null" >
+        CYC_HBDB,
+      </if>
+      <if test="cycZqcd != null" >
+        CYC_ZQCD,
+      </if>
+      <if test="cycYqcd != null" >
+        CYC_YQCD,
+      </if>
+      <if test="cycZhcd != null" >
+        CYC_ZHCD,
+      </if>
+      <if test="cycYhcd != null" >
+        CYC_YHCD,
+      </if>
+      <if test="cycCmz1 != null" >
+        CYC_CMZ1,
+      </if>
+      <if test="cycCmy1 != null" >
+        CYC_CMY1,
+      </if>
+      <if test="cycCmy2 != null" >
+        CYC_CMY2,
+      </if>
+      <if test="cycCmy3 != null" >
+        CYC_CMY3,
+      </if>
+      <if test="cycZywp != null" >
+        CYC_ZYWP,
+      </if>
+      <if test="cycSscd != null" >
+        CYC_SSCD,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="carId != null" >
+        #{carId,jdbcType=INTEGER},
+      </if>
+      <if test="accId != null" >
+        #{accId,jdbcType=INTEGER},
+      </if>
+      <if test="vin != null" >
+        #{vin,jdbcType=VARCHAR},
+      </if>
+      <if test="xdcWz != null" >
+        #{xdcWz,jdbcType=VARCHAR},
+      </if>
+      <if test="xdcDy != null" >
+        #{xdcDy,jdbcType=VARCHAR},
+      </if>
+      <if test="xdcSscd != null" >
+        #{xdcSscd,jdbcType=VARCHAR},
+      </if>
+      <if test="dccDccwz != null" >
+        #{dccDccwz,jdbcType=VARCHAR},
+      </if>
+      <if test="dccCdkwz != null" >
+        #{dccCdkwz,jdbcType=VARCHAR},
+      </if>
+      <if test="dccCdqwz != null" >
+        #{dccCdqwz,jdbcType=VARCHAR},
+      </if>
+      <if test="dccWkcz != null" >
+        #{dccWkcz,jdbcType=VARCHAR},
+      </if>
+      <if test="dccEddy != null" >
+        #{dccEddy,jdbcType=VARCHAR},
+      </if>
+      <if test="dccCzfs != null" >
+        #{dccCzfs,jdbcType=VARCHAR},
+      </if>
+      <if test="dccEdrl != null" >
+        #{dccEdrl,jdbcType=VARCHAR},
+      </if>
+      <if test="dccHdzt != null" >
+        #{dccHdzt,jdbcType=VARCHAR},
+      </if>
+      <if test="dccSscd != null" >
+        #{dccSscd,jdbcType=VARCHAR},
+      </if>
+      <if test="dccDclx != null" >
+        #{dccDclx,jdbcType=VARCHAR},
+      </if>
+      <if test="dccDcxh != null" >
+        #{dccDcxh,jdbcType=VARCHAR},
+      </if>
+      <if test="dccDcedrl != null" >
+        #{dccDcedrl,jdbcType=VARCHAR},
+      </if>
+      <if test="dccDceddy != null" >
+        #{dccDceddy,jdbcType=VARCHAR},
+      </if>
+      <if test="dcglxtWz != null" >
+        #{dcglxtWz,jdbcType=VARCHAR},
+      </if>
+      <if test="dcglxtSscd != null" >
+        #{dcglxtSscd,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcDdj != null" >
+        #{fdjcDdj,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcZkb != null" >
+        #{fdjcZkb,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcDjkzq != null" >
+        #{fdjcDjkzq,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcSrq != null" >
+        #{fdjcSrq,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcJsx != null" >
+        #{fdjcJsx,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcLqfs != null" >
+        #{fdjcLqfs,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcDyzhq != null" >
+        #{fdjcDyzhq,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcAbs != null" >
+        #{fdjcAbs,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcPdh != null" >
+        #{fdjcPdh,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcZqd != null" >
+        #{fdjcZqd,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcBxh != null" >
+        #{fdjcBxh,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcYqd != null" >
+        #{fdjcYqd,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcJqqg != null" >
+        #{fdjcJqqg,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcFddongj != null" >
+        #{fdjcFddongj,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcPqqg != null" >
+        #{fdjcPqqg,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcQdj != null" >
+        #{fdjcQdj,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcBsqLhq != null" >
+        #{fdjcBsqLhq,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcFdianj != null" >
+        #{fdjcFdianj,jdbcType=VARCHAR},
+      </if>
+      <if test="cycYbb != null" >
+        #{cycYbb,jdbcType=VARCHAR},
+      </if>
+      <if test="cycBfq != null" >
+        #{cycBfq,jdbcType=VARCHAR},
+      </if>
+      <if test="cycJxh != null" >
+        #{cycJxh,jdbcType=VARCHAR},
+      </if>
+      <if test="cycJsq != null" >
+        #{cycJsq,jdbcType=VARCHAR},
+      </if>
+      <if test="cycZxp != null" >
+        #{cycZxp,jdbcType=VARCHAR},
+      </if>
+      <if test="cycJswzq != null" >
+        #{cycJswzq,jdbcType=VARCHAR},
+      </if>
+      <if test="cycDhkg != null" >
+        #{cycDhkg,jdbcType=VARCHAR},
+      </if>
+      <if test="cycFjszy != null" >
+        #{cycFjszy,jdbcType=VARCHAR},
+      </if>
+      <if test="cycGfj != null" >
+        #{cycGfj,jdbcType=VARCHAR},
+      </if>
+      <if test="cycCkzq != null" >
+        #{cycCkzq,jdbcType=VARCHAR},
+      </if>
+      <if test="cycQbdb != null" >
+        #{cycQbdb,jdbcType=VARCHAR},
+      </if>
+      <if test="cycHbdb != null" >
+        #{cycHbdb,jdbcType=VARCHAR},
+      </if>
+      <if test="cycZqcd != null" >
+        #{cycZqcd,jdbcType=VARCHAR},
+      </if>
+      <if test="cycYqcd != null" >
+        #{cycYqcd,jdbcType=VARCHAR},
+      </if>
+      <if test="cycZhcd != null" >
+        #{cycZhcd,jdbcType=VARCHAR},
+      </if>
+      <if test="cycYhcd != null" >
+        #{cycYhcd,jdbcType=VARCHAR},
+      </if>
+      <if test="cycCmz1 != null" >
+        #{cycCmz1,jdbcType=VARCHAR},
+      </if>
+      <if test="cycCmy1 != null" >
+        #{cycCmy1,jdbcType=VARCHAR},
+      </if>
+      <if test="cycCmy2 != null" >
+        #{cycCmy2,jdbcType=VARCHAR},
+      </if>
+      <if test="cycCmy3 != null" >
+        #{cycCmy3,jdbcType=VARCHAR},
+      </if>
+      <if test="cycZywp != null" >
+        #{cycZywp,jdbcType=VARCHAR},
+      </if>
+      <if test="cycSscd != null" >
+        #{cycSscd,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

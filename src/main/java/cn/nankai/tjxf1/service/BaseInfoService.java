@@ -1,0 +1,36 @@
+package cn.nankai.tjxf1.service;
+
+import cn.nankai.tjxf1.entity.BaseInfo;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+
+public interface BaseInfoService {
+    Integer addBaseInfo (BaseInfo baseInfo);
+
+    Integer insertAccId (Integer accId);
+
+    Boolean findByAccId (Integer accId);
+
+    Integer countAccNum ();
+
+    int[] countStatusById(Integer id);
+
+    int[] countTodayStatusById(Integer id);
+
+    int[] countWeekStatusById(Integer id);
+
+    int[] countMonthStatusById(Integer id);
+
+    int[] countStatusByDay( Integer id, Integer diff);
+
+    Integer getPageTotalCount(Map<String,Object> paramMap);
+    Integer getPageTotalCountExcel(Map<String,Object> paramMap);
+
+    List<BaseInfo> getPageListInfo(Map<String,Object> paramMap);
+    List<BaseInfo> getPageListInfoExcel(Map<String,Object> paramMap);
+
+}

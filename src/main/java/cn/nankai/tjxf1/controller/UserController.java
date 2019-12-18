@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import cn.nankai.tjxf1.entity.BaseInfo;
+import cn.nankai.tjxf1.entity.EnvInfo;
 import cn.nankai.tjxf1.entity.PeolpleInfo;
 import cn.nankai.tjxf1.service.BaseInfoService;
+import cn.nankai.tjxf1.service.EnvInfoService;
 import cn.nankai.tjxf1.service.PeopleInfoService;
 import cn.nankai.tjxf1.util.ResultBean;
 import com.fasterxml.jackson.databind.ser.Serializers;
@@ -45,6 +47,9 @@ public class UserController {
 
 	@Autowired
 	private BaseInfoService baseInfoService;
+
+	@Autowired
+	private EnvInfoService envInfoService;
 
 	@Autowired
 	private PeopleInfoService peopleInfoService;
@@ -140,13 +145,14 @@ public class UserController {
 
 
 
-
 	@RequestMapping(value = "/downTemplate", method = RequestMethod.GET)
+	@ResponseBody
     public void downTemplate(HttpServletResponse response) {
-    	User user = userServivce.findUserById(1006);
-    	List<User> userList = new ArrayList<>();
-    	userList.add(user);
-		ExcelKit.$Export(User.class, response).downXlsx(userList, true);
+		EnvInfo baseInfo = envInfoService.findEnvInfoByAccId(20195121);
+				/*findBaseInfoByAccId(20195121);*/
+    	List<EnvInfo> userList = new ArrayList<>();
+    	userList.add(baseInfo);
+		ExcelKit.$Export(EnvInfo.class, response).downXlsx(userList, true);
 
     }
 	
@@ -278,12 +284,15 @@ public class UserController {
 		Integer id = (Integer) session.getAttribute("curUserId");
 
 
+
 		String[] date = test1(7);
 		int[] newAcc = new int[7];
 		int[] done = new int[7];
 		int[] doing = new int[7];
 		for (int i = 0,j=0; i < 7&&j>-7; i++,j--) {
+			System.out.println("qian");
 			int[] temp = baseInfoService.countStatusByDay(id,j);
+			System.out.println("hoio");
 			newAcc[i] = temp[0];
 			doing[i] = temp[1];
 			done[i] =temp[2];

@@ -1,47 +1,62 @@
 package cn.nankai.tjxf1.entity;
 
+import com.wuwenze.poi.annotation.Excel;
+import com.wuwenze.poi.annotation.ExcelField;
+
 import java.util.Date;
 
+@Excel("表A时间地点人员")
 public class BaseInfo {
+    @ExcelField(value = "事故编号")
     private Integer accId;
-
+    @ExcelField(value = "填报人ID")
     private Integer id;
-
+    @ExcelField(value = "发现时间")
     private Date timeFind;
-
+    @ExcelField(value = "涉及车辆数")
     private Integer carNum;
-
+    @ExcelField(value = "伤亡人数")
     private Integer hurtNum;
-
+    @ExcelField(value = "省")
     private String locSheng;
-
+    @ExcelField(value = "市")
     private String locShi;
-
+    @ExcelField(value = "县")
     private String locXian;
-
+    @ExcelField(value = "详细地址")
     private String locDetail;
-
+    @ExcelField(value = "涉及人员数")
     private Integer peopleNum;
-
+    @ExcelField(value = "采集人")
     private String govCj;
-
+    @ExcelField(value = "信息录入人")
     private String govLr;
-
+    @ExcelField(value = "警方到场时间")
     private Date timePolice;
-
+    @ExcelField(value = "调查时间")
     private Date timeInvest;
-
+    @ExcelField(value = "是否有消防车到场")
     private String fireTru;
-
+    @ExcelField(value = "消防车到场时间")
     private Date timeFiretru;
-
+    @ExcelField(value = "是否有救护车到场")
     private String ambulance;
-
+    @ExcelField(value = "救护车到场时间")
     private Date timeAmbu;
-
+    @ExcelField(value = "现场形态")
     private String state;
-
+    @ExcelField(value = "状态")
     private Integer status;
+    @ExcelField(value = "插入数据库时间")
+    private Date timeInsert;
+
+    public Date getTimeInsert() {
+        return timeInsert;
+    }
+
+    public void setTimeInsert(Date timeInsert) {
+        this.timeInsert = timeInsert;
+    }
 
     public Integer getId() {
         return id;

@@ -36,6 +36,9 @@
 
         var  data ;
 
+        var filename = "hahaha.excel";
+        /*var filename;*/
+
         //第一个实例
         table.render({
             elem: '#demo'
@@ -79,15 +82,38 @@
                     ,url: '/import'
                     ,accept: 'file' //普通文件
                     ,exts: 'xls|xlsx' //允许上传的文件后缀
+                    /*,choose:function (obj) {
+                        var files = obj.pushFile();
+                        obj.preview(function (index,file,result) {
+                            filename = file.name;
+                        })
+                    }*/
                     ,before: function(obj){
+                        obj.preview(function (index,file,result) {
+                            filename = file.name;
+                        })
                         this.data={'accId1':data.accId};//关键代码
                     }
                     ,done: function(res){//返回值接收
                         if(res.flag=="1"){
-                            layer.msg('成功导入'+ data.accId+'的表格数据！' , {
+                            /*layer.msg('成功导入'+ data.accId+'的表格数据！' , {
                             }, function(){
                                 location.reload();
+                            });*/
+                            layer.msg(filename+'的数据上传到'+ data.accId+'事故中！', {
+                                icon: 6,
+                                time:100000,
+                                btn:['刷新'],
+                                success: function(layero){
+                                    var btn = layero.find('.layui-layer-btn');
+                                    btn.find('.layui-layer-btn0').attr({
+                                        href: '/jsp/uploadExcel'
+                                    });
+                                }
+
                             });
+                        }else if(res.flag == "3"){
+                            layer.msg('事故ID不一致，请确认是否有误！',{time:7*1000})
                         }else{
                             layer.msg('导入失败！', {
                             }, function(){

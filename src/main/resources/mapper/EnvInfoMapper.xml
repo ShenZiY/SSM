@@ -50,6 +50,9 @@
     Acc_ID, Location, RoadInfo_CT, RoadInfo_PD, RoadInfo_CZ, RoadInfo_ZK, RoadInfo_JK, 
     WeaInfo_TQ, WeaInfo_FX, WeaInfo_FL, WeaInfo_WD, Protect_XC, Protect_CL, WeaInfo_FS
   </sql>
+  <select id="selectByAccId" resultType="cn.nankai.tjxf1.entity.EnvInfo">
+     select * from a12_envinfo where Acc_ID = #{accId}
+  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.nankai.tjxf1.entity.EnvInfoExample" >
     select
     <if test="distinct" >

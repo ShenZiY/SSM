@@ -15,6 +15,8 @@ public interface BaseInfoService {
 
     Boolean findByAccId (Integer accId);
 
+    BaseInfo findBaseInfoByAccId (Integer accId);
+
     Integer countAccNum ();
 
     int[] countStatusById(Integer id);
@@ -32,5 +34,7 @@ public interface BaseInfoService {
 
     List<BaseInfo> getPageListInfo(Map<String,Object> paramMap);
     List<BaseInfo> getPageListInfoExcel(Map<String,Object> paramMap);
+
+    int updateStatus(Integer status, Integer accId);
 
 }

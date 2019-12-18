@@ -47,6 +47,11 @@ public class BaseInfoServiceImpl implements BaseInfoService {
     }
 
     @Override
+    public BaseInfo findBaseInfoByAccId(Integer accId) {
+        return baseInfoMapper.findByAccId(accId);
+    }
+
+    @Override
     public Integer countAccNum() {
         System.out.println("记录数"+baseInfoMapper.countToday());
         return baseInfoMapper.countToday();
@@ -131,6 +136,11 @@ public class BaseInfoServiceImpl implements BaseInfoService {
     @Override
     public List<BaseInfo> getPageListInfoExcel(Map<String, Object> paramMap) {
         return baseInfoMapper.getPageListInfoExcel((Integer) paramMap.get("id"),(Integer)paramMap.get("start"),(Integer)paramMap.get("size"));
+    }
+
+    @Override
+    public int updateStatus(Integer status, Integer accId) {
+        return baseInfoMapper.updateStatus(status,accId);
     }
 
 }

@@ -9,4 +9,6 @@ public interface EnvInfoService {
 
     Integer addEnvInfo(EnvInfo envInfo);
 
+    EnvInfo findEnvInfoByAccId(Integer accId);
+
 }

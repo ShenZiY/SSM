@@ -44,4 +44,5 @@ public interface BaseInfoMapper {
     List<BaseInfo> getPageListInfo(@Param("id") Integer id,@Param("start") Integer start,@Param("size") Integer size);
     List<BaseInfo> getPageListInfoExcel(@Param("id") Integer id,@Param("start") Integer start,@Param("size") Integer size);
 
+    int updateStatus(@Param("status") Integer status,@Param("accId") Integer accId);
 }

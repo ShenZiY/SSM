@@ -27,6 +27,11 @@ public class JspController {
         return "updatePassword";
     }
 
+    @RequestMapping("/pdf")
+    public String pdf (){
+        return "pdf";
+    }
+
     @RequestMapping("/uploadExcel")
     public String uploadExcel (){
         return "uploadExcel";

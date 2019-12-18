@@ -108,9 +108,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</a>
 							</li>
 							<li>
-								<a _href="/aa">
+								<a _href="/user/downTemplate1"> <%--去掉1即可用--%>
 									<i class="iconfont">&#xe6a7;</i>
-									<cite>删除事故</cite>
+									<cite>导出模板</cite>
 								</a>
 							</li>
 						</ul>
@@ -130,7 +130,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</a>
 							</li>
 							<li>
-								<a _href="/user/import">
+								<a _href="/generatePdf">
+									<i class="iconfont">&#xe6a7;</i>
+									<cite>PDF</cite>
+								</a>
+							</li>
+							<li>
+								<a _href="/jsp/pdf">
 									<i class="iconfont">&#xe6a7;</i>
 									<cite>数据删除</cite>
 								</a>

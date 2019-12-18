@@ -1,33 +1,38 @@
 package cn.nankai.tjxf1.entity;
 
+import com.wuwenze.poi.annotation.Excel;
+import com.wuwenze.poi.annotation.ExcelField;
+
+@Excel("表A事故地点环境条件")
 public class EnvInfo {
+    @ExcelField(value = "事故编码")
     private Integer accId;
-
+    @ExcelField(value = "事故地点")
     private String location;
-
+    @ExcelField(value = "沿车头趋势")
     private String roadinfoCt;
-
+    @ExcelField(value = "坡度")
     private Integer roadinfoPd;
-
+    @ExcelField(value = "表面材质")
     private String roadinfoCz;
-
+    @ExcelField(value = "表面状况")
     private String roadinfoZk;
-
+    @ExcelField(value = "周围监控")
     private String roadinfoJk;
-
+    @ExcelField(value = "天气")
     private String weainfoTq;
-
+    @ExcelField(value = "风向")
     private String weainfoFx;
-
+    @ExcelField(value = "风力")
     private String weainfoFl;
-
-    private Integer weainfoWd;
-
-    private String protectXc;
-
-    private String protectCl;
-
+    @ExcelField(value = "风速")
     private Integer weainfoFs;
+    @ExcelField(value = "温度")
+    private Integer weainfoWd;
+    @ExcelField(value = "现场保护")
+    private String protectXc;
+    @ExcelField(value = "车辆保护")
+    private String protectCl;
 
     public Integer getAccId() {
         return accId;

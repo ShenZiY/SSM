@@ -14,5 +14,7 @@ public interface EnvInfoMapper {
 
     int insertSelective(EnvInfo record);
 
+    EnvInfo selectByAccId(Integer accId);
+
     List<EnvInfo> selectByExample(EnvInfoExample example);
 }

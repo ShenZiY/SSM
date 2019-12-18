@@ -22,6 +22,8 @@
     <result column="State" jdbcType="VARCHAR" property="state" />
     <result column="Status" jdbcType="INTEGER" property="status" />
     <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="Time_Insert" jdbcType="TIMESTAMP" property="timeInsert" />
+
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -84,19 +86,24 @@
   <sql id="Base_Column_List">
     Acc_ID, Time_Find, Car_Num, Hurt_Num, Loc_Sheng, Loc_Shi, Loc_Xian, Loc_Detail, People_Num, 
     Gov_CJ, Gov_LR, Time_Police, Time_Invest, Fire_Tru, Time_FireTru, Ambulance, Time_Ambu, 
-    State, Status, id
+    State, Status, id,Time_Insert
   </sql>
+
+  <!--更改ID下的status-->
+  <update id="updateStatus" >
+      update a11_baseinfo set `Status` = #{status} where Acc_ID = #{accId}
+  </update>
 
   <select id="getPageListInfoExcel" resultMap="BaseResultMap">
      SELECT  Acc_ID, Time_Find, Car_Num, Hurt_Num,  Loc_Shi, Loc_Xian, Loc_Detail, People_Num,
     Gov_CJ, Gov_LR, Time_Police, Time_Invest, Fire_Tru, Time_FireTru, Ambulance, Time_Ambu,
-    State, id,Loc_Sheng ,status
+    State, id,Loc_Sheng ,status,Time_Insert
     FROM a11_baseinfo WHERE id = #{id} and status = 0 order by Time_Invest desc limit #{start},#{size}
   </select>
   <select id="getPageListInfo" resultMap="BaseResultMap">
      SELECT  Acc_ID, Time_Find, Car_Num, Hurt_Num,  Loc_Shi, Loc_Xian, Loc_Detail, People_Num,
     Gov_CJ, Gov_LR, Time_Police, Time_Invest, Fire_Tru, Time_FireTru, Ambulance, Time_Ambu,
-    State, id,Loc_Sheng ,status
+    State, id,Loc_Sheng ,status,Time_Insert
     FROM a11_baseinfo WHERE id = #{id} and YEARWEEK( date_format(  Time_Invest,'%Y-%m-%d' ),1 ) = YEARWEEK( now(),1 ) order by Time_Invest desc limit #{start},#{size}
   </select>
 
@@ -109,7 +116,7 @@
 
   <!--Echarts-->
   <select id="countStatusByDay" resultType="Integer" parameterType="Integer">
-          SELECT status FROM a11_baseinfo WHERE id = #{id} and DATEDIFF(Time_Find,NOW())= #{diff};
+          SELECT status FROM a11_baseinfo WHERE id = #{id} and DATEDIFF(Time_Insert,NOW())= #{diff};
   </select>
 
   <!--表格-->
@@ -118,15 +125,15 @@
   </select>
 
   <select id="countTodayStatusById" resultType="Integer" parameterType="Integer">
-          select status from a11_baseinfo where id = #{id} and Time_Invest >= date(now())
+          select status from a11_baseinfo where id = #{id} and Time_Insert >= date(now())
   </select>
 
   <select id="countWeekStatusById" resultType="Integer" parameterType="Integer">
-          SELECT status FROM  a11_baseinfo WHERE id = #{id} and YEARWEEK( date_format(  Time_Invest,'%Y-%m-%d' ),1 ) = YEARWEEK( now(),1 ) ;
+          SELECT status FROM  a11_baseinfo WHERE id = #{id} and YEARWEEK( date_format(  Time_Insert,'%Y-%m-%d' ),1 ) = YEARWEEK( now(),1 ) ;
   </select>
 
   <select id="countMonthStatusById" resultType="Integer" parameterType="Integer">
-          SELECT status FROM  a11_baseinfo WHERE id = #{id} and DATE_FORMAT( Time_Invest, '%Y%m' ) = DATE_FORMAT( CURDATE( ) ,'%Y%m' ) ;
+          SELECT status FROM  a11_baseinfo WHERE id = #{id} and DATE_FORMAT( Time_Insert, '%Y%m' ) = DATE_FORMAT( CURDATE( ) ,'%Y%m' ) ;
   </select>
 
 
@@ -137,7 +144,7 @@
 
   <select id="countToday" resultType="Integer">
     select count(*) as countRes from a11_baseinfo
-    where Time_Invest >= date(now())
+    where Time_Insert >= date(now())
   </select>
 
 
@@ -164,14 +171,14 @@
       Gov_CJ, Gov_LR, Time_Police, 
       Time_Invest, Fire_Tru, Time_FireTru, 
       Ambulance, Time_Ambu, State, 
-      Status,id)
+      Status,id,Time_Insert)
     values (#{accId,jdbcType=INTEGER}, #{timeFind,jdbcType=TIMESTAMP}, #{carNum,jdbcType=TINYINT}, 
       #{hurtNum,jdbcType=TINYINT}, #{locSheng,jdbcType=VARCHAR}, #{locShi,jdbcType=VARCHAR}, 
       #{locXian,jdbcType=VARCHAR}, #{locDetail,jdbcType=VARCHAR}, #{peopleNum,jdbcType=TINYINT}, 
       #{govCj,jdbcType=VARCHAR}, #{govLr,jdbcType=VARCHAR}, #{timePolice,jdbcType=TIMESTAMP}, 
       #{timeInvest,jdbcType=TIMESTAMP}, #{fireTru,jdbcType=VARCHAR}, #{timeFiretru,jdbcType=TIMESTAMP}, 
       #{ambulance,jdbcType=VARCHAR}, #{timeAmbu,jdbcType=TIMESTAMP}, #{state,jdbcType=VARCHAR}, 
-      #{status,jdbcType=TINYINT},#{id,jdbcType=TINYINT})
+      #{status,jdbcType=TINYINT},#{id,jdbcType=TINYINT},#{timeInsert,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="cn.nankai.tjxf1.entity.BaseInfo">
     insert into a11_baseinfo
@@ -236,6 +243,9 @@
       <if test="id != null">
         id,
       </if>
+      <if test="Time_Insert != null">
+        id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="accId != null">
@@ -297,6 +307,9 @@
       </if>
       <if test="id != null">
         #{id,jdbcType=TINYINT},
+      </if>
+      <if test="timeInsert != null">
+        #{timeInsert,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>

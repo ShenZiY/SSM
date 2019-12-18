@@ -37,7 +37,7 @@
     <div style="margin-top: 20px">
         <blockquote class="layui-elem-quote"><div id="nowTime"></div></blockquote>
     </div>
-    <div class="layui-carousel" id="stepForm" lay-filter="stepForm" style="margin: 0 auto; padding-top: 50px;">
+   <%-- <div class="layui-carousel" id="stepForm" lay-filter="stepForm" style="margin: 0 auto; padding-top: 50px;">
         <div carousel-item>
             <div>
                 <form  action="/keepAccId" class="layui-form" style="margin: 0 auto;max-width: 460px;text-align:center;padding-top: 40px;">
@@ -53,9 +53,9 @@
                             <button class="layui-btn" lay-submit lay-filter="formStep" type="submit">
                                 保存
                             </button>
-                            <%-- <button class="layui-btn" lay-submit lay-filter="keepAccId" type="submit">
+                            &lt;%&ndash; <button class="layui-btn" lay-submit lay-filter="keepAccId" type="submit">
                                  &emsp;保存&emsp;
-                             </button>--%>
+                             </button>&ndash;%&gt;
                             <button class="layui-btn" lay-submit lay-filter="formStep2" type="submit">
                                 继续
                             </button>
@@ -84,12 +84,12 @@
                                 </select>
                             </div>
                         </div>
-                        <%--<div class="layui-inline">
+                        &lt;%&ndash;<div class="layui-inline">
                             <label class="layui-form-label">详细地址</label>
                             <div class="layui-input-inline">
                                 <input type="text" name="locDetail" id="locDetail" lay-verify="required"  autocomplete="off" class="layui-input">
                             </div>
-                        </div>--%>
+                        </div>&ndash;%&gt;
                         <div class="layui-inline">
                             <label class="layui-form-label ">详细地址</label>
                             <div class="layui-input-inline">
@@ -157,15 +157,18 @@
                         </div>
                         <div class="layui-inline">
                             <label class="layui-form-label">现场形态</label>
-                            <div class="layui-input-inline">
-                                <select name="state">
+                            <div class="layui-input-block">
+                                <div class="layui-input-inline">
+                                <input type="text" name="state" id="stateInput" class="layui-input" style="position:absolute;z-index:2;width:80%;" placeholder="请选择" autocomplete="off">
+                                <select type="text"  id="stateSelect" lay-filter="hc_select" autocomplete="off"   class="layui-select" >
                                     <option value=""></option>
-                                    <option value="原始">原始</option>
-                                    <option value="变动" >变动</option>
-                                    <option value="无现场">无现场</option>
-                                    <option value="其他">其他</option>
-                                    <option value="未知">未知</option>
+                                    <option value="①原始">1原始</option>
+                                    <option value="②变动" >2变动</option>
+                                    <option value="③无现场">3无现场</option>
+                                    <option value="⑧其他">8其他</option>
+                                    <option value="⑨未知">9未知</option>
                                 </select>
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -176,16 +179,16 @@
                             <div class="layui-input-inline">
                                 <select name="fireTru">
                                     <option value=""></option>
-                                    <option value="是">是</option>
-                                    <option value="否" >否</option>
-                                    <option value="未知" >未知</option>
+                                    <option value="①是">1是</option>
+                                    <option value="②否" >2否</option>
+                                    <option value="⑨未知" >9未知</option>
                                 </select>
                             </div>
                         </div>
                         <div class="layui-inline">
                             <label class="layui-form-label">时间</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="timeFireTru" id ="timeFireTru" lay-verify=""  placeholder="消防车到场时间" autocomplete="off" class="layui-input">
+                                <input type="text" name="timeFireTru" id ="timeFireTru" lay-verify="" value="一" placeholder="消防车到场时间" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                     </div>
@@ -196,16 +199,16 @@
                             <div class="layui-input-inline">
                                 <select name="ambulance">
                                     <option value=""></option>
-                                    <option value="是">是</option>
-                                    <option value="否" >否</option>
-                                    <option value="未知" >未知</option>
+                                    <option value="1是">1是</option>
+                                    <option value="2否" >2否</option>
+                                    <option value="9未知" >9未知</option>
                                 </select>
                             </div>
                         </div>
                         <div class="layui-inline">
                             <label class="layui-form-label">时间</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="timeAmbu" id ="timeAmbu" lay-verify=""  placeholder="救护车到场时间" autocomplete="off" class="layui-input">
+                                <input type="text" name="timeAmbu" id ="timeAmbu" lay-verify="" value="一" placeholder="救护车到场时间" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                     </div>
@@ -228,27 +231,33 @@
                     <div class="layui-form-item">
                         <div class="layui-inline">
                             <label class="layui-form-label">现场保护</label>
-                            <div class="layui-input-inline">
-                                <select name="xcbh">
-                                    <option value=""></option>
-                                    <option value="采取措施">采取措施</option>
-                                    <option value="没有采取措施" >没有采取措施</option>
-                                    <option value="其他">其他</option>
-                                    <option value="未知">未知</option>
-                                </select>
+                            <div class="layui-input-block">
+                                <div class="layui-input-inline">
+                                    <input type="text" name="xcbh" id="xcbhInput" class="layui-input" style="position:absolute;z-index:2;width:80%;" placeholder="请选择" autocomplete="off">
+                                    <select id ="xcbhSelect" lay-filter="xcbh_select" autocomplete="off"   class="layui-select" >
+                                        <option value=""></option>
+                                        <option value="1采取措施">1采取措施</option>
+                                        <option value="2没有采取措施" >2没有采取措施</option>
+                                        <option value="8其他">8其他</option>
+                                        <option value="9未知">9未知</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
 
                         <div class="layui-inline">
                             <label class="layui-form-label">车辆保护</label>
-                            <div class="layui-input-inline">
-                                <select name="clbh">
-                                    <option value=""></option>
-                                    <option value="采取措施">采取措施</option>
-                                    <option value="没有采取措施" >没有采取措施</option>
-                                    <option value="其他">其他</option>
-                                    <option value="未知">未知</option>
-                                </select>
+                            <div class="layui-input-block">
+                                <div class="layui-input-inline">
+                                    <input type="text" name="clbh" id="clbhInput" class="layui-input" style="position:absolute;z-index:2;width:80%;" placeholder="请选择" autocomplete="off">
+                                    <select id="clbhSelect" lay-filter="clbh_select" autocomplete="off"   class="layui-select" >
+                                        <option value=""></option>
+                                        <option value="1采取措施">1采取措施</option>
+                                        <option value="2没有采取措施" >2没有采取措施</option>
+                                        <option value="8其他">8其他</option>
+                                        <option value="9未知">9未知</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -273,17 +282,20 @@
                     <div class="layui-form-item">
                         <div class="layui-inline">
                             <label class="layui-form-label">事故地点</label>
-                            <div class="layui-input-inline">
-                                <select name="location">
-                                    <option value=""></option>
-                                    <option value="城区">城区</option>
-                                    <option value="村庄" >村庄</option>
-                                    <option value="高速公路">高速公路</option>
-                                    <option value="野外">野外</option>
-                                    <option value="车库">车库</option>
-                                    <option value="其他">其他</option>
-                                    <option value="未知">未知</option>
-                                </select>
+                            <div class="layui-input-block">
+                                <div class="layui-input-inline">
+                                    <input type="text" name="location" id="locationInput" class="layui-input" style="position:absolute;z-index:2;width:80%;" placeholder="请选择" autocomplete="off">
+                                    <select  id="locationSelect" lay-filter="location_select" autocomplete="off"   class="layui-select" >
+                                        <option value=""></option>
+                                        <option value="1城区">1城区</option>
+                                        <option value="2村庄" >2村庄</option>
+                                        <option value="3高速公路">3高速公路</option>
+                                        <option value="4野外">4野外</option>
+                                        <option value="5车库">5车库</option>
+                                        <option value="8其他">8其他</option>
+                                        <option value="9未知">9未知</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="layui-inline">
@@ -291,10 +303,10 @@
                             <div class="layui-input-inline">
                                 <select name="ctqs">
                                     <option value=""></option>
-                                    <option value="平坦的">平坦的</option>
-                                    <option value="上升" >上升</option>
-                                    <option value="下降">下降</option>
-                                    <option value="未知">未知</option>
+                                    <option value="1平坦的">1平坦的</option>
+                                    <option value="2上升" >2上升</option>
+                                    <option value="3下降">3下降</option>
+                                    <option value="9未知">9未知</option>
                                 </select>
                             </div>
                         </div>
@@ -310,45 +322,59 @@
                     <div class="layui-form-item">
                         <div class="layui-inline">
                             <label class="layui-form-label">道路材质</label>
-                            <div class="layui-input-inline">
-                                <select name="bmcz">
-                                    <option value=""></option>
-                                    <option value="沥青">沥青</option>
-                                    <option value="水泥" >水泥</option>
-                                    <option value="砂石">砂石</option>
-                                    <option value="土路">土路</option>
-                                    <option value="草地">草地</option>
-                                    <option value="其他">其他</option>
-                                    <option value="未知">未知</option>
-                                </select>
-                            </div>
+                                <div class="layui-input-block">
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="bmcz" id="bmczInput" class="layui-input" style="position:absolute;z-index:2;width:80%;" placeholder="请选择" autocomplete="off">
+                                        <select type="text"  id="bmczSelect" lay-filter="bmcz_select" autocomplete="off"   class="layui-select" >
+                                            <option value=""></option>
+                                            <option value="1沥青">1沥青</option>
+                                            <option value="2水泥" >2水泥</option>
+                                            <option value="3砂石">3砂石</option>
+                                            <option value="4土路">4土路</option>
+                                            <option value="5草地">草地</option>
+                                            <option value="8其他">8其他</option>
+                                            <option value="9未知">9未知</option>
+                                        </select>
+                                    </div>
+                                </div>
                         </div>
                         <div class="layui-inline">
                             <label class="layui-form-label">道路状况</label>
-                            <div class="layui-input-inline">
-                                <select name="bmzk">
-                                    <option value=""></option>
-                                    <option value="干">干</option>
-                                    <option value="湿" >湿</option>
-                                    <option value="冰冻">冰冻</option>
-                                    <option value="积雪">积雪</option>
-                                    <option value="其他">其他</option>
-                                    <option value="未知">未知</option>
-                                </select>
-                            </div>
+                                <div class="layui-input-block">
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="bmzk" id="bmzkInput" class="layui-input" style="position:absolute;z-index:2;width:80%;" placeholder="请选择" autocomplete="off">
+                                        <select type="text"  id="bmzkSelect" lay-filter="bmzk_select" autocomplete="off"   class="layui-select" >
+                                            <option value=""></option>
+                                            <option value="1干">1干</option>
+                                            <option value="2湿" >2湿</option>
+                                            <option value="3冰冻">3冰冻</option>
+                                            <option value="4积雪">4积雪</option>
+                                            <option value="8其他">8其他</option>
+                                            <option value="9未知">9未知</option>
+                                        </select>
+                                    </div>
+                                </div>
                         </div>
                         <div class="layui-inline">
-                            <label class="layui-form-label">周围监控</label>
-                            <div class="layui-input-inline">
-                                <select name="zwjk">
-                                    <option value=""></option>
-                                    <option value="没有">没有</option>
-                                    <option value="有" >有</option>
-                                    <option value="未知">未知</option>
-                                </select>
+                            <label class="layui-form-label">天气</label>
+                            <div class="layui-input-block">
+                                <div class="layui-input-inline">
+                                    <input type="text" name="tq" id="tqInput" class="layui-input" style="position:absolute;z-index:2;width:80%;" placeholder="请选择" autocomplete="off">
+                                    <select type="text"  id="tqSelect" lay-filter="tq_select" autocomplete="off"   class="layui-select" >
+                                        <option value=""></option>
+                                        <option value="1晴">1晴</option>
+                                        <option value="2阴" >2阴</option>
+                                        <option value="3雨">3雨</option>
+                                        <option value="4雪">4雪</option>
+                                        <option value="5雾">5雾</option>
+                                        <option value="6大风">6大风</option>
+                                        <option value="7冰雹">7冰雹</option>
+                                        <option value="8其他">8其他</option>
+                                        <option value="9未知">9未知</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-
                     </div>
 
                     <div class="layui-form-item">
@@ -357,16 +383,16 @@
                             <div class="layui-input-inline">
                                 <select name="fx">
                                     <option value=""></option>
-                                    <option value="无风">无风</option>
-                                    <option value="北" >北</option>
-                                    <option value="东北">东北</option>
-                                    <option value="东">东</option>
-                                    <option value="东南">东南</option>
-                                    <option value="南">南</option>
-                                    <option value="西南">西南</option>
-                                    <option value="西">西</option>
-                                    <option value="西北">西北</option>
-                                    <option value="未知">未知</option>
+                                    <option value="1无风">1无风</option>
+                                    <option value="2北" >2北</option>
+                                    <option value="3东北">3东北</option>
+                                    <option value="4东">4东</option>
+                                    <option value="5东南">5东南</option>
+                                    <option value="6南">6南</option>
+                                    <option value="7西南">7西南</option>
+                                    <option value="8西">8西</option>
+                                    <option value="10西北">10西北</option>
+                                    <option value="9未知">9未知</option>
                                 </select>
                             </div>
                         </div>
@@ -375,10 +401,10 @@
                             <div class="layui-input-inline">
                                 <select name="fl">
                                     <option value=""></option>
-                                    <option value="无风">没有</option>
-                                    <option value="稳定弱" >稳定、弱</option>
-                                    <option value="稳定强" >稳定、强</option>
-                                    <option value="未知" >未知</option>
+                                    <option value="1无风">1没有</option>
+                                    <option value="2稳定弱" >2稳定、弱</option>
+                                    <option value="3稳定强" >3稳定、强</option>
+                                    <option value="9未知" >9未知</option>
                                 </select>
                             </div>
                         </div>
@@ -388,34 +414,28 @@
                                 <input type="number" name="fs" id ="fs"    autocomplete="off" class="layui-input">
                             </div>
                         </div>
+                    </div>
 
-
-                        <div class="layui-form-item">
-                            <div class="layui-inline">
-                                <label class="layui-form-label">天气</label>
-                                <div class="layui-input-inline">
-                                    <select name="tq">
-                                        <option value=""></option>
-                                        <option value="晴">晴</option>
-                                        <option value="阴" >阴</option>
-                                        <option value="雨">雨</option>
-                                        <option value="雪">雪</option>
-                                        <option value="雾">雾</option>
-                                        <option value="大风">大风</option>
-                                        <option value="冰雹">冰雹</option>
-                                        <option value="其他">其他</option>
-                                        <option value="未知">未知</option>
-                                    </select>
-                                </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">周围监控</label>
+                            <div class="layui-input-inline">
+                                <select name="zwjk">
+                                    <option value=""></option>
+                                    <option value="1没有">1没有</option>
+                                    <option value="2有" >2有</option>
+                                    <option value="9未知">9未知</option>
+                                </select>
                             </div>
-                            <div class="layui-inline">
-                                <label class="layui-form-label">温度</label>
-                                <div class="layui-input-inline">
-                                    <input type="number" name="wd" id ="wd"    autocomplete="off" class="layui-input">
-                                </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">温度</label>
+                            <div class="layui-input-inline">
+                                <input type="number" name="wd" id ="wd"    autocomplete="off" class="layui-input">
                             </div>
                         </div>
                     </div>
+
                     <div class="layui-form-item">
                         <div class="layui-input-block">
                             <button type="button" class="layui-btn layui-btn-primary pre ">上一步</button>
@@ -447,7 +467,7 @@
             </div>
 
         </div>
-    </div>
+    </div>--%>
 </div>
 </body>
 <script src="${APP_PATH }/layuimini/lib/layui-v2.5.4/layui.js" charset="utf-8"></script>
@@ -459,6 +479,7 @@
 <script>
     okLoading.close();
 </script>
+
 <script>
     var newDate = '';
     var curUserName= '<%=session.getAttribute("curUserName")%>';
@@ -499,17 +520,53 @@
         newDate = dateFilter(year)+"年"+dateFilter(month)+"月"+dateFilter(date)+"日 ";
         document.getElementById("nowTime").innerHTML = "尊敬的"+curUserName+"！  今天是  "+newDate+"&nbsp&nbsp"+week+
             "&nbsp&nbsp第"+zhous+"周"+"&nbsp&nbsp&nbsp"
-            +"数据库今日已录入案件"+todayAccNum+"起"+"&nbsp&nbsp&nbsp"+"建议事故编号: "+year+zhous+weekNumber+num;
+            +"数据库今日已录入案件"+todayAccNum+"起"+"&nbsp&nbsp&nbsp"+"新建事故编号: "+year+zhous+weekNumber+num;
         setTimeout("getLangDate()",1000);
     }
 </script>
 
-<script>
+<%--<script>
     layui.use([ 'form', 'step','laydate'], function () {
         var $ = layui.$,
             form = layui.form,
             step = layui.step,
             laydate = layui.laydate;
+
+        form.on('select(hc_select)', function (data) {   //选择移交单位 赋值给input框
+            $("#stateInput").val(data.value);
+            $("#stateSelect").next().find("dl").css({ "display": "none" });
+            form.render();
+        });
+        form.on('select(xcbh_select)', function (data) {   //选择移交单位 赋值给input框
+            $("#xcbhInput").val(data.value);
+            $("#xcbhSelect").next().find("dl").css({ "display": "none" });
+            form.render();
+        });
+        form.on('select(clbh_select)', function (data) {   //选择移交单位 赋值给input框
+            $("#clbhInput").val(data.value);
+            $("#clbhSelect").next().find("dl").css({ "display": "none" });
+            form.render();
+        });
+        form.on('select(location_select)', function (data) {   //选择移交单位 赋值给input框
+            $("#locationInput").val(data.value);
+            $("#locationSelect").next().find("dl").css({ "display": "none" });
+            form.render();
+        });
+        form.on('select(bmcz_select)', function (data) {   //选择移交单位 赋值给input框
+            $("#bmczInput").val(data.value);
+            $("#bmczSelect").next().find("dl").css({ "display": "none" });
+            form.render();
+        });
+        form.on('select(bmzk_select)', function (data) {   //选择移交单位 赋值给input框
+            $("#bmzkInput").val(data.value);
+            $("#bmzkSelect").next().find("dl").css({ "display": "none" });
+            form.render();
+        });
+        form.on('select(tq_select)', function (data) {   //选择移交单位 赋值给input框
+            $("#tqInput").val(data.value);
+            $("#tqSelect").next().find("dl").css({ "display": "none" });
+            form.render();
+        });
 
         laydate.render({
             elem: '#timeFind' //指定元素
@@ -583,9 +640,9 @@
         });
     })
 
-</script>
+</script>--%>
 
-<script type="text/javascript">
+<%--<script type="text/javascript">
     layui.use(['form', 'jquery', 'layer'], function () {
         var form = layui.form;
         var $ = layui.jquery;
@@ -659,7 +716,18 @@
             showError(result.msg);
         }
     }
-</script>
+</script>--%>
+
+<%--<script>
+    $(document).ready(function () {
+        var time = new Date();
+        var day = ("0" + time.getDate()).slice(-2);
+        var month = ("0" + (time.getMonth() + 1)).slice(-2);
+        var today = time.getFullYear() + "-" + (month) + "-" + (day);
+        $('#timeFireTru').val(today);
+        $('#timeAmbu').val(today);
+    })
+</script>--%>
 
 
 

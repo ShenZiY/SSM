@@ -1,6 +1,7 @@
 package cn.nankai.tjxf1.controller;
 
 import cn.nankai.tjxf1.entity.*;
+import cn.nankai.tjxf1.service.BaseInfoService;
 import cn.nankai.tjxf1.service.UploadService;
 import com.google.common.collect.Lists;
 import com.wuwenze.poi.ExcelKit;
@@ -23,12 +24,31 @@ import java.util.*;
 public class UploadController {
     @Autowired
     private UploadService uploadService;
+    @Autowired
+    private BaseInfoService baseInfoService;
 
     @RequestMapping(value = "/import", method = RequestMethod.POST)
     public ResponseEntity<?> importUser(@RequestParam MultipartFile file,@RequestParam(value="accId1") String accId1)
             throws IOException {
 
-        System.out.println("进入controller"+accId1 );
+
+        System.out.println("进入controller"+accId1+"表名" );
+
+       /* if(accId1 != filename1){
+            Map<String, Object> map2 = new HashMap<>();
+            map2.put("flag", 3);
+            return ResponseEntity.ok(map2);
+        }*/
+        /*Map<String, Object> map1 = new HashMap<>();
+        map1.put("data", peolpleInfoList);
+        map1.put("haveError", haveError);
+        map1.put("error", errorList);
+        map1.put("timeConsuming", (System.currentTimeMillis() - beginMillis) / 1000L);
+        map1.put("flag", 1);*/
+
+
+
+
         long beginMillis = System.currentTimeMillis();
 
         List<PeolpleInfo> peolpleInfoList = Lists.newArrayList();
@@ -46,6 +66,7 @@ public class UploadController {
         List<EnvBurnInfo> envBurnInfoList = Lists.newArrayList();
         List<FireLocInfo> fireLocInfoList = Lists.newArrayList();
         List<Map<String, Object>> errorList = Lists.newArrayList();
+
 
 
 
@@ -73,6 +94,19 @@ public class UploadController {
                         errorList.add(map);
                     }
                 });
+
+        //测试如果事故ID与文件名不符合直接return
+        if(accId1.equals(peolpleInfoList.get(0).getAccId().toString()) == false ){
+            boolean haveError = errorList.isEmpty();
+            Map<String, Object> map2 = new HashMap<>();
+            map2.put("data", peolpleInfoList);
+            map2.put("haveError", haveError);
+            map2.put("error", errorList);
+            map2.put("timeConsuming", (System.currentTimeMillis() - beginMillis) / 1000L);
+            map2.put("flag", 3);
+            return ResponseEntity.ok(map2);
+        }
+
 
         ExcelKit.$Import(CarInfo.class)
                 .readXlsx(file.getInputStream(), new ExcelReadHandler<CarInfo>() {
@@ -424,6 +458,8 @@ public class UploadController {
         uploadService.insertB5InnerInfoSelective(b5InnerInfoList);
         uploadService.insertB5OuterInfoSelective(b5OuterInfoList);//这个有问题
 
+        baseInfoService.updateStatus(1,Integer.parseInt(accId1));
+
        /*uploadService.insertExcel(peolpleInfoList,carInfoList,b1InnerInfoList,b1OuterInfoList,b2InnerInfoList,b2OuterInfoList,b3InnerInfoList,b3OuterInfoList,b4InnerInfoList,b4OuterInfoList
                                     ,b5InnerInfoList,b5OuterInfoList,envBurnInfoList,fireLocInfoList);*/
         System.out.println("error"+errorList.size());
@@ -434,7 +470,6 @@ public class UploadController {
         map1.put("error", errorList);
         map1.put("timeConsuming", (System.currentTimeMillis() - beginMillis) / 1000L);
         map1.put("flag", 1);
-
         return ResponseEntity.ok(map1);
     }
 

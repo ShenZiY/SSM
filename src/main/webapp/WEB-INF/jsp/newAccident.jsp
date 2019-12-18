@@ -26,7 +26,7 @@
     <link rel="shortcut icon" href="${APP_PATH }/static/logo.ico" type="image/x-icon" />
     <link rel="stylesheet" href="${APP_PATH }/layuimini/lib/layui-v2.5.4/css/layui.css">
     <link rel="stylesheet" href="${APP_PATH }/ok-admin/css/oksub.css" media="all"/>
-    <script type="text/javascript" src="${APP_PATH }/ok-admin/js/okLoading.js"></script>
+    <%--<script type="text/javascript" src="${APP_PATH }/ok-admin/js/okLoading.js"></script>--%>
     <script src="${APP_PATH }/WeAdmin-master/lib/layui/layui.js" charset="utf-8"></script>
 
 
@@ -34,9 +34,12 @@
 
 <body style="background-color: rgba(171,176,215,0.36); ">
 <div class="weadmin-body">
-    <div style="margin-top: 20px">
-        <blockquote class="layui-elem-quote"><div id="nowTime"></div></blockquote>
+    <div style="margin-top: 20px;margin-left: 5px">
+        <blockquote class="layui-elem-quote" ><div id="nowTime" style="margin-left: 17%"></div></blockquote>
     </div>
+
+
+    <button type="button" id = "uploadExcel" class="layui-btn" style="margin-left: 45% ;margin-top: 7%"><i class="layui-icon"></i>上传EXCEL数据</button>
    <%-- <div class="layui-carousel" id="stepForm" lay-filter="stepForm" style="margin: 0 auto; padding-top: 50px;">
         <div carousel-item>
             <div>
@@ -476,11 +479,12 @@
 <script src="${APP_PATH }/static/js/select.js" type="text/javascript"></script>
 <script src="${APP_PATH }/static/js/jquery.min.js" type="text/javascript"></script>
 
-<script>
+<%--<script>
     okLoading.close();
-</script>
+</script>--%>
 
 <script>
+    var accId = '';
     var newDate = '';
     var curUserName= '<%=session.getAttribute("curUserName")%>';
     var todayAccNum =  '<%=request.getAttribute("todayAccNum")%>';
@@ -517,13 +521,46 @@
 
         var week = weeks[day]; //根据星期值，从数组中获取对应的星期字符串
         var zhous = getWeekOfYear();
+        accId = ''+year+zhous+weekNumber+num;
         newDate = dateFilter(year)+"年"+dateFilter(month)+"月"+dateFilter(date)+"日 ";
         document.getElementById("nowTime").innerHTML = "尊敬的"+curUserName+"！  今天是  "+newDate+"&nbsp&nbsp"+week+
             "&nbsp&nbsp第"+zhous+"周"+"&nbsp&nbsp&nbsp"
             +"数据库今日已录入案件"+todayAccNum+"起"+"&nbsp&nbsp&nbsp"+"新建事故编号: "+year+zhous+weekNumber+num;
+
         setTimeout("getLangDate()",1000);
     }
+
+
+    layui.use('upload', function(){
+        var $ = layui.jquery, upload = layui.upload;
+
+
+        upload.render({
+            elem: '#uploadExcel'
+            ,url: '/importA'
+            ,accept: 'file' //普通文件
+            ,exts: 'xls|xlsx' //允许上传的文件后缀
+            ,before: function(obj){
+                this.data={'accIdNew':accId};//关键代码
+            }
+            ,done: function(res){//返回值接收
+                if(res.flag=="1"){
+                    layer.msg('导入成功！', {
+                    }, function(){
+                        location.reload();
+                    });
+                }else{
+                    layer.msg('导入失败！', {
+                    }, function(){
+                        location.reload();
+                    });
+                }
+            }
+        });
+
+    });
 </script>
+
 
 <%--<script>
     layui.use([ 'form', 'step','laydate'], function () {

@@ -7,6 +7,27 @@ import com.wuwenze.poi.annotation.ExcelField;
 public class EnvInfo {
     @ExcelField(value = "事故编码")
     private Integer accId;
+
+    @Override
+    public String toString() {
+        return "EnvInfo{" +
+                "accId=" + accId +
+                ", location='" + location + '\'' +
+                ", roadinfoCt='" + roadinfoCt + '\'' +
+                ", roadinfoPd=" + roadinfoPd +
+                ", roadinfoCz='" + roadinfoCz + '\'' +
+                ", roadinfoZk='" + roadinfoZk + '\'' +
+                ", roadinfoJk='" + roadinfoJk + '\'' +
+                ", weainfoTq='" + weainfoTq + '\'' +
+                ", weainfoFx='" + weainfoFx + '\'' +
+                ", weainfoFl='" + weainfoFl + '\'' +
+                ", weainfoFs=" + weainfoFs +
+                ", weainfoWd=" + weainfoWd +
+                ", protectXc='" + protectXc + '\'' +
+                ", protectCl='" + protectCl + '\'' +
+                '}';
+    }
+
     @ExcelField(value = "事故地点")
     private String location;
     @ExcelField(value = "沿车头趋势")

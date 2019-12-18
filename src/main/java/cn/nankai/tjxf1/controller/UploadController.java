@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -26,6 +27,94 @@ public class UploadController {
     private UploadService uploadService;
     @Autowired
     private BaseInfoService baseInfoService;
+
+    @RequestMapping(value = "/importA", method = RequestMethod.POST)
+    public ResponseEntity<?> importA(@RequestParam MultipartFile file, @RequestParam(value="accIdNew") String accId, HttpSession session)
+            throws IOException {
+        Integer accIdNew = Integer.parseInt(accId);
+        Integer id = (Integer) session.getAttribute("curUserId");
+        Date now = new Date();
+
+        long beginMillis = System.currentTimeMillis();
+        List<BaseInfo> baseInfoList = Lists.newArrayList();
+        List<EnvInfo> envInfoInfoList = Lists.newArrayList();
+        List<Map<String, Object>> errorList = Lists.newArrayList();
+
+        ExcelKit.$Import(BaseInfo.class)
+                .readXlsx(file.getInputStream(), new ExcelReadHandler<BaseInfo>() {
+
+                    @Override
+                    public void onSuccess(int sheetIndex, int rowIndex, BaseInfo entity) {
+                        if(sheetIndex == 0){
+                            entity.setAccId(accIdNew);
+                            entity.setId(id);
+                            entity.setTimeInsert(now);
+                            System.out.println(entity.toString());
+                            baseInfoList.add(entity); // 单行读取成功，加入入库队列。
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(int sheetIndex, int rowIndex,
+                                        List<ExcelErrorField> errorFields) {
+                        // 读取数据失败，记录了当前行所有失败的数据
+                        Map<String, Object> map = new HashMap<>();
+                        map.put("sheetIndex", sheetIndex);
+                        map.put("rowIndex", rowIndex);
+                        map.put("errorFields", errorFields);
+                        errorList.add(map);
+                    }
+                });
+        ExcelKit.$Import(EnvInfo.class)
+                .readXlsx(file.getInputStream(), new ExcelReadHandler<EnvInfo>() {
+
+                    @Override
+                    public void onSuccess(int sheetIndex, int rowIndex, EnvInfo entity) {
+                        if(sheetIndex == 1){
+                            entity.setAccId(accIdNew);
+                            System.out.println(entity.toString());
+                            envInfoInfoList.add(entity); // 单行读取成功，加入入库队列。
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(int sheetIndex, int rowIndex,
+                                        List<ExcelErrorField> errorFields) {
+                        // 读取数据失败，记录了当前行所有失败的数据
+                        Map<String, Object> map = new HashMap<>();
+                        map.put("sheetIndex", sheetIndex);
+                        map.put("rowIndex", rowIndex);
+                        map.put("errorFields", errorFields);
+                        errorList.add(map);
+                    }
+                });
+
+
+        System.out.println("插入之前");
+        uploadService.insertEnvInfoSelective(envInfoInfoList);
+
+        System.out.println("插入之后");
+
+        try {
+            uploadService.insertBaseInfoSelective(baseInfoList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        baseInfoService.updateStatus(0,accIdNew);
+        boolean haveError = errorList.isEmpty();
+        Map<String, Object> map1 = new HashMap<>();
+        map1.put("data", baseInfoList);
+        map1.put("haveError", haveError);
+        map1.put("error", errorList);
+        map1.put("timeConsuming", (System.currentTimeMillis() - beginMillis) / 1000L);
+        map1.put("flag", 1);
+        return ResponseEntity.ok(map1);
+    }
+
+
 
     @RequestMapping(value = "/import", method = RequestMethod.POST)
     public ResponseEntity<?> importUser(@RequestParam MultipartFile file,@RequestParam(value="accId1") String accId1)
@@ -458,7 +547,7 @@ public class UploadController {
         uploadService.insertB5InnerInfoSelective(b5InnerInfoList);
         uploadService.insertB5OuterInfoSelective(b5OuterInfoList);//这个有问题
 
-        baseInfoService.updateStatus(1,Integer.parseInt(accId1));
+        baseInfoService.updateStatus(0,Integer.parseInt(accId1));
 
        /*uploadService.insertExcel(peolpleInfoList,carInfoList,b1InnerInfoList,b1OuterInfoList,b2InnerInfoList,b2OuterInfoList,b3InnerInfoList,b3OuterInfoList,b4InnerInfoList,b4OuterInfoList
                                     ,b5InnerInfoList,b5OuterInfoList,envBurnInfoList,fireLocInfoList);*/

@@ -15,6 +15,12 @@ import java.util.List;
 public class UploadServiceImpl implements UploadService {
 
 		@Autowired
+		private BaseInfoMapper baseInfoMapper;
+
+		@Autowired
+		private EnvInfoMapper envInfoMapper;
+
+		@Autowired
 	    private ImageDao imageDao;
 
 		@Autowired
@@ -205,6 +211,26 @@ public class UploadServiceImpl implements UploadService {
 			for (int i = 0; i < list.size(); i++) {
 				FireLocInfo fireLocInfo = list.get(i);
 				fireLocInfoMapper.insertSelective(fireLocInfo);
+			}
+		}
+	}
+
+	@Override
+	public void insertBaseInfoSelective(List<BaseInfo> list) {
+		if(list != null && list.size()!=0){
+			for (int i = 0; i < list.size(); i++) {
+				BaseInfo baseInfo = list.get(i);
+				baseInfoMapper.insertSelective(baseInfo);
+			}
+		}
+	}
+
+	@Override
+	public void insertEnvInfoSelective(List<EnvInfo> list) {
+		if(list != null && list.size()!=0){
+			for (int i = 0; i < list.size(); i++) {
+				EnvInfo envInfo = list.get(i);
+				envInfoMapper.insertSelective(envInfo);
 			}
 		}
 	}

@@ -47,7 +47,7 @@ public class test {
 
 
 
-            reader = new PdfReader("D:/PDF/表A12172.pdf");// 读取pdf模板
+            reader = new PdfReader("D:/PDF/表A12179.pdf");// 读取pdf模板
             bos = new ByteArrayOutputStream();
             stamper = new PdfStamper(reader, bos);
             AcroFields fields = stamper.getAcroFields();

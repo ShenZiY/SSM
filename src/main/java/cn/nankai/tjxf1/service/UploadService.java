@@ -38,6 +38,10 @@ public interface UploadService {
 
 		void insertFireLocInfo(List<FireLocInfo> list);
 
+		void insertBaseInfoSelective(List<BaseInfo> list);
+
+		void insertEnvInfoSelective(List<EnvInfo> list);
+
 		void insertExcel(List<PeolpleInfo> peolpleInfoList,List<CarInfo> carInfoList,List<B1InnerInfo> b1InnerInfoList,List<B1OuterInfo> b1OuterInfoList
 				,List<B2InnerInfo> b2InnerInfoList,List<B2OuterInfo> b2OuterInfoList,List<B3InnerInfo> b3InnerInfoList,List<B3OuterInfo> b3OuterInfoList
 				,List<B4InnerInfo> b4InnerInfoList,List<B4OuterInfo> b4OuterInfoList,List<B5InnerInfo> b5InnerInfoList,List<B5OuterInfo> b5OuterInfoList

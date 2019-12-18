@@ -11,7 +11,7 @@ public class BaseInfo {
     private Integer accId;
     @ExcelField(value = "填报人ID")
     private Integer id;
-    @ExcelField(value = "发现时间")
+    @ExcelField(value = "发现时间", dateFormat = "yyyy/MM/dd HH:mm:ss")
     private Date timeFind;
     @ExcelField(value = "涉及车辆数")
     private Integer carNum;
@@ -31,23 +31,51 @@ public class BaseInfo {
     private String govCj;
     @ExcelField(value = "信息录入人")
     private String govLr;
-    @ExcelField(value = "警方到场时间")
+    @ExcelField(value = "警方到场时间",dateFormat = "yyyy/MM/dd HH:mm:ss")
     private Date timePolice;
-    @ExcelField(value = "调查时间")
+    @ExcelField(value = "调查时间",dateFormat = "yyyy/MM/dd HH:mm:ss")
     private Date timeInvest;
     @ExcelField(value = "是否有消防车到场")
     private String fireTru;
-    @ExcelField(value = "消防车到场时间")
+    @ExcelField(value = "消防车到场时间",dateFormat = "yyyy/MM/dd HH:mm:ss")
     private Date timeFiretru;
     @ExcelField(value = "是否有救护车到场")
     private String ambulance;
-    @ExcelField(value = "救护车到场时间")
+    @ExcelField(value = "救护车到场时间",dateFormat = "yyyy/MM/dd HH:mm:ss")
     private Date timeAmbu;
     @ExcelField(value = "现场形态")
     private String state;
     @ExcelField(value = "状态")
     private Integer status;
-    @ExcelField(value = "插入数据库时间")
+
+    @Override
+    public String toString() {
+        return "BaseInfo{" +
+                "accId=" + accId +
+                ", id=" + id +
+                ", timeFind=" + timeFind +
+                ", carNum=" + carNum +
+                ", hurtNum=" + hurtNum +
+                ", locSheng='" + locSheng + '\'' +
+                ", locShi='" + locShi + '\'' +
+                ", locXian='" + locXian + '\'' +
+                ", locDetail='" + locDetail + '\'' +
+                ", peopleNum=" + peopleNum +
+                ", govCj='" + govCj + '\'' +
+                ", govLr='" + govLr + '\'' +
+                ", timePolice=" + timePolice +
+                ", timeInvest=" + timeInvest +
+                ", fireTru='" + fireTru + '\'' +
+                ", timeFiretru=" + timeFiretru +
+                ", ambulance='" + ambulance + '\'' +
+                ", timeAmbu=" + timeAmbu +
+                ", state='" + state + '\'' +
+                ", status=" + status +
+                ", timeInsert=" + timeInsert +
+                '}';
+    }
+
+    @ExcelField(value = "插入数据库时间" ,dateFormat = "yyyy/MM/dd HH:mm:ss")
     private Date timeInsert;
 
     public Date getTimeInsert() {

@@ -37,7 +37,7 @@
             <!--统计信息展示-->
             <fieldset class="layui-elem-field" style="padding: 5px;">
                 <!--WeAdmin公告-->
-                <div class="layui-card">
+              <%--  <div class="layui-card">
                     <div class="layui-card-header layui-elem-quote">公告</div>
                     <div class="layui-card-body">
                         <div class="layui-carousel weadmin-notice" lay-filter="notice" lay-indicator="inside" lay-arrow="none" style="width: 100%; height: 280px;">
@@ -64,16 +64,16 @@
                         </div>
 
                     </div>
-                </div>
+                </div>--%>
                 <!--<legend>信息统计</legend>-->
                 <blockquote class="layui-elem-quote font16">工作进展</blockquote>
-                <div >
-                    <table class="layui-table" lay-even style="text-align: center">
+                <div style="height: 370px;">
+                    <table class="layui-table" lay-even style="text-align: center;margin-top: 30px">
                         <tbody>
                         <tr>
                             <td>统计</td>
                             <td>创建案件</td>
-                            <td>上传EXCEL</td>
+                            <td>生成PDF</td>
                             <td>上传图片</td>
                             <td>处理图片</td>
                             <td>处理完毕</td>
@@ -284,6 +284,7 @@
             }
             ,cols: [[ //表头
                 {field: 'accId', title: '事故编码',  sort: true, fixed: 'left',align:'center'}
+                ,{field: 'timeInsert', title: '入库时间',sort: true ,align:'center' }
                 ,{field: 'timeInvest', title: '调查时间',sort: true ,align:'center' }
                 ,{field: 'loc', title: '事故地点',align:'center' }
                 ,{field: 'Status', title: '处理状态',align:'center' ,
@@ -296,7 +297,7 @@
 
                     }
                 }
-                ,{field: 'govLr', title: '录入人',align:'center' }
+              /*  ,{field: 'govLr', title: '录入人',align:'center' }*/
             ]]
            /* data:[{"timeInvest":"Wed Nov 20 10:58:37 CST 2019","govLr":"李明","locSheng":"重庆","accId":20194731,"status":3}]*/
         });

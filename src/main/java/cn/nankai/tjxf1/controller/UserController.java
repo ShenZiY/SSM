@@ -148,11 +148,11 @@ public class UserController {
 	@RequestMapping(value = "/downTemplate", method = RequestMethod.GET)
 	@ResponseBody
     public void downTemplate(HttpServletResponse response) {
-		EnvInfo baseInfo = envInfoService.findEnvInfoByAccId(20195121);
+		BaseInfo baseInfo = baseInfoService.findBaseInfoByAccId(20194733);
 				/*findBaseInfoByAccId(20195121);*/
-    	List<EnvInfo> userList = new ArrayList<>();
+    	List<BaseInfo> userList = new ArrayList<>();
     	userList.add(baseInfo);
-		ExcelKit.$Export(EnvInfo.class, response).downXlsx(userList, true);
+		ExcelKit.$Export(BaseInfo.class, response).downXlsx(userList, true);
 
     }
 	

@@ -111,9 +111,7 @@ public class BaseInfoServiceImpl implements BaseInfoService {
         ArrayList<Integer> res = baseInfoMapper.countStatusByDay(id,diff);
         int[] list = new int[5];
         for (int i = 0; i < res.size() ; i++) {
-            for (int j = 0; j <=res.get(i) ; j++) {
-                list[j]++;
-            }
+            list[res.get(i)]++;
         }
         return new int[]{list[0]+list[1]+list[2]+list[3]+list[4],list[0]+list[1]+list[2]+list[3],list[4]};
     }

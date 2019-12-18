@@ -32,6 +32,11 @@ public class JspController {
         return "pdf";
     }
 
+    @RequestMapping("/generatePDF")
+    public String generatePDF (){
+        return "generatePDF";
+    }
+
     @RequestMapping("/uploadExcel")
     public String uploadExcel (){
         return "uploadExcel";
@@ -74,12 +79,14 @@ public class JspController {
             String 	govLr = baseInfoTemp.getGovLr();
             String loc = baseInfoTemp.getLocSheng()+baseInfoTemp.getLocShi()+baseInfoTemp.getLocXian()+baseInfoTemp.getLocDetail();
             String timeInvest = handleDate(baseInfoTemp.getTimeInvest().toString());
+            String timeInsert = handleDate(baseInfoTemp.getTimeInsert().toString());
             String Status = handleStatus(baseInfoTemp.getStatus());
             Map<String,String> map = new HashMap<>();
             map.put("accId",accId);
             map.put("govLr",govLr);
             map.put("loc",loc);
             map.put("timeInvest",timeInvest);
+            map.put("timeInsert",timeInsert);
             map.put("Status",Status);
             System.out.println(map.toString());
             res.add(map);
@@ -153,6 +160,56 @@ public class JspController {
         return json.toString();
     }
 
+    @RequestMapping ("/dataPDF")
+    @ResponseBody
+    public String dataPDF(HttpSession session, @RequestParam(value="page") String pageno, @RequestParam (value="limit") String pagesize ) throws ParseException {
+        Integer id = (Integer) session.getAttribute("curUserId");
+        System.out.println("userId:"+id+"|| pageno:"+pageno+"||pagesize:"+pagesize);
+        JSONObject json = new JSONObject();
+        //当前页
+        Integer page = Integer.parseInt(pageno.trim());
+        //每页的数量
+        Integer size = Integer.parseInt(pagesize.trim());
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("id", id);
+        paramMap.put("start", (page - 1) * size);
+        paramMap.put("size", size);
+        List<BaseInfo> resultList = baseInfoService.getPageListInfoExcel(paramMap);
+
+        ArrayList<Map<String,String>> res = new ArrayList<>() ;
+
+        for (int i = 0; i < resultList.size(); i++) {
+            BaseInfo baseInfoTemp = resultList.get(i);
+            String accId = Integer.toString(baseInfoTemp.getAccId()) ;
+            String 	govLr = baseInfoTemp.getGovLr();
+            String loc = baseInfoTemp.getLocSheng()+baseInfoTemp.getLocShi()+baseInfoTemp.getLocXian()+baseInfoTemp.getLocDetail();
+            String timeInvest = handleDate(baseInfoTemp.getTimeInvest().toString());
+            String Status = handleStatus(baseInfoTemp.getStatus());
+            Map<String,String> map = new HashMap<>();
+            map.put("accId",accId);
+            map.put("govLr",govLr);
+            map.put("loc",loc);
+            map.put("timeInvest",timeInvest);
+            map.put("Status",Status);
+            System.out.println(map.toString());
+            res.add(map);
+        }
+
+        int count =baseInfoService.getPageTotalCountExcel(paramMap);
+
+        if(!resultList.isEmpty()) {
+
+            json.put("code", 0);
+            json.put("msg","");
+            json.put("count", count);
+            json.put("data", res);
+        }else{
+            json.put("error","查询列表为空");
+        }
+        System.out.println(json.toString());
+        return json.toString();
+    }
+
     public static String handleDate (String str) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
         Date d = sdf.parse(str);
@@ -163,9 +220,9 @@ public class JspController {
     public static String handleStatus (Integer status){
         switch(status){
             case 0 :
-                return "待上传数据";
-            case 1 :
                 return "已传EXCEL";
+            case 1 :
+                return "已生成PDF";
             case 2 :
                 return "已传图片";
             case 3 :

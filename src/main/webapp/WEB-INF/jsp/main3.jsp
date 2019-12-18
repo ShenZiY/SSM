@@ -107,12 +107,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<cite>新建事故</cite>
 								</a>
 							</li>
-							<li>
-								<a _href="/user/downTemplate1"> <%--去掉1即可用--%>
+							<%--<li>
+								<a _href="/user/downTemplate1"> &lt;%&ndash;去掉1即可用&ndash;%&gt;
 									<i class="iconfont">&#xe6a7;</i>
 									<cite>导出模板</cite>
 								</a>
-							</li>
+							</li>--%>
 						</ul>
 					</li>
 
@@ -124,18 +124,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</a>
 						<ul class="sub-menu">
 							<li>
-								<a _href="/jsp/uploadExcel">
+								<a _href="/jsp/generatePDF">
 									<i class="iconfont">&#xe6a7;</i>
-									<cite>数据导入</cite>
+									<cite>PDF处理</cite>
 								</a>
 							</li>
-							<li>
+							<%--<li>
 								<a _href="/generatePdf">
 									<i class="iconfont">&#xe6a7;</i>
 									<cite>PDF</cite>
 								</a>
-							</li>
-							<li>
+							</li>--%>
+							<%--<li>
 								<a _href="/jsp/pdf">
 									<i class="iconfont">&#xe6a7;</i>
 									<cite>数据删除</cite>
@@ -146,7 +146,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<i class="iconfont">&#xe6a7;</i>
 									<cite>预览和导出</cite>
 								</a>
-							</li>
+							</li>--%>
 						</ul>
 					</li>
 					

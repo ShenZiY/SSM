@@ -180,6 +180,71 @@
       #{ambulance,jdbcType=VARCHAR}, #{timeAmbu,jdbcType=TIMESTAMP}, #{state,jdbcType=VARCHAR}, 
       #{status,jdbcType=TINYINT},#{id,jdbcType=TINYINT},#{timeInsert,jdbcType=TIMESTAMP})
   </insert>
+  <update id = "updateSelective" parameterType="cn.nankai.tjxf1.entity.BaseInfo">
+      update a11_baseinfo
+    <set>
+      <if test="timeFind != null">
+        Time_Find =  #{timeFind,jdbcType=TIMESTAMP},
+      </if>
+      <if test="carNum != null">
+        Car_Num = #{carNum,jdbcType=TINYINT},
+      </if>
+      <if test="hurtNum != null">
+        Hurt_Num = #{hurtNum,jdbcType=TINYINT},
+      </if>
+      <if test="locSheng != null">
+        Loc_Sheng = #{locSheng,jdbcType=VARCHAR},
+      </if>
+      <if test="locShi != null">
+        Loc_Shi = #{locShi,jdbcType=VARCHAR},
+      </if>
+      <if test="locXian != null">
+        Loc_Xian = #{locXian,jdbcType=VARCHAR},
+      </if>
+      <if test="locDetail != null">
+        Loc_Detail =  #{locDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="peopleNum != null">
+        People_Num =  #{peopleNum,jdbcType=TINYINT},
+      </if>
+      <if test="govCj != null">
+        Gov_CJ = #{govCj,jdbcType=VARCHAR},
+      </if>
+      <if test="govLr != null">
+        Gov_LR  = #{govLr,jdbcType=VARCHAR},
+      </if>
+      <if test="timePolice != null">
+        Time_Police = #{timePolice,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeInvest != null">
+        Time_Invest =  #{timeInvest,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fireTru != null">
+        Fire_Tru = #{fireTru,jdbcType=VARCHAR},
+      </if>
+      <if test="timeFiretru != null">
+        Time_FireTru = #{timeFiretru,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ambulance != null">
+        Ambulance =  #{ambulance,jdbcType=VARCHAR},
+      </if>
+      <if test="timeAmbu != null">
+        Time_Ambu =   #{timeAmbu,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null">
+        State =  #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        Status = #{status,jdbcType=TINYINT},#{id,jdbcType=TINYINT},
+      </if>
+      <if test="timeInsert != null">
+        Time_Insert =   #{timeInsert,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Acc_ID =  #{accId,jdbcType=INTEGER}
+  </update>
+
+
   <insert id="insertSelective" parameterType="cn.nankai.tjxf1.entity.BaseInfo">
     insert into a11_baseinfo
     <trim prefix="(" suffix=")" suffixOverrides=",">

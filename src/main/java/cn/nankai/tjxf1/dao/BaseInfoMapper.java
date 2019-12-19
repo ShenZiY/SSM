@@ -17,6 +17,8 @@ public interface BaseInfoMapper {
 
     int insertSelective(BaseInfo record);
 
+    int updateSelective(BaseInfo recore);
+
     BaseInfo findByAccId(Integer accId);
 
 

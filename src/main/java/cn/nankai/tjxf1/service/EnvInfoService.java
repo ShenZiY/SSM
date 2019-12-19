@@ -11,4 +11,6 @@ public interface EnvInfoService {
 
     EnvInfo findEnvInfoByAccId(Integer accId);
 
+    int updateSelective(EnvInfo envInfo);
+
 }

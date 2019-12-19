@@ -29,6 +29,8 @@ public interface BaseInfoService {
 
     int[] countStatusByDay( Integer id, Integer diff);
 
+    int updateSelective(BaseInfo baseInfo);
+
     Integer getPageTotalCount(Map<String,Object> paramMap);
     Integer getPageTotalCountExcel(Map<String,Object> paramMap);
 

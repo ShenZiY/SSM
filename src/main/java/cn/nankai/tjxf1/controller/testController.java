@@ -50,6 +50,73 @@ public class testController {
 
     }
 
+    @RequestMapping(value = "/savePdf", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> savePdf(@Param("accId") Integer accId) throws IOException, DocumentException, ParseException {
+        String newPDFPath = "D:/TJXFdata/Temp/" +accId+".pdf";
+        PdfReader reader;
+        FileOutputStream out;
+        ByteArrayOutputStream bos;
+        PdfStamper stamper;
+        reader = new PdfReader(newPDFPath);// 读取pdf模板
+        bos = new ByteArrayOutputStream();
+        stamper = new PdfStamper(reader, bos);
+        AcroFields fields = stamper.getAcroFields();
+        BaseInfo baseInfo = new BaseInfo();
+        baseInfo.setAccId(accId);
+        baseInfo.setTimeFind(reHandleDate(fields.getField("timeFind")));
+        baseInfo.setTimePolice(reHandleDate(fields.getField("timePolice")));
+        baseInfo.setTimeInvest(reHandleDate(fields.getField("timeInvest")));
+        baseInfo.setCarNum(Integer.parseInt(fields.getField("carNum")));
+        baseInfo.setHurtNum(Integer.parseInt(fields.getField("hurtNum")));
+        baseInfo.setPeopleNum(Integer.parseInt(fields.getField("peopleNum")));
+        baseInfo.setGovLr(fields.getField("govLr"));
+        baseInfo.setGovCj(fields.getField("govCj"));
+        baseInfo.setAmbulance(fields.getField("ambulance"));
+        baseInfo.setFireTru(fields.getField("fireTru"));
+        if(fields.getField("ambulance")=="1"){
+            baseInfo.setTimeAmbu(reHandleDate(fields.getField("timeAmbu")));
+        }
+        if(fields.getField("fireTru")=="1"){
+            baseInfo.setTimeFiretru(reHandleDate(fields.getField("timeFiretru")));
+        }
+        if(fields.getField("state") == "8"){
+            baseInfo.setState(fields.getField("state")+fields.getField("state1"));
+        }else{
+            baseInfo.setState(fields.getField("state"));
+        }
+        if(fields.getField("locSheng") == null || fields.getField("locSheng") == ""){
+            baseInfo.setLocSheng(fields.getField("locShi"));
+            baseInfo.setLocShi("市辖区");
+        }else{
+            baseInfo.setLocSheng(fields.getField("locSheng"));
+            baseInfo.setLocShi(fields.getField("locShi"));
+        }
+        baseInfo.setLocXian(fields.getField("locXian"));
+        baseInfo.setLocDetail(fields.getField("locDetail"));
+        int flag = baseInfoService.updateSelective(baseInfo);
+        if(flag != 1){
+            bos.close();
+            Map<String,Object> resultMap = new HashMap<>();
+            System.out.println("flag"+flag);
+            resultMap.put("code", "1");
+            return resultMap;
+        }
+
+
+        stamper.close();
+        reader.close();
+        bos.close();
+
+        Map<String,Object> resultMap = new HashMap<>();
+
+
+
+        System.out.println("flag"+flag);
+        resultMap.put("code", "0");
+        return resultMap;
+    }
+
     @RequestMapping(value = "/viewPdf", method = RequestMethod.POST)
     @ResponseBody
     public void viewPdf(@Param("accId") Integer accId) throws IOException, DocumentException {
@@ -58,7 +125,7 @@ public class testController {
         EnvInfo envInfo = envInfoService.findEnvInfoByAccId(accId);
         System.out.println(baseInfo.toString());
         System.out.println(envInfo.toString());
-        String dirFile = "D:/TJXFdata/Temp/" + accId;
+        String dirFile = "D:/TJXFdata/Temp/";
         File file = new File(dirFile);
         if(!file.exists()){     //判断文件路径是否存在
             file.mkdirs();              //不存在创建新的文件
@@ -66,7 +133,7 @@ public class testController {
         // 模板路径
         String templatePath = "D:/PDF/表A111.pdf";
         // 生成的新文件路径
-        String newPDFPath = "D:/TJXFdata/Temp/" + accId+"/"+accId+".pdf";
+        String newPDFPath = "D:/TJXFdata/Temp/" +accId+".pdf";
         File file1=new File(newPDFPath);
         if(file1.exists()&&file1.isFile())
             file1.delete();
@@ -112,12 +179,12 @@ public class testController {
             }else{
                 form.setField("locSheng",baseInfo.getLocSheng());
                 String shi = baseInfo.getLocShi();
-                form.setField("locShi",shi.substring(0,shi.length()-1));
+                form.setField("locShi",shi);
             }
 
 
             String xian = baseInfo.getLocXian();
-            form.setField("locXian",xian.substring(0,xian.length()-1));
+            form.setField("locXian",xian);
             form.setField("locDetail",baseInfo.getLocDetail());
             form.setField("peopleNum",baseInfo.getPeopleNum().toString());
             form.setField("govCj",baseInfo.getGovCj());
@@ -247,6 +314,11 @@ public class testController {
         File file1=new File(newPDFPath);
         if(file1.exists()&&file1.isFile())
             file1.delete();
+
+       /* String newPDFPath1 = "D:/TJXFdata/Temp/" +accId+".pdf";
+        File file11=new File(newPDFPath1);
+        if(file11.exists()&&file11.isFile())
+            file11.delete();*/
         PdfReader reader;
         FileOutputStream out;
         ByteArrayOutputStream bos;
@@ -410,15 +482,22 @@ public class testController {
     }
 
     public static String handleMultiple1(String str){
-        if(str!=null&&str.length()>1){
+        if(str!=null){
             return str.trim().substring(0,1);
         }else{
             return "";
         }
     }
 
+    public static Date reHandleDate (String str) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = format.parse(str);
+        return date;
+    }
+
+
     public static String handleMultiple(String str){
-        if(str!=null&&str.length()>1){
+        if(str!=null){
             switch (str.trim().substring(0,1)){
                 case "1": return "①";
                 case "2": return "②";

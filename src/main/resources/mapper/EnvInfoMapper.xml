@@ -80,6 +80,53 @@
       #{weainfoFl,jdbcType=VARCHAR}, #{weainfoWd,jdbcType=INTEGER}, #{protectXc,jdbcType=VARCHAR}, 
       #{protectCl,jdbcType=VARCHAR}, #{weainfoFs,jdbcType=INTEGER})
   </insert>
+
+  <update id="updateSelective" parameterType="cn.nankai.tjxf1.entity.EnvInfo" >
+    update a12_envinfo
+    <set>
+        <if test="location != null" >
+          Location = #{location,jdbcType=VARCHAR},
+        </if>
+        <if test="roadinfoCt != null" >
+          RoadInfo_CT =  #{roadinfoCt,jdbcType=VARCHAR},
+        </if>
+        <if test="roadinfoPd != null" >
+          RoadInfo_PD =  #{roadinfoPd,jdbcType=INTEGER},
+        </if>
+        <if test="roadinfoCz != null" >
+          RoadInfo_CZ =  #{roadinfoCz,jdbcType=VARCHAR},
+        </if>
+        <if test="roadinfoZk != null" >
+          RoadInfo_ZK = #{roadinfoZk,jdbcType=VARCHAR},
+        </if>
+        <if test="roadinfoJk != null" >
+          RoadInfo_JK = #{roadinfoJk,jdbcType=VARCHAR},
+        </if>
+        <if test="weainfoTq != null" >
+          WeaInfo_TQ = #{weainfoTq,jdbcType=VARCHAR},
+        </if>
+        <if test="weainfoFx != null" >
+          WeaInfo_FX = #{weainfoFx,jdbcType=VARCHAR},
+        </if>
+        <if test="weainfoFl != null" >
+          WeaInfo_FL =  #{weainfoFl,jdbcType=VARCHAR},
+        </if>
+        <if test="weainfoWd != null" >
+          WeaInfo_WD =  #{weainfoWd,jdbcType=INTEGER},
+        </if>
+        <if test="protectXc != null" >
+          Protect_XC = #{protectXc,jdbcType=VARCHAR},
+        </if>
+        <if test="protectCl != null" >
+          Protect_CL = #{protectCl,jdbcType=VARCHAR},
+        </if>
+        <if test="weainfoFs != null" >
+          WeaInfo_FS =  #{weainfoFs,jdbcType=INTEGER},
+        </if>
+    </set>
+    where  Acc_ID = #{accId,jdbcType=INTEGER}
+  </update>
+
   <insert id="insertSelective" parameterType="cn.nankai.tjxf1.entity.EnvInfo" >
     insert into a12_envinfo
     <trim prefix="(" suffix=")" suffixOverrides="," >

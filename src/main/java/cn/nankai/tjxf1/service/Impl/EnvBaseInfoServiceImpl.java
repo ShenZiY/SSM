@@ -21,4 +21,9 @@ public class EnvBaseInfoServiceImpl implements EnvInfoService {
     public EnvInfo findEnvInfoByAccId(Integer accId) {
         return envInfoMapper.selectByAccId(accId);
     }
+
+    @Override
+    public int updateSelective(EnvInfo envInfo) {
+        return envInfoMapper.updateSelective(envInfo);
+    }
 }

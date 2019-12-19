@@ -101,24 +101,53 @@
                     }
                 })
             } else if(layEvent === 'view'){
-                $.ajax({
-                    type: "post",
-                    url: "/viewPdf",
-                    data: {
-                        "accId": data.accId, /* testcontroller里面的viewPdf*/
-                    }
-                })
-            } else if(layEvent === 'report'){
+                layer.confirm('预览事故（'+data.accId+'）的数据？', function(index){
+                    layer.close(index);
+                    $.ajax({
+                        type: "post",
+                        url: "/viewPdf",
+                        data: {
+                            "accId": data.accId, /* testcontroller里面的viewPdf*/
+                        }
+                    })
 
-                layer.confirm('真的删除行么', function(index){
+                });
+
+
+            } else if(layEvent === 'savePdf'){
+
+                layer.confirm('保存事故（'+data.accId+'）的修改到数据库？', function(index){
+                    layer.close(index);
+                    $.ajax({
+                        type: "post",
+                        url: "/savePdf",
+                        data: {
+                            "accId": data.accId, /* testcontroller里面的savePdf*/
+                        },
+                        dataType: 'json',
+                        success: function (data1) {
+                            if(data1.code == "0"){
+                                alert("成功修改"+data.accId+"的数据!");
+                                location.reload();
+                            }else{
+                                alert("错误！")
+                            }
+
+                        },
+                        error: function () {
+                        }
+                    })
+
+                });
+                /*layer.confirm('真的删除行么', function(index){
                     obj.del(); //删除对应行（tr）的DOM结构
                     layer.close(index);
                     //向服务端发送删除指令
-                });
-                var row_data = data  // 整行的数据
+                });*/
+               /* var row_data = data  // 整行的数据
                     ,accId = row_data.accId  // 获取行数据的 id 值 对数据进行检索 操作
                 // do sothing 如发送请求 重新 reload 表格
-                layer.msg('编辑操作'+accId);
+                layer.msg('编辑操作'+accId);*/
             }
         });
 
@@ -127,12 +156,12 @@
 </script>
 
 <script type="text/html" id="bar"  lay-filter="test">
-    <a class="layui-btn layui-btn-normal " lay-event="view" >预览修改</a>
-    <a class="layui-btn  layui-btn-danger" lay-event="report" >预览提交</a>
+    <a class="layui-btn layui-btn-normal " lay-event="view" >预览</a>
+    <a class="layui-btn  layui-btn-danger" lay-event="savePdf" >修改提交</a>
     <a class="layui-btn  PDF_btn" lay-event="PDF">生成PDF</a>
 </script>
 
-<style type="text/css">
+    <style type="text/css">
     .layui-table-cell {
         height: 36px;
         line-height: 36px;

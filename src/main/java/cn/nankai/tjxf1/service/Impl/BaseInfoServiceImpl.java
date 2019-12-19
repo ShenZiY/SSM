@@ -117,6 +117,11 @@ public class BaseInfoServiceImpl implements BaseInfoService {
     }
 
     @Override
+    public int updateSelective(BaseInfo baseInfo) {
+        return baseInfoMapper.updateSelective(baseInfo);
+    }
+
+    @Override
     public Integer getPageTotalCount(Map<String, Object> paramMap) {
         return baseInfoMapper.getTotalCount((Integer) paramMap.get("id"));
     }

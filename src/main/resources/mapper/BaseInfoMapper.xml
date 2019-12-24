@@ -94,12 +94,19 @@
       update a11_baseinfo set `Status` = #{status} where Acc_ID = #{accId}
   </update>
 
-  <select id="getPageListInfoExcel" resultMap="BaseResultMap">
+  <select id="getPageListInfoExcel" resultMap="BaseResultMap"> /*获取最近三个月*/
      SELECT  Acc_ID, Time_Find, Car_Num, Hurt_Num,  Loc_Shi, Loc_Xian, Loc_Detail, People_Num,
     Gov_CJ, Gov_LR, Time_Police, Time_Invest, Fire_Tru, Time_FireTru, Ambulance, Time_Ambu,
     State, id,Loc_Sheng ,status,Time_Insert
-    FROM a11_baseinfo WHERE id = #{id}  order by Time_Insert desc limit #{start},#{size}
+    FROM a11_baseinfo WHERE id = #{id} and Time_Insert>DATE_SUB(CURDATE(), INTERVAL 3 MONTH) order by Time_Insert desc limit #{start},#{size}
   </select>
+  <select id="getPageListInfoSearch" resultMap="BaseResultMap"> /*模糊查询*/
+     SELECT  Acc_ID, Time_Find, Car_Num, Hurt_Num,  Loc_Shi, Loc_Xian, Loc_Detail, People_Num,
+    Gov_CJ, Gov_LR, Time_Police, Time_Invest, Fire_Tru, Time_FireTru, Ambulance, Time_Ambu,
+    State, id,Loc_Sheng ,status,Time_Insert
+    FROM a11_baseinfo WHERE id = #{id} and Acc_ID like '%${keyAccId}%' order by Time_Insert desc limit #{start},#{size}
+  </select>
+
   <select id="getPageListInfo" resultMap="BaseResultMap">
      SELECT  Acc_ID, Time_Find, Car_Num, Hurt_Num,  Loc_Shi, Loc_Xian, Loc_Detail, People_Num,
     Gov_CJ, Gov_LR, Time_Police, Time_Invest, Fire_Tru, Time_FireTru, Ambulance, Time_Ambu,
@@ -111,7 +118,10 @@
       SELECT count(*) FROM  a11_baseinfo WHERE id = #{id} and YEARWEEK( date_format(  Time_Insert,'%Y-%m-%d' ),1 ) = YEARWEEK( now(),1 ) ;
   </select>
   <select id="getTotalCountExcel" resultType="Integer">
-      SELECT count(*) FROM  a11_baseinfo WHERE id = #{id}  ;
+      SELECT count(*) FROM  a11_baseinfo WHERE id = #{id} and Time_Insert>DATE_SUB(CURDATE(), INTERVAL 3 MONTH) ;
+  </select>
+  <select id="getTotalCountSearch" resultType="Integer">
+      SELECT count(*) FROM  a11_baseinfo WHERE id = #{id} and  Acc_ID like '%${keyAccId}%';
   </select>
 
   <!--Echarts-->

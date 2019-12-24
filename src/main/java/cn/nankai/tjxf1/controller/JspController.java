@@ -162,7 +162,8 @@ public class JspController {
 
     @RequestMapping ("/dataPDF")
     @ResponseBody
-    public String dataPDF(HttpSession session, @RequestParam(value="page") String pageno, @RequestParam (value="limit") String pagesize ) throws ParseException {
+    public String dataPDF(HttpSession session, @RequestParam(value="page") String pageno, @RequestParam (value="limit") String pagesize) throws ParseException {
+
         Integer id = (Integer) session.getAttribute("curUserId");
         System.out.println("userId:"+id+"|| pageno:"+pageno+"||pagesize:"+pagesize);
         JSONObject json = new JSONObject();
@@ -209,6 +210,60 @@ public class JspController {
         System.out.println(json.toString());
         return json.toString();
     }
+
+    @RequestMapping ("/dataPDFsearch")
+    @ResponseBody
+    public String dataPDFsearch(HttpSession session, @RequestParam(value="page") String pageno, @RequestParam (value="limit") String pagesize,@RequestParam (value="keyAccId") String keyAccId) throws ParseException {
+
+        System.out.println("dataPDFsearch Controller");
+        Integer id = (Integer) session.getAttribute("curUserId");
+        System.out.println("userId:"+id+"|| pageno:"+pageno+"||pagesize:"+pagesize);
+        JSONObject json = new JSONObject();
+        //当前页
+        Integer page = Integer.parseInt(pageno.trim());
+        //每页的数量
+        Integer size = Integer.parseInt(pagesize.trim());
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("id", id);
+        paramMap.put("start", (page - 1) * size);
+        paramMap.put("size", size);
+        paramMap.put("keyAccId",Integer.parseInt(keyAccId));
+        List<BaseInfo> resultList = baseInfoService.getPageListInfoSearch(paramMap);
+
+        ArrayList<Map<String,String>> res = new ArrayList<>() ;
+
+        for (int i = 0; i < resultList.size(); i++) {
+            BaseInfo baseInfoTemp = resultList.get(i);
+            String accId = Integer.toString(baseInfoTemp.getAccId()) ;
+            String 	govLr = baseInfoTemp.getGovLr();
+            String loc = baseInfoTemp.getLocSheng()+baseInfoTemp.getLocShi()+baseInfoTemp.getLocXian()+baseInfoTemp.getLocDetail();
+            String timeInvest = handleDate(baseInfoTemp.getTimeInvest().toString());
+            String Status = handleStatus(baseInfoTemp.getStatus());
+            Map<String,String> map = new HashMap<>();
+            map.put("accId",accId);
+            map.put("govLr",govLr);
+            map.put("loc",loc);
+            map.put("timeInvest",timeInvest);
+            map.put("Status",Status);
+            System.out.println(map.toString());
+            res.add(map);
+        }
+
+        int count =baseInfoService.getPageTotalCountSearch(paramMap);
+
+        if(!resultList.isEmpty()) {
+
+            json.put("code", 0);
+            json.put("msg","");
+            json.put("count", count);
+            json.put("data", res);
+        }else{
+            json.put("error","查询列表为空");
+        }
+        System.out.println(json.toString());
+        return json.toString();
+    }
+
 
     public static String handleDate (String str) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);

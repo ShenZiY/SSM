@@ -33,9 +33,11 @@ public interface BaseInfoService {
 
     Integer getPageTotalCount(Map<String,Object> paramMap);
     Integer getPageTotalCountExcel(Map<String,Object> paramMap);
+    Integer getPageTotalCountSearch(Map<String,Object> paramMap);
 
     List<BaseInfo> getPageListInfo(Map<String,Object> paramMap);
     List<BaseInfo> getPageListInfoExcel(Map<String,Object> paramMap);
+    List<BaseInfo> getPageListInfoSearch(Map<String,Object> paramMap);
 
     int updateStatus(Integer status, Integer accId);
 

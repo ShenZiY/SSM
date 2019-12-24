@@ -42,9 +42,11 @@ public interface BaseInfoMapper {
 
     Integer getTotalCount(@Param("id") Integer id);
     Integer getTotalCountExcel(@Param("id") Integer id);
+    Integer getTotalCountSearch(@Param("id") Integer id,@Param("keyAccId") Integer keyAccId);
 
     List<BaseInfo> getPageListInfo(@Param("id") Integer id,@Param("start") Integer start,@Param("size") Integer size);
     List<BaseInfo> getPageListInfoExcel(@Param("id") Integer id,@Param("start") Integer start,@Param("size") Integer size);
+    List<BaseInfo> getPageListInfoSearch(@Param("id") Integer id,@Param("start") Integer start,@Param("size") Integer size,@Param("keyAccId") Integer keyAccId);
 
     int updateStatus(@Param("status") Integer status,@Param("accId") Integer accId);
 }

@@ -132,6 +132,11 @@ public class BaseInfoServiceImpl implements BaseInfoService {
     }
 
     @Override
+    public Integer getPageTotalCountSearch(Map<String, Object> paramMap) {
+        return baseInfoMapper.getTotalCountSearch((Integer) paramMap.get("id"),(Integer) paramMap.get("keyAccId"));
+    }
+
+    @Override
     public List<BaseInfo> getPageListInfo(Map<String, Object> paramMap) {
         return baseInfoMapper.getPageListInfo((Integer) paramMap.get("id"),(Integer)paramMap.get("start"),(Integer)paramMap.get("size"));
     }
@@ -139,6 +144,11 @@ public class BaseInfoServiceImpl implements BaseInfoService {
     @Override
     public List<BaseInfo> getPageListInfoExcel(Map<String, Object> paramMap) {
         return baseInfoMapper.getPageListInfoExcel((Integer) paramMap.get("id"),(Integer)paramMap.get("start"),(Integer)paramMap.get("size"));
+    }
+
+    @Override
+    public List<BaseInfo> getPageListInfoSearch(Map<String, Object> paramMap) {
+        return baseInfoMapper.getPageListInfoSearch((Integer) paramMap.get("id"),(Integer)paramMap.get("start"),(Integer)paramMap.get("size"),(Integer) paramMap.get("keyAccId"));
     }
 
     @Override

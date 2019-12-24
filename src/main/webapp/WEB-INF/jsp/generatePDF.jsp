@@ -21,7 +21,16 @@
 </head>
 <body>
 <div class="weadmin-body">
-    <blockquote class="layui-elem-quote font16">生成PDF处理</blockquote>
+    <blockquote class="layui-elem-quote font16 ">
+        <form class="layui-form">
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input searchVal" style="font-size: 16"  placeholder="请输入事故编码" />
+                </div>
+                <a class="layui-btn search_btn" data-type="reload"><i class="layui-icon">&#xe615;</i></a>
+            </div>
+        </form>
+    </blockquote>
     <div style="height: 600px;overflow-y: auto;width: 96%;margin-left: 1%;padding: 5px;">
         <table id="demo" style="text-align: center;" lay-filter = "demo"></table>
     </div>
@@ -36,8 +45,6 @@
 
         var  data ;
 
-        var filename = "hahaha.excel";
-        /*var filename;*/
 
         //第一个实例
         table.render({
@@ -52,7 +59,8 @@
                 ,first: false //不显示首页
                 ,last: false //不显示尾页
 
-            }
+            },
+            id : "pdfTable"
             ,cols: [[ //表头
                 {field: 'accId', title: '事故编码',  sort: true, align:'center'}
                 ,{field: 'timeInvest', title: '调查时间',sort: true ,align:'center' }
@@ -75,6 +83,24 @@
                     }
                 }*/
             ]]
+        });
+
+        //搜索【此功能需要后台配合，所以暂时没有动态效果演示】
+        $(".search_btn").on("click",function(){
+            if($(".searchVal").val() != ''){
+                table.reload("pdfTable",{
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    },
+                    where: {
+                       keyAccId: $(".searchVal").val()  //搜索的关键字
+                    },
+                    url:'/jsp/dataPDFsearch',
+                    method:'post'
+                })
+            }else{
+                layer.msg("请输入搜索的事故编码");
+            }
         });
 
         table.on('tool(demo)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
@@ -101,7 +127,7 @@
                     }
                 })
             } else if(layEvent === 'view'){
-                layer.confirm('预览事故（'+data.accId+'）的数据？', function(index){
+                layer.confirm('预览事故（'+data.accId+'）的数据?这会删除上一次预览的PDF,请确认上一次修改的数据已经提交到数据库！', function(index){
                     layer.close(index);
                     $.ajax({
                         type: "post",

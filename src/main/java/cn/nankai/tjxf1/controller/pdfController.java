@@ -3,6 +3,7 @@ package cn.nankai.tjxf1.controller;
 import cn.nankai.tjxf1.entity.*;
 import cn.nankai.tjxf1.service.BaseInfoService;
 import cn.nankai.tjxf1.service.EnvInfoService;
+import cn.nankai.tjxf1.service.pdfService;
 import cn.nankai.tjxf1.service.test;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -25,18 +26,22 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
 
 @Controller
-public class testController {
+public class pdfController {
 
     @Autowired
     BaseInfoService baseInfoService;
     @Autowired
     EnvInfoService envInfoService;
+    @Autowired
+    pdfService  pdfService;
+
 
 
     @Autowired
@@ -123,57 +128,65 @@ public class testController {
         Map<String,Object> resultMap = new HashMap<String, Object>();
         BaseInfo baseInfo = baseInfoService.findBaseInfoByAccId(accId);
         EnvInfo envInfo = envInfoService.findEnvInfoByAccId(accId);
-        System.out.println(baseInfo.toString());
-        System.out.println(envInfo.toString());
-        String dirFile = "D:/TJXFdata/Temp/";
+        //表B公共部分
+        EnvBurnInfo envBurnInfo = pdfService.envBurnInfoSelectAll(accId);
+        FireLocInfo fireLocInfo = pdfService.fireLocInfoSelectAll(accId);
+        CarInfo carInfo = pdfService.carInfoSelectAll(accId);
+        Integer carType = carInfo.getCarType();
+
+        String dirFile = "D:/TJXFdata/Temp/"+accId+"/";
+        String dirFileMerge = "D:/TJXFdata/Merge/"+accId+"/";
         File file = new File(dirFile);
+        File fileMerge = new File(dirFileMerge);
         if(!file.exists()){     //判断文件路径是否存在
             file.mkdirs();              //不存在创建新的文件
         }
+        if(!fileMerge.exists()){     //判断文件路径是否存在
+            fileMerge.mkdirs();              //不存在创建新的文件
+        }
         // 模板路径
-        String templatePath = "D:/PDF/表A111.pdf";
+        String templatePath = "D:\\新桌面\\毕设\\PDF\\template\\表A111.pdf";
+        String templatePathB1 = "D:\\新桌面\\毕设\\PDF\\template\\表B1.pdf";
         // 生成的新文件路径
-        String newPDFPath = "D:/TJXFdata/Temp/" +accId+".pdf";
-        File file1=new File(newPDFPath);
+        String newPDFPath = "D:/TJXFdata/Temp/" +accId+"/"+accId+"A.pdf";
+        String newPDFPathB1 = "D:/TJXFdata/Temp/" +accId+"/" +accId+"B1.pdf";
+        File[] fs = file.listFiles();
+        File[] fsMerge = fileMerge.listFiles();
+        for (File f:fs) {
+            if(f.exists()&&f.isFile())
+                f.delete();
+        }
+        for (File f:fsMerge) {
+            if(f.exists()&&f.isFile())
+                f.delete();
+        }
+       /* File file1=new File(newPDFPath);
         if(file1.exists()&&file1.isFile())
-            file1.delete();
+            file1.delete();*/
         PdfReader reader;
         FileOutputStream out;
         ByteArrayOutputStream bos;
         PdfStamper stamper;
         BaseFont bf = BaseFont.createFont("STSong-Light","UniGB-UCS2-H",BaseFont.NOT_EMBEDDED);
 
+
         try {
             out = new FileOutputStream(newPDFPath);// 输出流
             reader = new PdfReader(templatePath);// 读取pdf模板
             bos = new ByteArrayOutputStream();
             stamper = new PdfStamper(reader, bos);
-
-            Font FontChinese = new Font(bf, 11, Font.NORMAL);
             AcroFields s = stamper.getAcroFields();
-            System.out.println("s: " + s);
-            System.out.println("AcroFields: " + s.getFields());
-            System.out.println("AcroFields.class: " + s.getFields().getClass());
-            System.out.println("getSignatureNames: " + s.getSignatureNames());
-            System.out.println("getSignatureNames: " + s.getTotalRevisions());
-            System.out.println("s: " + s.getBlankSignatureNames());
-            System.out.println("s: " + s.getFieldCache());
-            System.out.println("s: " + s.getSubstitutionFonts());
             int i = 1;
             for (Iterator it = s.getFields().keySet().iterator(); it.hasNext(); i++) {
                 String name = (String) it.next();
                 String value = s.getField(name);
-                System.out.println("[" + i + "- name:" + name + ", value: "+value+"]");
                 s.setFieldProperty(""+name.trim(),"textfont",bf,null);
             }
-
-
             AcroFields form = stamper.getAcroFields();
             form.setField("accId", baseInfo.getAccId().toString());
             form.setField("timeFind",handleDate(baseInfo.getTimeFind().toString()));
             form.setField("carNum",baseInfo.getCarNum().toString());
             form.setField("hurtNum",baseInfo.getHurtNum().toString());
-
             if(baseInfo.getLocShi().equals("市辖区")||baseInfo.getLocShi().equals("县")){
                 form.setField("locShi",baseInfo.getLocSheng());
             }else{
@@ -181,8 +194,6 @@ public class testController {
                 String shi = baseInfo.getLocShi();
                 form.setField("locShi",shi);
             }
-
-
             String xian = baseInfo.getLocXian();
             form.setField("locXian",xian);
             form.setField("locDetail",baseInfo.getLocDetail());
@@ -263,15 +274,13 @@ public class testController {
 
             stamper.setFormFlattening(false);// 如果为false那么生成的PDF文件还能编辑，一定要设为true
             stamper.close();
-
            /* Document doc = new Document();
             PdfCopy copy = new PdfCopy(doc, out);
             doc.open();
             PdfImportedPage importPage = copy.getImportedPage(new PdfReader(bos.toByteArray()), 1);
             copy.addPage(importPage);
             doc.close();*/
-
-
+            reader.close();
             out.write(bos.toByteArray());
             bos.close();
             out.close();
@@ -285,13 +294,237 @@ public class testController {
         } catch (NullPointerException e){
             System.out.println(3);
         }
-        System.out.println("done");
+        //表B1
+        if(carType == 1) {
+            try {
+                B1OuterInfo b1OuterInfo = pdfService.b1OuterInfoSelectAll(accId);
+                B1InnerInfo b1InnerInfo = pdfService.b1InnerInfoSelectAll(accId);
+                HashMap<String,Object> map = new HashMap<>();
+                bianLi(carInfo,map);bianLi(fireLocInfo,map);bianLi(envBurnInfo,map);bianLi(b1InnerInfo,map);bianLi(b1OuterInfo,map);
+                out = new FileOutputStream(newPDFPathB1);// 输出流
+                reader = new PdfReader(templatePathB1);// 读取pdf模板
+                bos = new ByteArrayOutputStream();
+                stamper = new PdfStamper(reader, bos);
+                AcroFields s = stamper.getAcroFields();
+                int i = 1;
+                for (Iterator it = s.getFields().keySet().iterator(); it.hasNext(); i++) {
+                    String name = (String) it.next();
+                    String value = s.getField(name);
+                    s.setFieldProperty("" + name.trim(), "textfont", bf, null);
+                    if(map.get("" + name.trim())!=null){
+                        System.out.println("" + name.trim()+"的值为："+map.get("" + name.trim()).toString());
+                        s.setField("" + name.trim(),map.get("" + name.trim()).toString());
+                        if(map.get("registerTime")!=null){
+                            s.setField("registerTime",handleDate(map.get("registerTime").toString()));
+                        }
+                        if(map.get("modifyTime")!=null){
+                            s.setField("modifyTime",handleDate(map.get("modifyTime").toString()));
+                        }
+                        if(map.get("maintainTime")!=null){
+                            s.setField("maintainTime",handleDate(map.get("maintainTime").toString()));
+                        }
+                        if(map.get("insuranceTime")!=null){
+                            s.setField("insuranceTime",handleDate(map.get("insuranceTime").toString()));
+                        }
+                        if(map.get("state")!=null){
+                            s.setField("state",handleMultiple1(map.get("state").toString()));
+                        }
+                        if(map.get("aftloc")!=null){
+                            String aft = map.get("aftloc").toString();
+                            if(aft.charAt(0)=='2'){
+                                s.setField("aftloc","2");
+                                s.setField("aftloc2",aft.substring(1,aft.length()));
+                            }else if(aft.charAt(0)=='8'){
+                                s.setField("aftloc","8");
+                                s.setField("aftloc8",aft.substring(1,aft.length()));
+                            }else{
+                                s.setField("aftloc","1");
+                            }
+                        }
+                        if(map.get("transMethod")!=null){
+                            String trans = map.get("transMethod").toString();
+                            if(trans.charAt(0)=='8'){
+                                s.setField("transMethod","8");
+                                s.setField("transMethod8",trans.substring(1,trans.length()));
+                            }else{
+                                s.setField("transMethod",trans.substring(0,1));
+                            }
+                        }
+                        if(map.get("ifModify")!=null){
+                            String ifModify = map.get("ifModify").toString();
+                            if(ifModify.charAt(0)=='8'){
+                                s.setField("ifModify","8");
+                                s.setField("ifModify8",ifModify.substring(1,ifModify.length()));
+                            }else{
+                                s.setField("ifModify",ifModify.substring(0,1));
+                            }
+                        }
+                        if(map.get("maintainPurpose")!=null){
+                            String maintainPurpose = map.get("maintainPurpose").toString();
+                            if(maintainPurpose.charAt(0)=='8'){
+                                s.setField("maintainPurpose","8");
+                                s.setField("maintainPurpose8",maintainPurpose.substring(1,maintainPurpose.length()));
+                            }else{
+                                s.setField("maintainPurpose",maintainPurpose.substring(0,1));
+                            }
+                        }
+                        if(map.get("insurance")!=null){
+                            String insurance = map.get("insurance").toString();
+                            if(insurance.charAt(0)=='8'){
+                                s.setField("insurance","8");
+                                s.setField("insurance8",insurance.substring(1,insurance.length()));
+                            }else{
+                                s.setField("insurance",insurance.substring(0,1));
+                            }
+                        }
+                        if(map.get("insuranceType")!=null){
+                            String insuranceType = map.get("insuranceType").toString();
+                            if(insuranceType.charAt(0)=='8'){
+                                s.setField("insuranceType","8");
+                                s.setField("insuranceType8",insuranceType.substring(1,insuranceType.length()));
+                            }else{
+                                s.setField("insuranceType",insuranceType.substring(0,1));
+                            }
+                        }
+                        if(map.get("modifyPos")!=null){
+                            String modifyPos = map.get("modifyPos").toString();
+                            if(modifyPos.charAt(0)=='8'){
+                                s.setField("modifyPos","8");
+                                s.setField("modifyPos8",modifyPos.substring(1,modifyPos.length()));
+                            }else{
+                                s.setField("modifyPos",modifyPos.substring(0,1));
+                            }
+                        }
+                        if(map.get("myqs")!=null){
+                            String myqs = map.get("myqs").toString();
+                            if(myqs.charAt(0)=='8'){
+                                s.setField("myqs","8");
+                                s.setField("myqs8",myqs.substring(1,myqs.length()));
+                            }else{
+                                s.setField("myqs",myqs.substring(0,1));
+                            }
+                        }
+                        if(map.get("qhbw")!=null){
+                            String qhbw = map.get("qhbw").toString();
+                            if(qhbw.charAt(0)=='8'){
+                                s.setField("qhbw","8");
+                                s.setField("qhbw8",qhbw.substring(1,qhbw.length()));
+                            }else{
+                                s.setField("qhbw",qhbw.substring(0,1));
+                            }
+                        }
+                        if(map.get("barryPos")!=null){
+                            String barryPos = map.get("barryPos").toString();
+                            if(barryPos.charAt(0)=='8'){
+                                s.setField("barryPos","8");
+                                s.setField("barryPos8",barryPos.substring(1,barryPos.length()));
+                            }else{
+                                s.setField("barryPos",barryPos.substring(0,1));
+                            }
+                        }
+                        if(map.get("barryVol")!=null){
+                            String barryVol = map.get("barryVol").toString();
+                            if(barryVol.charAt(0)=='8'){
+                                s.setField("barryVol","8");
+                                s.setField("barryVol8",barryVol.substring(1,barryVol.length()));
+                            }else{
+                                s.setField("barryVol",barryVol.substring(0,1));
+                            }
+                        }
+                        if(map.get("oiltankPos")!=null){
+                            String oiltankPos = map.get("oiltankPos").toString();
+                            if(oiltankPos.charAt(0)=='8'){
+                                s.setField("oiltankPos","8");
+                                s.setField("oiltankPos8",oiltankPos.substring(1,oiltankPos.length()));
+                            }else{
+                                s.setField("oiltankPos",oiltankPos.substring(0,1));
+                            }
+                        }
+                        if(map.get("oiltankMaterial")!=null){
+                            String oiltankMaterial = map.get("oiltankMaterial").toString();
+                            if(oiltankMaterial.charAt(0)=='8'){
+                                s.setField("oiltankMaterial","8");
+                                s.setField("oiltankMaterial8",oiltankMaterial.substring(1,oiltankMaterial.length()));
+                            }else{
+                                s.setField("oiltankMaterial",oiltankMaterial.substring(0,1));
+                            }
+                        }
+                        if(map.get("oiltankVol")!=null){
+                            String oiltankVol = map.get("oiltankVol").toString();
+                            if(oiltankVol.charAt(0)=='8'){
+                                s.setField("oiltankVol","8");
+                                s.setField("oiltankVol8",oiltankVol.substring(1,oiltankVol.length()));
+                            }else{
+                                s.setField("oiltankVol",oiltankVol.substring(0,1));
+                            }
+                        }
+                        if(map.get("unit1Circurt")!=null){
+                            String unit1Circurt = map.get("unit1Circurt").toString();
+                            if(unit1Circurt.charAt(0)=='8'){
+                                s.setField("unit1Circurt","8");
+                                s.setField("unit1Circurt8",unit1Circurt.substring(1,unit1Circurt.length()));
+                            }else{
+                                s.setField("unit1Circurt",unit1Circurt.substring(0,1));
+                            }
+                        }
+                        if(map.get("unit2Circurt")!=null){
+                            String unit2Circurt = map.get("unit2Circurt").toString();
+                            if(unit2Circurt.charAt(0)=='8'){
+                                s.setField("unit2Circurt","8");
+                                s.setField("unit2Circurt8",unit2Circurt.substring(1,unit2Circurt.length()));
+                            }else{
+                                s.setField("unit2Circurt",unit2Circurt.substring(0,1));
+                            }
+                        }
+                        if(map.get("other1Circurt")!=null){
+                            String other1Circurt = map.get("other1Circurt").toString();
+                            if(other1Circurt.charAt(0)=='8'){
+                                s.setField("other1Circurt","8");
+                                s.setField("other1Circurt8",other1Circurt.substring(1,other1Circurt.length()));
+                            }else{
+                                s.setField("other1Circurt",other1Circurt.substring(0,1));
+                            }
+                        }
+                        if(map.get("other2Circurt")!=null){
+                            String other2Circurt = map.get("other2Circurt").toString();
+                            if(other2Circurt.charAt(0)=='8'){
+                                s.setField("other2Circurt","8");
+                                s.setField("other2Circurt8",other2Circurt.substring(1,other2Circurt.length()));
+                            }else{
+                                s.setField("other2Circurt",other2Circurt.substring(0,1));
+                            }
+                        }
+                    }
+                }
+                //开始向PDF中添加值
+                //添加结束
+                stamper.setFormFlattening(false);// 如果为false那么生成的PDF文件还能编辑，一定要设为true
+                stamper.close();
+                out.write(bos.toByteArray());
+                bos.close();
+                reader.close();
+                out.close();
+            } catch (IOException e) {
+                System.out.println(1);
+            } catch (DocumentException e) {
+                System.out.println(2);
+            } /*catch (ParseException e) {
+            e.printStackTrace();
+        } */ catch (NullPointerException e) {
+                e.printStackTrace();
+                System.out.println(3);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
 
         resultMap.put("code", "0");
         /*return resultMap;*/
         Desktop desktop = Desktop.getDesktop();
-        file = new File(newPDFPath);
-        desktop.open(file);
+
+        for (File f:fs) {
+            desktop.open(f);
+        }
     }
 
     @RequestMapping(value = "/generatePdf", method = RequestMethod.POST)
@@ -516,4 +749,37 @@ public class testController {
             return "";
         }
     }
+
+    private void bianLi(Object obj,HashMap<String,Object> map){
+        if (obj == null) return;
+        Field[] fields = obj.getClass().getDeclaredFields();
+        for(int i = 0 , len = fields.length; i < len; i++) {
+            // 对于每个属性，获取属性名
+            String varName = fields[i].getName();
+            try {
+                // 获取原来的访问控制权限
+                boolean accessFlag = fields[i].isAccessible();
+                // 修改访问控制权限
+                fields[i].setAccessible(true);
+                // 获取在对象f中属性fields[i]对应的对象中的变量
+                Object o;
+                try {
+                    o = fields[i].get(obj);
+                    if(!map.containsKey(varName)){
+                        map.put(varName,o);
+                    }
+                    /*System.err.println("传入的对象中包含一个如下的变量：" + varName + " = " + o);*/
+                } catch (IllegalAccessException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                // 恢复访问控制权限
+                fields[i].setAccessible(accessFlag);
+            } catch (IllegalArgumentException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+
 }

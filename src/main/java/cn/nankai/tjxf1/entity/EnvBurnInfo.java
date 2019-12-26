@@ -84,6 +84,51 @@ public class EnvBurnInfo {
     @ExcelField(value = "地面物体二烧损情况")
     private String down2Burn;
 
+    @ExcelField(value = "后方物体一")
+    private String back1;
+    @ExcelField(value = "后方物体一烧损情况")
+    private String back1Burn;
+    @ExcelField(value = "后方物体二")
+    private String back2;
+    @ExcelField(value = "后方物体二烧损情况")
+    private String back2Burn;
+
+    public String getBack1() {
+        return back1;
+    }
+
+    public void setBack1(String back1) {
+        this.back1 = back1;
+    }
+
+    public String getBack1Burn() {
+        return back1Burn;
+    }
+
+    public void setBack1Burn(String back1Burn) {
+        this.back1Burn = back1Burn;
+    }
+
+    public String getBack2() {
+        return back2;
+    }
+
+    public void setBack2(String back2) {
+        this.back2 = back2;
+    }
+
+    public String getBack2Burn() {
+        return back2Burn;
+    }
+
+    public void setBack2Burn(String back2Burn) {
+        this.back2Burn = back2Burn;
+    }
+
+
+
+
+
     public String getVin() {
         return vin;
     }

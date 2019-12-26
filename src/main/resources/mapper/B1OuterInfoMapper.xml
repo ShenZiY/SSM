@@ -46,7 +46,7 @@
     <result column="CHZHQ" jdbcType="VARCHAR" property="chzhq" />
   </resultMap>
   <select id="selectA" resultType="cn.nankai.tjxf1.entity.B1OuterInfo">
-       select * from b1_outerinfo where Acc_ID = 20191006
+       select * from b1_outerinfo where Acc_ID = #{accId}
   </select>
   <insert id="insert" parameterType="cn.nankai.tjxf1.entity.B1OuterInfo">
     insert into b1_outerinfo (Car_Id, Acc_ID, VIN, 

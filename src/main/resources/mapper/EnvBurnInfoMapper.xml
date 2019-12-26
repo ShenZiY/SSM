@@ -25,10 +25,14 @@
     <result column="Up2_Burn" property="up2Burn" jdbcType="VARCHAR" />
     <result column="Down2" property="down2" jdbcType="VARCHAR" />
     <result column="Down2_Burn" property="down2Burn" jdbcType="VARCHAR" />
+    <result column="Back1" property="front1" jdbcType="VARCHAR" />
+    <result column="Back1_Burn" property="front1Burn" jdbcType="VARCHAR" />
+    <result column="Back2" property="front1" jdbcType="VARCHAR" />
+    <result column="Back2_Burn" property="front1Burn" jdbcType="VARCHAR" />
   </resultMap>
 
   <select id="selectAll" resultType="cn.nankai.tjxf1.entity.EnvBurnInfo">
-    select * from b_envburninfo where Acc_ID = 20191006
+    select * from b_envburninfo where Acc_ID = #{accId}
   </select>
   <insert id="insert" parameterType="cn.nankai.tjxf1.entity.EnvBurnInfo" >
     insert into b_envburninfo (VIN, Acc_ID, Front1, 
@@ -38,7 +42,7 @@
       Front2, Front2_Burn, Left2, 
       Left2_Burn, Right2, Right2_Burn, 
       Up2, Up2_Burn, Down2, 
-      Down2_Burn)
+      Down2_Burn,Back1,Back1_Burn,Back2,Back2_Burn)
     values (#{carId,jdbcType=INTEGER},#{vin,jdbcType=VARCHAR}, #{accId,jdbcType=INTEGER}, #{front1,jdbcType=VARCHAR},
       #{front1Burn,jdbcType=VARCHAR}, #{left1,jdbcType=VARCHAR}, #{left1Burn,jdbcType=VARCHAR}, 
       #{right1,jdbcType=VARCHAR}, #{right1Burn,jdbcType=VARCHAR}, #{up1,jdbcType=VARCHAR}, 
@@ -46,7 +50,9 @@
       #{front2,jdbcType=VARCHAR}, #{front2Burn,jdbcType=VARCHAR}, #{left2,jdbcType=VARCHAR}, 
       #{left2Burn,jdbcType=VARCHAR}, #{right2,jdbcType=VARCHAR}, #{right2Burn,jdbcType=VARCHAR}, 
       #{up2,jdbcType=VARCHAR}, #{up2Burn,jdbcType=VARCHAR}, #{down2,jdbcType=VARCHAR}, 
-      #{down2Burn,jdbcType=VARCHAR})
+      #{down2Burn,jdbcType=VARCHAR},#{back1,jdbcType=VARCHAR},
+      #{back1Burn,jdbcType=VARCHAR},#{back2,jdbcType=VARCHAR},
+      #{back2Burn,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.nankai.tjxf1.entity.EnvBurnInfo" >
     insert into b_envburninfo
@@ -120,6 +126,18 @@
       <if test="down2Burn != null" >
         Down2_Burn,
       </if>
+      <if test="front1 != null" >
+        Back1,
+      </if>
+      <if test="front1Burn != null" >
+        Back1_Burn,
+      </if>
+      <if test="front1 != null" >
+        Back2,
+      </if>
+      <if test="front1Burn != null" >
+        Back2_Burn,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="carId != null" >
@@ -190,6 +208,18 @@
       </if>
       <if test="down2Burn != null" >
         #{down2Burn,jdbcType=VARCHAR},
+      </if>
+      <if test="front1 != null" >
+        #{back1,jdbcType=VARCHAR},
+      </if>
+      <if test="front1Burn != null" >
+        #{back1Burn,jdbcType=VARCHAR},
+      </if>
+      <if test="front1 != null" >
+        #{back2,jdbcType=VARCHAR},
+      </if>
+      <if test="front1Burn != null" >
+        #{back2Burn,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>

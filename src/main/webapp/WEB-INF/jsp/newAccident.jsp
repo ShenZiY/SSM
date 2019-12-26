@@ -537,7 +537,7 @@
 
         upload.render({
             elem: '#uploadExcel'
-            ,url: '/importA'
+            ,url: '/importA' //UploadController中
             ,accept: 'file' //普通文件
             ,exts: 'xls|xlsx' //允许上传的文件后缀
             ,before: function(obj){

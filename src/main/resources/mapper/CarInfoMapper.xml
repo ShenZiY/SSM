@@ -27,10 +27,11 @@
     <result column="Insurance_Type" property="insuranceType" jdbcType="VARCHAR" />
     <result column="MYQS" property="myqs" jdbcType="VARCHAR" />
     <result column="QHBW" property="qhbw" jdbcType="VARCHAR" />
+    <result column="Car_Type" property="carType" jdbcType="INTEGER" />
   </resultMap>
 
   <select id="selectAll" resultType="cn.nankai.tjxf1.entity.CarInfo">
-    select * from b_carinfo where Acc_Id = 20191006;
+    select * from b_carinfo where Acc_Id = #{accId};
   </select>
   <insert id="insert" parameterType="cn.nankai.tjxf1.entity.CarInfo" >
     insert into b_carinfo (Car_Id,VIN, Acc_ID, Brand,
@@ -40,7 +41,7 @@
       If_Modify, Modify_Time, Modify_Part, 
       Modify_Pos, Maintain_Time, Maintain_Purpose, 
       Maintain_Content, Insurance, Insurance_Time, 
-      Insurance_Type, MYQS, QHBW
+      Insurance_Type, MYQS, QHBW,Car_Type
       )
     values (#{carId,jdbcType=INTEGER},#{vin,jdbcType=VARCHAR}, #{accId,jdbcType=INTEGER}, #{brand,jdbcType=VARCHAR},
       #{registerTime,jdbcType=TIMESTAMP}, #{carProperty,jdbcType=VARCHAR}, #{carMiles,jdbcType=VARCHAR}, 
@@ -49,7 +50,7 @@
       #{ifModify,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP}, #{modifyPart,jdbcType=VARCHAR}, 
       #{modifyPos,jdbcType=VARCHAR}, #{maintainTime,jdbcType=TIMESTAMP}, #{maintainPurpose,jdbcType=VARCHAR}, 
       #{maintainContent,jdbcType=VARCHAR}, #{insurance,jdbcType=VARCHAR}, #{insuranceTime,jdbcType=TIMESTAMP}, 
-      #{insuranceType,jdbcType=VARCHAR}, #{myqs,jdbcType=VARCHAR}, #{qhbw,jdbcType=VARCHAR}
+      #{insuranceType,jdbcType=VARCHAR}, #{myqs,jdbcType=VARCHAR}, #{qhbw,jdbcType=VARCHAR}, #{carType,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="cn.nankai.tjxf1.entity.CarInfo" >
@@ -130,6 +131,9 @@
       <if test="qhbw != null" >
         QHBW,
       </if>
+      <if test="carType != null" >
+        Car_Type,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="carId != null" >
@@ -206,6 +210,9 @@
       </if>
       <if test="qhbw != null" >
         #{qhbw,jdbcType=VARCHAR},
+      </if>
+      <if test="carType != null" >
+        #{carType,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>

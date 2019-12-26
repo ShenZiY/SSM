@@ -90,6 +90,17 @@ public class CarInfo {
     @ExcelField(value = "起火部位")
     private String qhbw;
 
+    @ExcelField(value = "车辆种类")
+    private Integer carType;
+
+    public Integer getCarType() {
+        return carType;
+    }
+
+    public void setCarType(Integer carType) {
+        this.carType = carType;
+    }
+
     public String getVin() {
         return vin;
     }

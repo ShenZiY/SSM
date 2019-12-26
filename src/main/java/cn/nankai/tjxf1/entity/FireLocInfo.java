@@ -155,4 +155,5 @@ public class FireLocInfo {
     public void setMainBurnobject2Burn(String mainBurnobject2Burn) {
         this.mainBurnobject2Burn = mainBurnobject2Burn == null ? null : mainBurnobject2Burn.trim();
     }
+
 }

@@ -1,6 +1,7 @@
 package cn.nankai.tjxf1.dao;
 
 import cn.nankai.tjxf1.entity.B1InnerInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -9,5 +10,5 @@ public interface B1InnerInfoMapper {
 
     int insertSelective(B1InnerInfo record);
 
-    B1InnerInfo selectA();
+    B1InnerInfo selectA(@Param("accId") Integer accId);
 }

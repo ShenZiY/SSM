@@ -1,6 +1,7 @@
 package cn.nankai.tjxf1.dao;
 
 import cn.nankai.tjxf1.entity.EnvBurnInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -9,5 +10,5 @@ public interface EnvBurnInfoMapper {
 
     int insertSelective(EnvBurnInfo record);
 
-    EnvBurnInfo selectAll();
+    EnvBurnInfo selectAll(@Param("accId") Integer accId);
 }

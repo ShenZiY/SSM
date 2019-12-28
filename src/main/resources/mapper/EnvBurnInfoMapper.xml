@@ -126,16 +126,16 @@
       <if test="down2Burn != null" >
         Down2_Burn,
       </if>
-      <if test="front1 != null" >
+      <if test="back1 != null" >
         Back1,
       </if>
-      <if test="front1Burn != null" >
+      <if test="back1Burn != null" >
         Back1_Burn,
       </if>
-      <if test="front1 != null" >
+      <if test="back2 != null" >
         Back2,
       </if>
-      <if test="front1Burn != null" >
+      <if test="back2Burn != null" >
         Back2_Burn,
       </if>
     </trim>
@@ -209,16 +209,16 @@
       <if test="down2Burn != null" >
         #{down2Burn,jdbcType=VARCHAR},
       </if>
-      <if test="front1 != null" >
+      <if test="back1 != null" >
         #{back1,jdbcType=VARCHAR},
       </if>
-      <if test="front1Burn != null" >
+      <if test="back1Burn != null" >
         #{back1Burn,jdbcType=VARCHAR},
       </if>
-      <if test="front1 != null" >
+      <if test="back2 != null" >
         #{back2,jdbcType=VARCHAR},
       </if>
-      <if test="front1Burn != null" >
+      <if test="back2Burn != null" >
         #{back2Burn,jdbcType=VARCHAR},
       </if>
     </trim>

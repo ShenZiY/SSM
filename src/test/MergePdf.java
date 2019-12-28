@@ -18,8 +18,6 @@ public class MergePdf {
 
     public static void manipulatePdf(String pathMerge,String path, Integer accId)
             throws IOException, DocumentException {
-        /*PdfReader cover = new PdfReader(COVER);*/
-       /* PdfReader reader = new PdfReader();*/
         Document document = new Document();
         String newPath = pathMerge +accId+ ".pdf";
         PdfCopy copy = new PdfCopy(document, new FileOutputStream(newPath));
@@ -32,18 +30,18 @@ public class MergePdf {
             copy.addDocument(reader);
             reader.close();
         }
-        /*copy.addDocument(cover);
-        copy.addDocument(reader);*/
         document.close();
     }
 
 
     public static void main(String[] args)
             throws IOException, DocumentException {
-        File file = new File(DEST);
-        file.getParentFile().mkdirs();
+       /* String dirFileMerge = "D:/TJXFdata/Merge/20195224/20195224.pdf";
+        PdfReader reader = new PdfReader(dirFileMerge);
+        System.out.println(reader.getNumberOfPages());*/
+       /* File file = new File(DEST);
+        file.getParentFile().mkdirs();*/
         manipulatePdf("D:\\TJXFdata\\Temp\\test\\", "D:\\TJXFdata\\Temp\\20195224\\",20195224);//本地
-
         /*try {
            splitPDF(new FileInputStream("D:\\TJXFdata\\Temp\\20195224\\20195224.pdf"),
                     new FileOutputStream("D:\\TJXFdata\\Temp\\20195224\\output1.pdf"), 1, 1);
@@ -62,66 +60,6 @@ public class MergePdf {
     }
 
 
-    //拆分PDF
-    /**
-     * @author viralpatel.net
-     *
-     * @param inputStream Input PDF file
-     * @param outputStream Output PDF file
-     * @param fromPage start page from input PDF file
-     * @param toPage end page from input PDF file
-     */
-    public static void splitPDF(InputStream inputStream,
-                                OutputStream outputStream, int fromPage, int toPage) {
-        Document document = new Document();
-        try {
-            PdfReader inputPDF = new PdfReader(inputStream);
-            /*ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            PdfStamper stamper = new PdfStamper(inputPDF, bos);
-            stamper.setFormFlattening(true);// 如果为false那么生成的PDF文件还能编辑，一定要设为true
-            stamper.close();
-            AcroFields s = stamper.getAcroFields();
-            System.out.println(s.getField("accId"));*/
-
-            int totalPages = inputPDF.getNumberOfPages();
-
-            //make fromPage equals to toPage if it is greater
-            if(fromPage > toPage ) {
-                fromPage = toPage;
-            }
-            if(toPage > totalPages) {
-                toPage = totalPages;
-            }
-
-            // Create a writer for the outputstream
-            PdfWriter writer = PdfWriter.getInstance(document, outputStream);
-
-            document.open();
-            PdfContentByte cb = writer.getDirectContent(); // Holds the PDF data
-            PdfImportedPage page;
-
-            while(fromPage <= toPage) {
-                document.newPage();
-                page = writer.getImportedPage(inputPDF, fromPage);
-                cb.addTemplate(page, 0, 0);
-                fromPage++;
-            }
-            outputStream.flush();
-            document.close();
-            outputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (document.isOpen())
-                document.close();
-            try {
-                if (outputStream != null)
-                    outputStream.close();
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-            }
-        }
-    }
 
     /**
      * 截取pdfFile的第from页至第end页，组成一个新的文件名

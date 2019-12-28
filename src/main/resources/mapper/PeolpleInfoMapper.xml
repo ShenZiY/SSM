@@ -111,6 +111,9 @@
       #{fogColor,jdbcType=VARCHAR}, #{fogHeight,jdbcType=VARCHAR}, #{fogHeightall,jdbcType=DOUBLE}
       )
   </insert>
+   <select id="selectA" resultType="cn.nankai.tjxf1.entity.PeolpleInfo">
+        select * from c_peopleinfo where Acc_ID = #{accId}
+   </select>
   <insert id="insertSelective" parameterType="cn.nankai.tjxf1.entity.PeolpleInfo">
     insert into c_peopleinfo
     <trim prefix="(" suffix=")" suffixOverrides=",">

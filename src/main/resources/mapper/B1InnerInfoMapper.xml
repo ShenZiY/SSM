@@ -59,9 +59,9 @@
     <result column="HBX_Object2" property="hbxObject2" jdbcType="VARCHAR" />
     <result column="Object2_BurnDegree" property="object2Burndegree" jdbcType="VARCHAR" />
   </resultMap>
-<select id="selectA" resultType="cn.nankai.tjxf1.entity.B1InnerInfo">
-  select * from b1_innerinfo where Acc_ID = #{accId}
-</select>
+  <select id="selectA" resultType="cn.nankai.tjxf1.entity.B1InnerInfo">
+    select * from b1_innerinfo where Acc_ID = #{accId}
+  </select>
   <insert id="insert" parameterType="cn.nankai.tjxf1.entity.B1InnerInfo" >
     insert into b1_innerinfo (Car_Id, Acc_ID, VIN, 
       Barry_Pos, Barry_Vol, Barry_Break_Degree, 

@@ -7,6 +7,8 @@ import cn.nankai.tjxf1.service.pdfService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class pdfServiceImpl  implements pdfService {
     @Autowired
@@ -19,6 +21,8 @@ public class pdfServiceImpl  implements pdfService {
     private B1InnerInfoMapper b1InnerInfoMapper;
     @Autowired
     private B1OuterInfoMapper b1OuterInfoMapper;
+    @Autowired
+    private  PeolpleInfoMapper peolpleInfoMapper;
 
     @Override
     public CarInfo carInfoSelectAll(Integer accId) {
@@ -43,5 +47,10 @@ public class pdfServiceImpl  implements pdfService {
     @Override
     public B1OuterInfo b1OuterInfoSelectAll(Integer accId) {
         return b1OuterInfoMapper.selectA(accId);
+    }
+
+    @Override
+    public List<PeolpleInfo> peopleInfoSelectAll(Integer accId) {
+        return peolpleInfoMapper.selectA(accId);
     }
 }

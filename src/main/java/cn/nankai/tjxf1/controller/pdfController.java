@@ -12,6 +12,8 @@ import com.itextpdf.text.pdf.*;
 import com.wuwenze.poi.ExcelKit;
 import com.itextpdf.text.pdf.fonts.*;
 import org.apache.ibatis.annotations.Param;
+import org.apache.pdfbox.multipdf.PDFMergerUtility;
+import org.apache.pdfbox.pdmodel.PDDocument;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -58,18 +60,46 @@ public class pdfController {
     @RequestMapping(value = "/savePdf", method = RequestMethod.POST)
     @ResponseBody
     public Map<String,Object> savePdf(@Param("accId") Integer accId) throws IOException, DocumentException, ParseException {
-        String newPDFPath = "D:/TJXFdata/Temp/" +accId+".pdf";
+        String dirFileMerge = "D:/TJXFdata/Merge/"+accId+"/"+accId+".pdf";
+        String dirFile = "D:/TJXFdata/Temp/"+accId+"/";
+        String dirFileA = "D:/TJXFdata/Temp/"+accId+"/"+accId+"A.pdf";
+        String dirFileB = "D:/TJXFdata/Temp/"+accId+"/"+accId+"B.pdf";
+       /* File file = new File(dirFile);
+        File[] fs = file.listFiles();
+        for (File f:fs) {
+            if(f.exists()&&f.isFile())
+                f.delete();
+        }*/
+
+        /*splitPDFFile(dirFileMerge,dirFileA,1,1);
+        splitPDFFile(dirFileMerge,dirFileB,2,5);
+        PdfReader reader1 = new PdfReader(dirFileMerge);
+        int totalPages = reader1.getNumberOfPages();
+        reader1.close();
+        for (int i = 6,j=1; i <=totalPages ; i++,j++) {
+            String dirFileC = "D:/TJXFdata/Temp/"+accId+"/"+accId+"C"+j+".pdf";
+            splitPDFFile(dirFileMerge,dirFileC,i,i);
+        }*/
+
         PdfReader reader;
         FileOutputStream out;
         ByteArrayOutputStream bos;
         PdfStamper stamper;
-        reader = new PdfReader(newPDFPath);// 读取pdf模板
+        reader = new PdfReader(dirFileA);// 读取pdf模板
         bos = new ByteArrayOutputStream();
         stamper = new PdfStamper(reader, bos);
         AcroFields fields = stamper.getAcroFields();
+        System.out.println(fields.toString());
         BaseInfo baseInfo = new BaseInfo();
+        Set<String> fldNames = fields.getFields().keySet();
+        System.out.println(fldNames.size());
+        for (String fldName : fldNames) {
+            System.out.println( fldName + ": " + fields.getField( fldName ) );
+        }
+
         baseInfo.setAccId(accId);
         baseInfo.setTimeFind(reHandleDate(fields.getField("timeFind")));
+
         baseInfo.setTimePolice(reHandleDate(fields.getField("timePolice")));
         baseInfo.setTimeInvest(reHandleDate(fields.getField("timeInvest")));
         baseInfo.setCarNum(Integer.parseInt(fields.getField("carNum")));
@@ -99,6 +129,7 @@ public class pdfController {
         }
         baseInfo.setLocXian(fields.getField("locXian"));
         baseInfo.setLocDetail(fields.getField("locDetail"));
+        System.out.println("heerer");
         int flag = baseInfoService.updateSelective(baseInfo);
         if(flag != 1){
             bos.close();
@@ -107,17 +138,29 @@ public class pdfController {
             resultMap.put("code", "1");
             return resultMap;
         }
-
-
         stamper.close();
-        reader.close();
         bos.close();
+        reader.close();
+
+        //updateB
+        reader = new PdfReader(dirFileB);// 读取pdf模板
+        bos = new ByteArrayOutputStream();
+        stamper = new PdfStamper(reader, bos);
+        fields = stamper.getAcroFields();
+        System.out.println(fields.toString());
+        fldNames = fields.getFields().keySet();
+        System.out.println(fldNames.size());
+        for (String fldName : fldNames) {
+            System.out.println( fldName + ": " + fields.getField( fldName ) );
+        }
+
+
+
+
+
 
         Map<String,Object> resultMap = new HashMap<>();
 
-
-
-        System.out.println("flag"+flag);
         resultMap.put("code", "0");
         return resultMap;
     }
@@ -147,9 +190,10 @@ public class pdfController {
         // 模板路径
         String templatePath = "D:\\新桌面\\毕设\\PDF\\template\\表A111.pdf";
         String templatePathB1 = "D:\\新桌面\\毕设\\PDF\\template\\表B1.pdf";
+        String templatePathC = "D:\\新桌面\\毕设\\PDF\\template\\表C.pdf";
         // 生成的新文件路径
         String newPDFPath = "D:/TJXFdata/Temp/" +accId+"/"+accId+"A.pdf";
-        String newPDFPathB1 = "D:/TJXFdata/Temp/" +accId+"/" +accId+"B1.pdf";
+        String newPDFPathB = "D:/TJXFdata/Temp/" +accId+"/" +accId+"B.pdf";
         File[] fs = file.listFiles();
         File[] fsMerge = fileMerge.listFiles();
         for (File f:fs) {
@@ -274,15 +318,9 @@ public class pdfController {
 
             stamper.setFormFlattening(false);// 如果为false那么生成的PDF文件还能编辑，一定要设为true
             stamper.close();
-           /* Document doc = new Document();
-            PdfCopy copy = new PdfCopy(doc, out);
-            doc.open();
-            PdfImportedPage importPage = copy.getImportedPage(new PdfReader(bos.toByteArray()), 1);
-            copy.addPage(importPage);
-            doc.close();*/
-            reader.close();
             out.write(bos.toByteArray());
             bos.close();
+            reader.close();
             out.close();
 
         } catch (IOException e) {
@@ -301,7 +339,7 @@ public class pdfController {
                 B1InnerInfo b1InnerInfo = pdfService.b1InnerInfoSelectAll(accId);
                 HashMap<String,Object> map = new HashMap<>();
                 bianLi(carInfo,map);bianLi(fireLocInfo,map);bianLi(envBurnInfo,map);bianLi(b1InnerInfo,map);bianLi(b1OuterInfo,map);
-                out = new FileOutputStream(newPDFPathB1);// 输出流
+                out = new FileOutputStream(newPDFPathB);// 输出流
                 reader = new PdfReader(templatePathB1);// 读取pdf模板
                 bos = new ByteArrayOutputStream();
                 stamper = new PdfStamper(reader, bos);
@@ -341,159 +379,8 @@ public class pdfController {
                                 s.setField("aftloc","1");
                             }
                         }
-                        if(map.get("transMethod")!=null){
-                            String trans = map.get("transMethod").toString();
-                            if(trans.charAt(0)=='8'){
-                                s.setField("transMethod","8");
-                                s.setField("transMethod8",trans.substring(1,trans.length()));
-                            }else{
-                                s.setField("transMethod",trans.substring(0,1));
-                            }
-                        }
-                        if(map.get("ifModify")!=null){
-                            String ifModify = map.get("ifModify").toString();
-                            if(ifModify.charAt(0)=='8'){
-                                s.setField("ifModify","8");
-                                s.setField("ifModify8",ifModify.substring(1,ifModify.length()));
-                            }else{
-                                s.setField("ifModify",ifModify.substring(0,1));
-                            }
-                        }
-                        if(map.get("maintainPurpose")!=null){
-                            String maintainPurpose = map.get("maintainPurpose").toString();
-                            if(maintainPurpose.charAt(0)=='8'){
-                                s.setField("maintainPurpose","8");
-                                s.setField("maintainPurpose8",maintainPurpose.substring(1,maintainPurpose.length()));
-                            }else{
-                                s.setField("maintainPurpose",maintainPurpose.substring(0,1));
-                            }
-                        }
-                        if(map.get("insurance")!=null){
-                            String insurance = map.get("insurance").toString();
-                            if(insurance.charAt(0)=='8'){
-                                s.setField("insurance","8");
-                                s.setField("insurance8",insurance.substring(1,insurance.length()));
-                            }else{
-                                s.setField("insurance",insurance.substring(0,1));
-                            }
-                        }
-                        if(map.get("insuranceType")!=null){
-                            String insuranceType = map.get("insuranceType").toString();
-                            if(insuranceType.charAt(0)=='8'){
-                                s.setField("insuranceType","8");
-                                s.setField("insuranceType8",insuranceType.substring(1,insuranceType.length()));
-                            }else{
-                                s.setField("insuranceType",insuranceType.substring(0,1));
-                            }
-                        }
-                        if(map.get("modifyPos")!=null){
-                            String modifyPos = map.get("modifyPos").toString();
-                            if(modifyPos.charAt(0)=='8'){
-                                s.setField("modifyPos","8");
-                                s.setField("modifyPos8",modifyPos.substring(1,modifyPos.length()));
-                            }else{
-                                s.setField("modifyPos",modifyPos.substring(0,1));
-                            }
-                        }
-                        if(map.get("myqs")!=null){
-                            String myqs = map.get("myqs").toString();
-                            if(myqs.charAt(0)=='8'){
-                                s.setField("myqs","8");
-                                s.setField("myqs8",myqs.substring(1,myqs.length()));
-                            }else{
-                                s.setField("myqs",myqs.substring(0,1));
-                            }
-                        }
-                        if(map.get("qhbw")!=null){
-                            String qhbw = map.get("qhbw").toString();
-                            if(qhbw.charAt(0)=='8'){
-                                s.setField("qhbw","8");
-                                s.setField("qhbw8",qhbw.substring(1,qhbw.length()));
-                            }else{
-                                s.setField("qhbw",qhbw.substring(0,1));
-                            }
-                        }
-                        if(map.get("barryPos")!=null){
-                            String barryPos = map.get("barryPos").toString();
-                            if(barryPos.charAt(0)=='8'){
-                                s.setField("barryPos","8");
-                                s.setField("barryPos8",barryPos.substring(1,barryPos.length()));
-                            }else{
-                                s.setField("barryPos",barryPos.substring(0,1));
-                            }
-                        }
-                        if(map.get("barryVol")!=null){
-                            String barryVol = map.get("barryVol").toString();
-                            if(barryVol.charAt(0)=='8'){
-                                s.setField("barryVol","8");
-                                s.setField("barryVol8",barryVol.substring(1,barryVol.length()));
-                            }else{
-                                s.setField("barryVol",barryVol.substring(0,1));
-                            }
-                        }
-                        if(map.get("oiltankPos")!=null){
-                            String oiltankPos = map.get("oiltankPos").toString();
-                            if(oiltankPos.charAt(0)=='8'){
-                                s.setField("oiltankPos","8");
-                                s.setField("oiltankPos8",oiltankPos.substring(1,oiltankPos.length()));
-                            }else{
-                                s.setField("oiltankPos",oiltankPos.substring(0,1));
-                            }
-                        }
-                        if(map.get("oiltankMaterial")!=null){
-                            String oiltankMaterial = map.get("oiltankMaterial").toString();
-                            if(oiltankMaterial.charAt(0)=='8'){
-                                s.setField("oiltankMaterial","8");
-                                s.setField("oiltankMaterial8",oiltankMaterial.substring(1,oiltankMaterial.length()));
-                            }else{
-                                s.setField("oiltankMaterial",oiltankMaterial.substring(0,1));
-                            }
-                        }
-                        if(map.get("oiltankVol")!=null){
-                            String oiltankVol = map.get("oiltankVol").toString();
-                            if(oiltankVol.charAt(0)=='8'){
-                                s.setField("oiltankVol","8");
-                                s.setField("oiltankVol8",oiltankVol.substring(1,oiltankVol.length()));
-                            }else{
-                                s.setField("oiltankVol",oiltankVol.substring(0,1));
-                            }
-                        }
-                        if(map.get("unit1Circurt")!=null){
-                            String unit1Circurt = map.get("unit1Circurt").toString();
-                            if(unit1Circurt.charAt(0)=='8'){
-                                s.setField("unit1Circurt","8");
-                                s.setField("unit1Circurt8",unit1Circurt.substring(1,unit1Circurt.length()));
-                            }else{
-                                s.setField("unit1Circurt",unit1Circurt.substring(0,1));
-                            }
-                        }
-                        if(map.get("unit2Circurt")!=null){
-                            String unit2Circurt = map.get("unit2Circurt").toString();
-                            if(unit2Circurt.charAt(0)=='8'){
-                                s.setField("unit2Circurt","8");
-                                s.setField("unit2Circurt8",unit2Circurt.substring(1,unit2Circurt.length()));
-                            }else{
-                                s.setField("unit2Circurt",unit2Circurt.substring(0,1));
-                            }
-                        }
-                        if(map.get("other1Circurt")!=null){
-                            String other1Circurt = map.get("other1Circurt").toString();
-                            if(other1Circurt.charAt(0)=='8'){
-                                s.setField("other1Circurt","8");
-                                s.setField("other1Circurt8",other1Circurt.substring(1,other1Circurt.length()));
-                            }else{
-                                s.setField("other1Circurt",other1Circurt.substring(0,1));
-                            }
-                        }
-                        if(map.get("other2Circurt")!=null){
-                            String other2Circurt = map.get("other2Circurt").toString();
-                            if(other2Circurt.charAt(0)=='8'){
-                                s.setField("other2Circurt","8");
-                                s.setField("other2Circurt8",other2Circurt.substring(1,other2Circurt.length()));
-                            }else{
-                                s.setField("other2Circurt",other2Circurt.substring(0,1));
-                            }
-                        }
+                        String[] listString = new String[]{"transMethod","ifModify","maintainPurpose","insurance","insuranceType", "modifyPos","myqs","qhbw","barryPos","barryVol","oiltankPos","oiltankMaterial","oiltankVol","unit1Circurt","unit2Circurt","other1Circurt","other2Circurt"};
+                        splitEight(listString,s,map);
                     }
                 }
                 //开始向PDF中添加值
@@ -518,10 +405,72 @@ public class pdfController {
             }
         }
 
+        List<PeolpleInfo> peolpleInfoList = new ArrayList<>();
+        peolpleInfoList = pdfService.peopleInfoSelectAll(accId);
+        if(peolpleInfoList.size()>0){
+            for (int i = 0; i <peolpleInfoList.size() ; i++) {
+                String newPDFPathC = "D:/TJXFdata/Temp/" +accId+"/" +accId+"C"+(i+1)+".pdf";
+                try {
+                    PeolpleInfo peolpleInfo = peolpleInfoList.get(i);
+                    HashMap<String,Object> map = new HashMap<>();
+                    bianLi(peolpleInfo,map);
+                    out = new FileOutputStream(newPDFPathC);// 输出流
+                    reader = new PdfReader(templatePathC);// 读取pdf模板
+                    bos = new ByteArrayOutputStream();
+                    stamper = new PdfStamper(reader, bos);
+                    AcroFields s = stamper.getAcroFields();
+                    int j = 1;
+                    for (Iterator it = s.getFields().keySet().iterator(); it.hasNext();j++) {
+                        String name = (String) it.next();
+                        String value = s.getField(name);
+                        s.setFieldProperty("" + name.trim(), "textfont", bf, null);
+                        if(map.get("" + name.trim())!=null){
+                            System.out.println("" + name.trim()+"的值为："+map.get("" + name.trim()).toString());
+                            s.setField("" + name.trim(),map.get("" + name.trim()).toString());
+                        }
+                        String[] listString = new String[]{"peopleType","peopleSex","investLoc","investMethod","ifSmoke","ifInjury","ifDrink","measure1","fireFindLoc","phenomenon","measure2","fireLoc","fogLoc","fogColor","fogHeight","fireHeight"};
+                        splitEight(listString,s,map);
+                        if(map.get("carPerform")!=null){
+                            String carPerform = map.get("carPerform").toString();
+                            if(carPerform.charAt(0)=='3'){
+                                s.setField("carPerform","3");
+                                s.setField("carPerform3",carPerform.substring(1,carPerform.length()));
+                            } else if(carPerform.charAt(0)=='8'){
+                                s.setField("carPerform","8");
+                                s.setField("carPerform8",carPerform.substring(1,carPerform.length()));
+                            }else{
+                                s.setField("carPerform",carPerform.substring(0,1));
+                            }
+                        }
+
+                    }
+                    //开始向PDF中添加值
+                    //添加结束
+                    stamper.setFormFlattening(false);// 如果为false那么生成的PDF文件还能编辑，一定要设为true
+                    stamper.close();
+                    out.write(bos.toByteArray());
+                    bos.close();
+                    reader.close();
+                    out.close();
+                } catch (IOException e) {
+                    System.out.println(1);
+                } catch (DocumentException e) {
+                    System.out.println(2);
+                } /*catch (ParseException e) {
+            e.printStackTrace();
+        } */ catch (NullPointerException e) {
+                    e.printStackTrace();
+                    System.out.println(3);
+                }
+            }
+        }
+        //不再合并，这样不好吧，问题解决不了
+        /*manipulatePdf(dirFileMerge,dirFile,accId);*/
         resultMap.put("code", "0");
         /*return resultMap;*/
         Desktop desktop = Desktop.getDesktop();
 
+        fs = file.listFiles();
         for (File f:fs) {
             desktop.open(f);
         }
@@ -778,6 +727,70 @@ public class pdfController {
             } catch (IllegalArgumentException ex) {
                 ex.printStackTrace();
             }
+        }
+    }
+
+    public  void manipulatePdf(String pathMerge,String path, Integer accId)
+            throws IOException {
+
+        String newPath = pathMerge +accId+ ".pdf";
+        File file = new File(path);
+        File[] fs = file.listFiles();
+        PDFMergerUtility PDFmerger = new PDFMergerUtility();
+        PDFmerger.setDestinationFileName(newPath);
+        for (File f:fs) {
+            System.out.println(f.getAbsolutePath());
+            File file1 = new File(f.getAbsolutePath());
+
+            PDFmerger.addSource(file1);
+        }
+       /* PDFmerger.mergeDocuments();*/
+    }
+
+    public void splitEight(String[] listString,AcroFields s,HashMap<String,Object> map) throws IOException, DocumentException {
+        for (int i = 0; i < listString.length; i++) {
+            String str = listString[i];
+            if(map.get(str)!=null){
+                String aft = map.get(str).toString();
+                if(aft.charAt(0)=='8'){
+                    s.setField(str,"8");
+                    s.setField(str+8,aft.substring(1,aft.length()));
+                }else{
+                    s.setField(str,aft.substring(0,1));
+                }
+            }
+        }
+    }
+
+    public void splitPDFFile(String respdfFile, String savepath, int from, int end) {
+        Document document = null;
+        PdfCopy copy = null;
+        try {
+            PdfReader reader = new PdfReader(respdfFile);
+            int n = reader.getNumberOfPages();
+            if(end==0){
+                end = n;
+            }
+            ArrayList<String> savepaths = new ArrayList<String>();
+            String staticpath = respdfFile.substring(0, respdfFile.lastIndexOf("\\")+1);
+            //String savepath = staticpath+ newFile;
+            savepaths.add(savepath);
+            document = new Document(reader.getPageSize(1));
+            copy = new PdfCopy(document, new FileOutputStream(savepaths.get(0)));
+            document.open();
+            for(int j=from; j<=end; j++) {
+                document.newPage();
+                PdfImportedPage page = copy.getImportedPage(reader, j);
+                copy.addPage(page);
+            }
+            document.close();
+            copy.close();
+            reader.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch(DocumentException e) {
+            e.printStackTrace();
         }
     }
 

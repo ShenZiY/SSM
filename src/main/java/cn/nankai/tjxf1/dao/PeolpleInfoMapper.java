@@ -4,6 +4,8 @@ import cn.nankai.tjxf1.entity.PeolpleInfo;
 import cn.nankai.tjxf1.entity.PeolpleInfoExample;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface PeolpleInfoMapper {
     int deleteByExample(PeolpleInfoExample example);
 
@@ -14,4 +16,6 @@ public interface PeolpleInfoMapper {
     int updateByExampleSelective(@Param("record") PeolpleInfo record, @Param("example") PeolpleInfoExample example);
 
     int updateByExample(@Param("record") PeolpleInfo record, @Param("example") PeolpleInfoExample example);
+
+    List<PeolpleInfo> selectA(@Param("accId") Integer accId);
 }

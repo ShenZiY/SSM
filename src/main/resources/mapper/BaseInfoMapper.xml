@@ -88,6 +88,9 @@
     Gov_CJ, Gov_LR, Time_Police, Time_Invest, Fire_Tru, Time_FireTru, Ambulance, Time_Ambu, 
     State, Status, id,Time_Insert
   </sql>
+  <select id="selectLocDetail" parameterType="Integer"  resultType="String">
+      select  Loc_Detail from a11_baseinfo WHERE  id = #{id} and Time_Insert>DATE_SUB(CURDATE(), INTERVAL 1 MONTH) order by Time_Insert desc
+  </select>
 
   <!--更改ID下的status-->
   <update id="updateStatus" >
@@ -156,9 +159,6 @@
     select count(*) as countRes from a11_baseinfo
     where Time_Insert >= date(now())
   </select>
-
-
-
   <select id="selectByExample" parameterType="cn.nankai.tjxf1.entity.BaseInfoExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -190,6 +190,7 @@
       #{ambulance,jdbcType=VARCHAR}, #{timeAmbu,jdbcType=TIMESTAMP}, #{state,jdbcType=VARCHAR}, 
       #{status,jdbcType=TINYINT},#{id,jdbcType=TINYINT},#{timeInsert,jdbcType=TIMESTAMP})
   </insert>
+
   <update id = "updateSelective" parameterType="cn.nankai.tjxf1.entity.BaseInfo">
       update a11_baseinfo
     <set>
@@ -253,8 +254,6 @@
     </set>
     where Acc_ID =  #{accId,jdbcType=INTEGER}
   </update>
-
-
   <insert id="insertSelective" parameterType="cn.nankai.tjxf1.entity.BaseInfo">
     insert into a11_baseinfo
     <trim prefix="(" suffix=")" suffixOverrides=",">

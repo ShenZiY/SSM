@@ -117,6 +117,208 @@
       #{jssYhm,jdbcType=VARCHAR}, #{hbxZhcd,jdbcType=VARCHAR}, #{hbxYhcd,jdbcType=VARCHAR}, 
       #{hbxZywp,jdbcType=VARCHAR}, #{hbxSscd,jdbcType=VARCHAR})
   </insert>
+
+  <update id="updateSelective" parameterType="cn.nankai.tjxf1.entity.B4InnerInfo" >
+    update b4_innerinfo
+    <set>
+      <if test="carId != null" >
+        Car_Id = #{carId,jdbcType=INTEGER},
+      </if>
+      <if test="accId != null" >
+        Acc_ID = #{accId,jdbcType=INTEGER},
+      </if>
+      <if test="vin != null" >
+        VIN = #{vin,jdbcType=VARCHAR},
+      </if>
+      <if test="xdcWz != null" >
+        XDC_WZ =  #{xdcWz,jdbcType=VARCHAR},
+      </if>
+      <if test="xdcDy != null" >
+        XDC_DY = #{xdcDy,jdbcType=VARCHAR},
+      </if>
+      <if test="xdcSscd != null" >
+        XDC_SSCD = #{xdcSscd,jdbcType=VARCHAR},
+      </if>
+      <if test="dccDccwz != null" >
+        DCC_DCCWZ = #{dccDccwz,jdbcType=VARCHAR},
+      </if>
+      <if test="dccKcdkwz != null" >
+        DCC_KCDKWZ = #{dccKcdkwz,jdbcType=VARCHAR},
+      </if>
+      <if test="dccMcdkwz != null" >
+        DCC_MCDKWZ = #{dccMcdkwz,jdbcType=VARCHAR},
+      </if>
+      <if test="dccCdqwz != null" >
+        DCC_CDQWZ = #{dccCdqwz,jdbcType=VARCHAR},
+      </if>
+      <if test="dccWkcz != null" >
+        DCC_WKCZ =  #{dccWkcz,jdbcType=VARCHAR},
+      </if>
+      <if test="dccEddy != null" >
+        DCC_EDDY = #{dccEddy,jdbcType=VARCHAR},
+      </if>
+      <if test="dccCzfs != null" >
+        DCC_CZFS =  #{dccCzfs,jdbcType=VARCHAR},
+      </if>
+      <if test="dccEdrl != null" >
+        DCC_EDRL = #{dccEdrl,jdbcType=VARCHAR},
+      </if>
+      <if test="dccHdzt != null" >
+        DCC_HDZT = #{dccHdzt,jdbcType=VARCHAR},
+      </if>
+      <if test="dccSsscd != null" >
+        DCC_SSSCD = #{dccSsscd,jdbcType=VARCHAR},
+      </if>
+      <if test="dccXsscd != null" >
+        DCC_XSSCD = #{dccXsscd,jdbcType=VARCHAR},
+      </if>
+      <if test="dccZsscd != null" >
+        DCC_ZSSCD =  #{dccZsscd,jdbcType=VARCHAR},
+      </if>
+      <if test="dccYsscd != null" >
+        DCC_YSSCD = #{dccYsscd,jdbcType=VARCHAR},
+      </if>
+      <if test="dccQsscd != null" >
+        DCC_QSSCD =  #{dccQsscd,jdbcType=VARCHAR},
+      </if>
+      <if test="dccHsscd != null" >
+        DCC_HSSCD = #{dccHsscd,jdbcType=VARCHAR},
+      </if>
+      <if test="dccDclx != null" >
+        DCC_DCLX = #{dccDclx,jdbcType=VARCHAR},
+      </if>
+      <if test="dccDcxh != null" >
+        DCC_DCXH =  #{dccDcxh,jdbcType=VARCHAR},
+      </if>
+      <if test="dccDcedrl != null" >
+        DCC_DCEDRL =  #{dccDcedrl,jdbcType=VARCHAR},
+      </if>
+      <if test="dccDceddy != null" >
+        DCC_DCEDDY = #{dccDceddy,jdbcType=VARCHAR},
+      </if>
+      <if test="dcglxtWz != null" >
+        DCGLXT_WZ =  #{dcglxtWz,jdbcType=VARCHAR},
+      </if>
+      <if test="dcglxtSscd != null" >
+        DCGLXT_SSCD = #{dcglxtSscd,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcDdj != null" >
+        FDJC_DDJ = #{fdjcDdj,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcZkb != null" >
+        FDJC_ZKB = #{fdjcZkb,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcDjkzq != null" >
+        FDJC_DJKZQ =  #{fdjcDjkzq,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcSrq != null" >
+        FDJC_SRQ = #{fdjcSrq,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcJsx != null" >
+        FDJC_JSX = #{fdjcJsx,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcLqfs != null" >
+        FDJC_LQFS = #{fdjcLqfs,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcDyzhq != null" >
+        FDJC_DYZHQ = #{fdjcDyzhq,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcAbs != null" >
+        FDJC_ABS = #{fdjcAbs,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcPdh != null" >
+        FDJC_PDH =  #{fdjcPdh,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcZqd != null" >
+        FDJC_ZQD = #{fdjcZqd,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcBxh != null" >
+        FDJC_BXH = #{fdjcBxh,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcYqd != null" >
+        FDJC_YQD = #{fdjcYqd,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcJqqg != null" >
+        FDJC_JQQG = #{fdjcJqqg,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcFddongj != null" >
+        FDJC_FDdongJ  = #{fdjcFddongj,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcPqqg != null" >
+        FDJC_PQQG  = #{fdjcPqqg,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcQdj != null" >
+        FDJC_QDJ = #{fdjcQdj,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcBsqLhq != null" >
+        FDJC_BSQ_LHQ  = #{fdjcBsqLhq,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcFdianj != null" >
+        FDJC_FDianJ = #{fdjcFdianj,jdbcType=VARCHAR},
+      </if>
+      <if test="jssYbb != null" >
+        JSS_YBB = #{jssYbb,jdbcType=VARCHAR},
+      </if>
+      <if test="jssDyq != null" >
+        JSS_DYQ = #{jssDyq,jdbcType=VARCHAR},
+      </if>
+      <if test="jssZxp != null" >
+        JSS_ZXP =  #{jssZxp,jdbcType=VARCHAR},
+      </if>
+      <if test="jssStx != null" >
+        JSS_STX =  #{jssStx,jdbcType=VARCHAR},
+      </if>
+      <if test="jssZyjxh != null" >
+        JSS_ZYJXH = #{jssZyjxh,jdbcType=VARCHAR},
+      </if>
+      <if test="jssZyfsx != null" >
+        JSS_ZYFSX = #{jssZyfsx,jdbcType=VARCHAR},
+      </if>
+      <if test="jssDhkg != null" >
+        JSS_DHKG = #{jssDhkg,jdbcType=VARCHAR},
+      </if>
+      <if test="jssJswzy != null" >
+        JSS_JSWZY = #{jssJswzy,jdbcType=VARCHAR},
+      </if>
+      <if test="jssBfq != null" >
+        JSS_BFQ = #{jssBfq,jdbcType=VARCHAR},
+      </if>
+      <if test="jssFjszy != null" >
+        JSS_FJSZY = #{jssFjszy,jdbcType=VARCHAR},
+      </if>
+      <if test="jssGfj != null" >
+        JSS_GFJ =  #{jssGfj,jdbcType=VARCHAR},
+      </if>
+      <if test="jssHpzy != null" >
+        JSS_HPZY = #{jssHpzy,jdbcType=VARCHAR},
+      </if>
+      <if test="jssZqm != null" >
+        JSS_ZQM = #{jssZqm,jdbcType=VARCHAR},
+      </if>
+      <if test="jssYqm != null" >
+        JSS_YQM =  #{jssYqm,jdbcType=VARCHAR},
+      </if>
+      <if test="jssZhm != null" >
+        JSS_ZHM = #{jssZhm,jdbcType=VARCHAR},
+      </if>
+      <if test="jssYhm != null" >
+        JSS_YHM = #{jssYhm,jdbcType=VARCHAR},
+      </if>
+      <if test="hbxZhcd != null" >
+        HBX_ZHCD = #{hbxZhcd,jdbcType=VARCHAR},
+      </if>
+      <if test="hbxYhcd != null" >
+        HBX_YHCD = #{hbxYhcd,jdbcType=VARCHAR},
+      </if>
+      <if test="hbxZywp != null" >
+        HBX_ZYWP = #{hbxZywp,jdbcType=VARCHAR},
+      </if>
+      <if test="hbxSscd != null" >
+        HBX_SSCD = #{hbxSscd,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Acc_ID =  #{accId,jdbcType=INTEGER}
+  </update>
   <insert id="insertSelective" parameterType="cn.nankai.tjxf1.entity.B4InnerInfo" >
     insert into b4_innerinfo
     <trim prefix="(" suffix=")" suffixOverrides="," >

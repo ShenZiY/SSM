@@ -107,6 +107,187 @@
       #{cycY2,jdbcType=VARCHAR}, #{cycY3,jdbcType=VARCHAR}, #{cycZywp,jdbcType=VARCHAR}, 
       #{cycSscd,jdbcType=VARCHAR})
   </insert>
+
+  <update id="updateSelective" parameterType="cn.nankai.tjxf1.entity.B3InnerInfo" >
+    update b3_innerinfo
+    <set>
+      <if test="carId != null" >
+        Car_Id = #{carId,jdbcType=INTEGER},
+      </if>
+      <if test="accId != null" >
+        Acc_ID =  #{accId,jdbcType=INTEGER},
+      </if>
+      <if test="vin != null" >
+        VIN = #{vin,jdbcType=VARCHAR},
+      </if>
+      <if test="xdcWz != null" >
+        XDC_WZ = #{xdcWz,jdbcType=VARCHAR},
+      </if>
+      <if test="xdcDy != null" >
+        XDC_DY =  #{xdcDy,jdbcType=VARCHAR},
+      </if>
+      <if test="xdcSscd != null" >
+        XDC_SSCD =  #{xdcSscd,jdbcType=VARCHAR},
+      </if>
+      <if test="oiltankPos != null" >
+        OilTank_Pos = #{oiltankPos,jdbcType=VARCHAR},
+      </if>
+      <if test="oiltankMaterial != null" >
+        OilTank_Material =  #{oiltankMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="oiltankVol != null" >
+        OilTank_Vol =  #{oiltankVol,jdbcType=VARCHAR},
+      </if>
+      <if test="oiltankBreakDegree != null" >
+        OilTank_Break_Degree = #{oiltankBreakDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcFdongj != null" >
+        FDJC_FDongJ = #{fdjcFdongj,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcJqqg != null" >
+        FDJC_JQQG =  #{fdjcJqqg,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcFdianj != null" >
+        FDJC_FDianJ = #{fdjcFdianj,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcPqqg != null" >
+        FDJC_PQQG = #{fdjcPqqg,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcQdj != null" >
+        FDJC_QDJ =  #{fdjcQdj,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcWlzyq != null" >
+        FDJC_WLZYQ = #{fdjcWlzyq,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcCyb != null" >
+        FDJC_CYB = #{fdjcCyb,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcLqyg != null" >
+        FDJC_LQYG =  #{fdjcLqyg,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcHsq != null" >
+        FDJC_HSQ = #{fdjcHsq,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcQxyg != null" >
+        FDJC_QXYG =  #{fdjcQxyg,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcDhxq != null" >
+        FDJC_DHXQ = #{fdjcDhxq,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcZdyg != null" >
+        FDJC_ZDYG = #{fdjcZdyg,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcKqlqq != null" >
+        FDJC_KQLQQ = #{fdjcKqlqq,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcZlzxyg != null" >
+        FDJC_ZLZXYG =  #{fdjcZlzxyg,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcJylqq != null" >
+        FDJC_JYLQQ = #{fdjcJylqq,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcKtysj != null" >
+        FDJC_KTYSJ = #{fdjcKtysj,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcZkzlq != null" >
+        FDJC_ZKZLQ =  #{fdjcZkzlq,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcAbs != null" >
+        FDJC_ABS = #{fdjcAbs,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcBxh != null" >
+        FDJC_BXH = #{fdjcBxh,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcKqysj != null" >
+        FDJC_KQYSJ = #{fdjcKqysj,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcBsqLhq != null" >
+        FDJC_BSQ_LHQ = #{fdjcBsqLhq,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcLqfs != null" >
+        FDJC_LQFS = #{fdjcLqfs,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcSrq != null" >
+        FDJC_SRQ =  #{fdjcSrq,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcDyzkg != null" >
+        FDJC_DYZKG = #{fdjcDyzkg,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcLnq != null" >
+        FDJC_LNQ = #{fdjcLnq,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcJxh != null" >
+        FDJC_JXH =  #{fdjcJxh,jdbcType=VARCHAR},
+      </if>
+      <if test="cycYbb != null" >
+        CYC_YBB =  #{cycYbb,jdbcType=VARCHAR},
+      </if>
+      <if test="cycBfq != null" >
+        CYC_BFQ = #{cycBfq,jdbcType=VARCHAR},
+      </if>
+      <if test="cycJxh != null" >
+        CYC_JXH = #{cycJxh,jdbcType=VARCHAR},
+      </if>
+      <if test="cycJsq != null" >
+        CYC_JSQ = #{cycJsq,jdbcType=VARCHAR},
+      </if>
+      <if test="cycZxp != null" >
+        CYC_ZXP = #{cycZxp,jdbcType=VARCHAR},
+      </if>
+      <if test="cycJswzy != null" >
+        CYC_JSWZY =  #{cycJswzy,jdbcType=VARCHAR},
+      </if>
+      <if test="cycDhkg != null" >
+        CYC_DHKG = #{cycDhkg,jdbcType=VARCHAR},
+      </if>
+      <if test="cycFjszq != null" >
+        CYC_FJSZQ =  #{cycFjszq,jdbcType=VARCHAR},
+      </if>
+      <if test="cycGfj != null" >
+        CYC_GFJ = #{cycGfj,jdbcType=VARCHAR},
+      </if>
+      <if test="cycCkzy != null" >
+        CYC_CKZY = #{cycCkzy,jdbcType=VARCHAR},
+      </if>
+      <if test="cycQbdb != null" >
+        CYC_QBDB = #{cycQbdb,jdbcType=VARCHAR},
+      </if>
+      <if test="cycHbdb != null" >
+        CYC_HBDB =  #{cycHbdb,jdbcType=VARCHAR},
+      </if>
+      <if test="cycZqcd != null" >
+        CYC_ZQCD = #{cycZqcd,jdbcType=VARCHAR},
+      </if>
+      <if test="cycYqzd != null" >
+        CYC_YQZD =  #{cycYqzd,jdbcType=VARCHAR},
+      </if>
+      <if test="cycZhcd != null" >
+        CYC_ZHCD =  #{cycZhcd,jdbcType=VARCHAR},
+      </if>
+      <if test="cycYhcd != null" >
+        CYC_YHCD =  #{cycYhcd,jdbcType=VARCHAR},
+      </if>
+      <if test="cycZ1 != null" >
+        CYC_Z1 = #{cycZ1,jdbcType=VARCHAR},
+      </if>
+      <if test="cycY1 != null" >
+        CYC_Y1 =  #{cycY1,jdbcType=VARCHAR},
+      </if>
+      <if test="cycY2 != null" >
+        CYC_Y2 =  #{cycY2,jdbcType=VARCHAR},
+      </if>
+      <if test="cycY3 != null" >
+        CYC_Y3 = #{cycY3,jdbcType=VARCHAR},
+      </if>
+      <if test="cycZywp != null" >
+        CYC_ZYWP = #{cycZywp,jdbcType=VARCHAR},
+      </if>
+      <if test="cycSscd != null" >
+        CYC_SSCD = #{cycSscd,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Acc_ID =  #{accId,jdbcType=INTEGER}
+  </update>
   <insert id="insertSelective" parameterType="cn.nankai.tjxf1.entity.B3InnerInfo" >
     insert into b3_innerinfo
     <trim prefix="(" suffix=")" suffixOverrides="," >

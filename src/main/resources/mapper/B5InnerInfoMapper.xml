@@ -67,6 +67,195 @@
   <select id="selectA" resultType="cn.nankai.tjxf1.entity.B5InnerInfo">
     select * from b5_innerinfo where Acc_ID = 2019
   </select>
+  <update id="updateSelective" parameterType="cn.nankai.tjxf1.entity.B5InnerInfo" >
+    update b5_innerinfo
+    <set>
+    <if test="carId != null" >
+      Car_Id = #{carId,jdbcType=INTEGER},
+    </if>
+    <if test="accId != null" >
+      Acc_ID = #{accId,jdbcType=INTEGER},
+    </if>
+    <if test="vin != null" >
+      VIN = #{vin,jdbcType=VARCHAR},
+    </if>
+    <if test="xdcWz != null" >
+      XDC_WZ =  #{xdcWz,jdbcType=VARCHAR},
+    </if>
+    <if test="xdcDy != null" >
+      XDC_DY = #{xdcDy,jdbcType=VARCHAR},
+    </if>
+    <if test="xdcSscd != null" >
+      XDC_SSCD = #{xdcSscd,jdbcType=VARCHAR},
+    </if>
+    <if test="dccDccwz != null" >
+      DCC_DCCWZ =  #{dccDccwz,jdbcType=VARCHAR},
+    </if>
+    <if test="dccCdkwz != null" >
+      DCC_CDKWZ = #{dccCdkwz,jdbcType=VARCHAR},
+    </if>
+    <if test="dccCdqwz != null" >
+      DCC_CDQWZ =  #{dccCdqwz,jdbcType=VARCHAR},
+    </if>
+    <if test="dccWkcz != null" >
+      DCC_WKCZ = #{dccWkcz,jdbcType=VARCHAR},
+    </if>
+    <if test="dccEddy != null" >
+      DCC_EDDY =  #{dccEddy,jdbcType=VARCHAR},
+    </if>
+    <if test="dccCzfs != null" >
+      DCC_CZFS =  #{dccCzfs,jdbcType=VARCHAR},
+    </if>
+    <if test="dccEdrl != null" >
+      DCC_EDRL = #{dccEdrl,jdbcType=VARCHAR},
+    </if>
+    <if test="dccHdzt != null" >
+      DCC_HDZT = #{dccHdzt,jdbcType=VARCHAR},
+    </if>
+    <if test="dccSscd != null" >
+      DCC_SSCD =  #{dccSscd,jdbcType=VARCHAR},
+    </if>
+    <if test="dccDclx != null" >
+      DCC_DCLX = #{dccDclx,jdbcType=VARCHAR},
+    </if>
+    <if test="dccDcxh != null" >
+      DCC_DCXH = #{dccDcxh,jdbcType=VARCHAR},
+    </if>
+    <if test="dccDcedrl != null" >
+      DCC_DCEDRL = #{dccDcedrl,jdbcType=VARCHAR},
+    </if>
+    <if test="dccDceddy != null" >
+      DCC_DCEDDY = #{dccDceddy,jdbcType=VARCHAR},
+    </if>
+    <if test="dcglxtWz != null" >
+      DCGLXT_WZ = #{dcglxtWz,jdbcType=VARCHAR},
+    </if>
+    <if test="dcglxtSscd != null" >
+      DCGLXT_SSCD = #{dcglxtSscd,jdbcType=VARCHAR},
+    </if>
+    <if test="fdjcDdj != null" >
+      FDJC_DDJ = #{fdjcDdj,jdbcType=VARCHAR},
+    </if>
+    <if test="fdjcZkb != null" >
+      FDJC_ZKB = #{fdjcZkb,jdbcType=VARCHAR},
+    </if>
+    <if test="fdjcDjkzq != null" >
+      FDJC_DJKZQ =  #{fdjcDjkzq,jdbcType=VARCHAR},
+    </if>
+    <if test="fdjcSrq != null" >
+      FDJC_SRQ = #{fdjcSrq,jdbcType=VARCHAR},
+    </if>
+    <if test="fdjcJsx != null" >
+      FDJC_JSX =  #{fdjcJsx,jdbcType=VARCHAR},
+    </if>
+    <if test="fdjcLqfs != null" >
+      FDJC_LQFS = #{fdjcLqfs,jdbcType=VARCHAR},
+    </if>
+    <if test="fdjcDyzhq != null" >
+      FDJC_DYZHQ = #{fdjcDyzhq,jdbcType=VARCHAR},
+    </if>
+    <if test="fdjcAbs != null" >
+      FDJC_ABS =  #{fdjcAbs,jdbcType=VARCHAR},
+    </if>
+    <if test="fdjcPdh != null" >
+      FDJC_PDH =  #{fdjcPdh,jdbcType=VARCHAR},
+    </if>
+    <if test="fdjcZqd != null" >
+      FDJC_ZQD = #{fdjcZqd,jdbcType=VARCHAR},
+    </if>
+    <if test="fdjcBxh != null" >
+      FDJC_BXH = #{fdjcBxh,jdbcType=VARCHAR},
+    </if>
+    <if test="fdjcYqd != null" >
+      FDJC_YQD = #{fdjcYqd,jdbcType=VARCHAR},
+    </if>
+    <if test="fdjcJqqg != null" >
+      FDJC_JQQG = #{fdjcJqqg,jdbcType=VARCHAR},
+    </if>
+    <if test="fdjcFddongj != null" >
+      FDJC_FDdongJ = #{fdjcFddongj,jdbcType=VARCHAR},
+    </if>
+    <if test="fdjcPqqg != null" >
+      FDJC_PQQG =  #{fdjcPqqg,jdbcType=VARCHAR},
+    </if>
+    <if test="fdjcQdj != null" >
+      FDJC_QDJ = #{fdjcQdj,jdbcType=VARCHAR},
+    </if>
+    <if test="fdjcBsqLhq != null" >
+      FDJC_BSQ_LHQ = #{fdjcBsqLhq,jdbcType=VARCHAR},
+    </if>
+    <if test="fdjcFdianj != null" >
+      FDJC_FDianJ = #{fdjcFdianj,jdbcType=VARCHAR},
+    </if>
+    <if test="cycYbb != null" >
+      CYC_YBB = #{cycYbb,jdbcType=VARCHAR},
+    </if>
+    <if test="cycBfq != null" >
+      CYC_BFQ =  #{cycBfq,jdbcType=VARCHAR},
+    </if>
+    <if test="cycJxh != null" >
+      CYC_JXH =  #{cycJxh,jdbcType=VARCHAR},
+    </if>
+    <if test="cycJsq != null" >
+      CYC_JSQ =  #{cycJsq,jdbcType=VARCHAR},
+    </if>
+    <if test="cycZxp != null" >
+      CYC_ZXP = #{cycZxp,jdbcType=VARCHAR},
+    </if>
+    <if test="cycJswzq != null" >
+      CYC_JSWZQ = #{cycJswzq,jdbcType=VARCHAR},
+    </if>
+    <if test="cycDhkg != null" >
+      CYC_DHKG = #{cycDhkg,jdbcType=VARCHAR},
+    </if>
+    <if test="cycFjszy != null" >
+      CYC_FJSZY = #{cycFjszy,jdbcType=VARCHAR},
+    </if>
+    <if test="cycGfj != null" >
+      CYC_GFJ = #{cycGfj,jdbcType=VARCHAR},
+    </if>
+    <if test="cycCkzq != null" >
+      CYC_CKZQ = #{cycCkzq,jdbcType=VARCHAR},
+    </if>
+    <if test="cycQbdb != null" >
+      CYC_QBDB =  #{cycQbdb,jdbcType=VARCHAR},
+    </if>
+    <if test="cycHbdb != null" >
+      CYC_HBDB = #{cycHbdb,jdbcType=VARCHAR},
+    </if>
+    <if test="cycZqcd != null" >
+      CYC_ZQCD = #{cycZqcd,jdbcType=VARCHAR},
+    </if>
+    <if test="cycYqcd != null" >
+      CYC_YQCD = #{cycYqcd,jdbcType=VARCHAR},
+    </if>
+    <if test="cycZhcd != null" >
+      CYC_ZHCD = #{cycZhcd,jdbcType=VARCHAR},
+    </if>
+    <if test="cycYhcd != null" >
+      CYC_YHCD = #{cycYhcd,jdbcType=VARCHAR},
+    </if>
+    <if test="cycCmz1 != null" >
+      CYC_CMZ1 = #{cycCmz1,jdbcType=VARCHAR},
+    </if>
+    <if test="cycCmy1 != null" >
+      CYC_CMY1 = #{cycCmy1,jdbcType=VARCHAR},
+    </if>
+    <if test="cycCmy2 != null" >
+      CYC_CMY2 = #{cycCmy2,jdbcType=VARCHAR},
+    </if>
+    <if test="cycCmy3 != null" >
+      CYC_CMY3 = #{cycCmy3,jdbcType=VARCHAR},
+    </if>
+    <if test="cycZywp != null" >
+      CYC_ZYWP = #{cycZywp,jdbcType=VARCHAR},
+    </if>
+    <if test="cycSscd != null" >
+      CYC_SSCD = #{cycSscd,jdbcType=VARCHAR},
+    </if>
+    </set>
+    where Acc_ID =  #{accId,jdbcType=INTEGER}
+  </update>
   <insert id="insert" parameterType="cn.nankai.tjxf1.entity.B5InnerInfo" >
     insert into b5_innerinfo (Car_Id, Acc_ID, VIN, 
       XDC_WZ, XDC_DY, XDC_SSCD, 

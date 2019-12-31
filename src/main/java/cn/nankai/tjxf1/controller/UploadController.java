@@ -468,6 +468,30 @@ public class UploadController {
                     }
                 });
 
+        String compareLocDetail = baseInfoList.get(0).getLocDetail();
+
+
+        ArrayList<String> locDetailList = null;
+        try {
+            locDetailList = baseInfoService.selectLocDetail(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(locDetailList.size());
+        for (int i = 0; i <locDetailList.size() ; i++) {
+            if(compareLocDetail.trim().equals(locDetailList.get(i).trim())){
+                boolean haveError = errorList.isEmpty();
+                Map<String, Object> map1 = new HashMap<>();
+                map1.put("data", baseInfoList);
+                map1.put("haveError", haveError);
+                map1.put("error", errorList);
+                map1.put("timeConsuming", (System.currentTimeMillis() - beginMillis) / 1000L);
+                map1.put("flag", 3);
+                map1.put("locDetail",locDetailList.get(i).trim());
+                return ResponseEntity.ok(map1);
+            }
+        }
+
 
         System.out.println("插入之前");
         uploadService.insertEnvInfoSelective(envInfoInfoList);
@@ -495,7 +519,6 @@ public class UploadController {
         uploadService.insertB4OuterInfoSelective(b4OuterInfoList);
         uploadService.insertB5InnerInfoSelective(b5InnerInfoList);
         uploadService.insertB5OuterInfoSelective(b5OuterInfoList);//这个有问题
-
         baseInfoService.updateStatus(0,accIdNew);
         boolean haveError = errorList.isEmpty();
         Map<String, Object> map1 = new HashMap<>();

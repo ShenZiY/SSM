@@ -77,6 +77,142 @@
       #{hbxg,jdbcType=VARCHAR}, #{dp,jdbcType=VARCHAR}, #{pqg,jdbcType=VARCHAR}, #{chzhq,jdbcType=VARCHAR}, 
       #{wjcdxl,jdbcType=VARCHAR})
   </insert>
+
+  <update id="updateSelective" parameterType="cn.nankai.tjxf1.entity.B4OuterInfo" >
+    update b4_outerinfo
+    <set>
+      <if test="carId != null" >
+        Car_Id = #{carId,jdbcType=INTEGER},
+      </if>
+      <if test="accId != null" >
+        Acc_ID =  #{accId,jdbcType=INTEGER},
+      </if>
+      <if test="vin != null" >
+        VIN =  #{vin,jdbcType=VARCHAR},
+      </if>
+      <if test="ltZq != null" >
+        LT_ZQ = #{ltZq,jdbcType=VARCHAR},
+      </if>
+      <if test="ltYq != null" >
+        LT_YQ = #{ltYq,jdbcType=VARCHAR},
+      </if>
+      <if test="ltZh != null" >
+        LT_ZH =  #{ltZh,jdbcType=VARCHAR},
+      </if>
+      <if test="ltYh != null" >
+        LT_YH =  #{ltYh,jdbcType=VARCHAR},
+      </if>
+      <if test="lwZq != null" >
+        LW_ZQ = #{lwZq,jdbcType=VARCHAR},
+      </if>
+      <if test="lwYq != null" >
+        LW_YQ = #{lwYq,jdbcType=VARCHAR},
+      </if>
+      <if test="lwZh != null" >
+        LW_ZH =  #{lwZh,jdbcType=VARCHAR},
+      </if>
+      <if test="lwYh != null" >
+        LW_YH =  #{lwYh,jdbcType=VARCHAR},
+      </if>
+      <if test="cmZq != null" >
+        CM_ZQ =  #{cmZq,jdbcType=VARCHAR},
+      </if>
+      <if test="cmYq != null" >
+        CM_YQ = #{cmYq,jdbcType=VARCHAR},
+      </if>
+      <if test="cmZh != null" >
+        CM_ZH = #{cmZh,jdbcType=VARCHAR},
+      </if>
+      <if test="cmYh != null" >
+        CM_YH = #{cmYh,jdbcType=VARCHAR},
+      </if>
+      <if test="ccZq != null" >
+        CC_ZQ = #{ccZq,jdbcType=VARCHAR},
+      </if>
+      <if test="ccYq != null" >
+        CC_YQ = #{ccYq,jdbcType=VARCHAR},
+      </if>
+      <if test="ccZh != null" >
+        CC_ZH = #{ccZh,jdbcType=VARCHAR},
+      </if>
+      <if test="ccYh != null" >
+        CC_YH  = #{ccYh,jdbcType=VARCHAR},
+      </if>
+      <if test="yzbZq != null" >
+        YZB_ZQ = #{yzbZq,jdbcType=VARCHAR},
+      </if>
+      <if test="yzbYq != null" >
+        YZB_YQ = #{yzbYq,jdbcType=VARCHAR},
+      </if>
+      <if test="yzbZh != null" >
+        YZB_ZH =  #{yzbZh,jdbcType=VARCHAR},
+      </if>
+      <if test="yzbYh != null" >
+        YZB_YH = #{yzbYh,jdbcType=VARCHAR},
+      </if>
+      <if test="cdZq != null" >
+        CD_ZQ =  #{cdZq,jdbcType=VARCHAR},
+      </if>
+      <if test="cdYq != null" >
+        CD_YQ = #{cdYq,jdbcType=VARCHAR},
+      </if>
+      <if test="cdZh != null" >
+        CD_ZH = #{cdZh,jdbcType=VARCHAR},
+      </if>
+      <if test="cdYh != null" >
+        CD_YH = #{cdYh,jdbcType=VARCHAR},
+      </if>
+      <if test="hsjZq != null" >
+        HSJ_ZQ =  #{hsjZq,jdbcType=VARCHAR},
+      </if>
+      <if test="hsjYq != null" >
+        HSJ_YQ = #{hsjYq,jdbcType=VARCHAR},
+      </if>
+      <if test="bxgQb != null" >
+        BXG_QB  = #{bxgQb,jdbcType=VARCHAR},
+      </if>
+      <if test="bxgHb != null" >
+        BXG_HB =  #{bxgHb,jdbcType=VARCHAR},
+      </if>
+      <if test="fdboQb != null" >
+        FDBO_QB =  #{fdboQb,jdbcType=VARCHAR},
+      </if>
+      <if test="fdblHb != null" >
+        FDBL_HB = #{fdblHb,jdbcType=VARCHAR},
+      </if>
+      <if test="ygqQb != null" >
+        YGQ_QB = #{ygqQb,jdbcType=VARCHAR},
+      </if>
+      <if test="ygqHb != null" >
+        YGQ_HB =  #{ygqHb,jdbcType=VARCHAR},
+      </if>
+      <if test="jcg != null" >
+        JCG =  #{jcg,jdbcType=VARCHAR},
+      </if>
+      <if test="dg != null" >
+        DG =  #{dg,jdbcType=VARCHAR},
+      </if>
+      <if test="tc != null" >
+        TC = #{tc,jdbcType=VARCHAR},
+      </if>
+      <if test="hbxg != null" >
+        HBXG = #{hbxg,jdbcType=VARCHAR},
+      </if>
+      <if test="dp != null" >
+        DP =  #{dp,jdbcType=VARCHAR},
+      </if>
+      <if test="pqg != null" >
+        PQG = #{pqg,jdbcType=VARCHAR},
+      </if>
+      <if test="chzhq != null" >
+        CHZHQ =  #{chzhq,jdbcType=VARCHAR},
+      </if>
+      <if test="wjcdxl != null" >
+        WJCDXL =  #{wjcdxl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Acc_ID =  #{accId,jdbcType=INTEGER}
+  </update>
   <insert id="insertSelective" parameterType="cn.nankai.tjxf1.entity.B4OuterInfo" >
     insert into b4_outerinfo
     <trim prefix="(" suffix=")" suffixOverrides="," >

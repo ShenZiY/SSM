@@ -11,4 +11,6 @@ public interface EnvBurnInfoMapper {
     int insertSelective(EnvBurnInfo record);
 
     EnvBurnInfo selectAll(@Param("accId") Integer accId);
+
+    int updateSelective(@Param("accId") Integer accId);
 }

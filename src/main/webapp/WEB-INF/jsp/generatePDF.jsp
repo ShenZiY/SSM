@@ -29,6 +29,13 @@
                 </div>
                 <a class="layui-btn search_btn" data-type="reload"><i class="layui-icon">&#xe615;</i></a>
             </div>
+            <div class="layui-inline" style="margin-left: 90px">
+                <div class="layui-input-inline">
+
+                    <input type="text" id = "testtime" class="layui-input searchValTime" style="font-size: 16"  placeholder="请选择日期" />
+                </div>
+                <a class="layui-btn search_btn1" data-type="reload"><i class="layui-icon">&#xe615;</i></a>
+            </div>
         </form>
     </blockquote>
     <div style="height: 600px;overflow-y: auto;width: 96%;margin-left: 1%;padding: 5px;">
@@ -39,11 +46,18 @@
 
 <script type="text/javascript" src="../lib/layui/layui.js" charset="utf-8"></script>
 <script>
-    layui.use(['table','upload'], function(){
+    layui.use(['table','upload','laydate'], function(){
         var table = layui.table;
         var upload = layui.upload, $ = layui.jquery;
+        var laydate = layui.laydate;
 
-        var  data ;
+        laydate.render({
+            elem: '#testtime'
+        });
+
+
+
+
 
 
         //第一个实例
@@ -98,10 +112,52 @@
                     url:'/jsp/dataPDFsearch',
                     method:'post'
                 })
-            }else{
-                layer.msg("请输入搜索的事故编码");
+            }else {
+                layer.msg("请输入事故编码");
             }
         });
+        $(".search_btn1").on("click",function(){
+            if($(".searchValTime").val() != ''){
+                var datada = $(".searchValTime").val();
+                var parserDate = function (datada) {
+                    var t = Date.parse(datada);
+                    if (!isNaN(t)) {
+                        return new Date(Date.parse(datada.replace(/-/g, "/")));
+                    } else {
+                        return new Date();
+                    }
+                };
+                var today = parserDate(datada);
+                var year = today.getFullYear(); //当前系统时间的完整年份值
+                var firstDay = new Date(today.getFullYear(),0, 1);
+                var day = today.getDay(); //当前系统时间中的星期值
+                var weeksNumber = [7,1,2,3,4,5,6];
+                var weekNumber = weeksNumber[day];
+                var dayOfWeek = firstDay.getDay();
+                var spendDay= 1;
+                if (dayOfWeek !=0) {
+                    spendDay=7-dayOfWeek+1;
+                }
+                firstDay = new Date(today.getFullYear(),0, 1+spendDay);
+                var d =Math.ceil((today.valueOf()- firstDay.valueOf())/ 86400000);
+                var result =Math.ceil(d/7);
+                var zhous = result+1;
+                var dateSearch = ""+year+zhous+weekNumber;
+                table.reload("pdfTable",{
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    },
+                    where: {
+                        keyAccId: dateSearch  //搜索的关键字
+                    },
+                    url:'/jsp/dataPDFsearch',
+                    method:'post'
+                })
+            }else {
+                layer.msg("请输入日期");
+            }
+        });
+
 
         table.on('tool(demo)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
             data = obj.data //获得当前行数据
@@ -177,7 +233,10 @@
             }
         });
 
+
+
     });
+
 
 </script>
 

@@ -2,6 +2,7 @@ package cn.nankai.tjxf1.service;
 
 import cn.nankai.tjxf1.entity.BaseInfo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,5 +41,7 @@ public interface BaseInfoService {
     List<BaseInfo> getPageListInfoSearch(Map<String,Object> paramMap);
 
     int updateStatus(Integer status, Integer accId);
+
+    ArrayList<String> selectLocDetail( Integer id);
 
 }

@@ -82,26 +82,201 @@
       JSS_YHM, HBX_ZHCD, HBX_YHCD, 
       HBX_BT, HBX_Object1, Object1_BurnDegree, 
       HBX_Object2, Object2_BurnDegree)
-    values (#{carId,jdbcType=INTEGER}, #{accId,jdbcType=INTEGER}, #{vin,jdbcType=VARCHAR}, 
-      #{barryPos,jdbcType=VARCHAR}, #{barryVol,jdbcType=VARCHAR}, #{barryBreakDegree,jdbcType=VARCHAR}, 
-      #{oiltankPos,jdbcType=VARCHAR}, #{oiltankMaterial,jdbcType=VARCHAR}, #{oiltankVol,jdbcType=VARCHAR}, 
-      #{oiltankBreakDegree,jdbcType=VARCHAR}, #{fdjcFdongj,jdbcType=VARCHAR}, #{fdjcJqqg,jdbcType=VARCHAR}, 
-      #{fdjcFdianj,jdbcType=VARCHAR}, #{fdjcPqqg,jdbcType=VARCHAR}, #{fdjcQdj,jdbcType=VARCHAR}, 
-      #{fdjcWlzyq,jdbcType=VARCHAR}, #{fdjcDhxq,jdbcType=VARCHAR}, #{fdjcLqyg,jdbcType=VARCHAR}, 
-      #{fdjcJylqq,jdbcType=VARCHAR}, #{fdjcQxyg,jdbcType=VARCHAR}, #{fdjcKqlqq,jdbcType=VARCHAR}, 
-      #{fdjcZdyg,jdbcType=VARCHAR}, #{fdjcZkzlq,jdbcType=VARCHAR}, #{fdjcZlzxyg,jdbcType=VARCHAR}, 
-      #{fdjcBxh,jdbcType=VARCHAR}, #{fdjcKtysj,jdbcType=VARCHAR}, #{fdjcBsqLhq,jdbcType=VARCHAR}, 
-      #{fdjcAbs,jdbcType=VARCHAR}, #{fdjcSrq,jdbcType=VARCHAR}, #{fdjcZqd,jdbcType=VARCHAR}, 
-      #{fdjcLnq,jdbcType=VARCHAR}, #{fdjcYqd,jdbcType=VARCHAR}, #{fdjcLqfs,jdbcType=VARCHAR}, 
-      #{jssYbb,jdbcType=VARCHAR}, #{jssDyq,jdbcType=VARCHAR}, #{jssZxp,jdbcType=VARCHAR}, 
-      #{jssStx,jdbcType=VARCHAR}, #{jssZyjxh,jdbcType=VARCHAR}, #{jssZyfsx,jdbcType=VARCHAR}, 
-      #{jssDhkg,jdbcType=VARCHAR}, #{jssJswzy,jdbcType=VARCHAR}, #{jssBfq,jdbcType=VARCHAR}, 
-      #{jssFjszy,jdbcType=VARCHAR}, #{jssGfj,jdbcType=VARCHAR}, #{jssHpzy,jdbcType=VARCHAR}, 
-      #{jssZqm,jdbcType=VARCHAR}, #{jssYqm,jdbcType=VARCHAR}, #{jssZhm,jdbcType=VARCHAR}, 
-      #{jssYhm,jdbcType=VARCHAR}, #{hbxZhcd,jdbcType=VARCHAR}, #{hbxYhcd,jdbcType=VARCHAR}, 
-      #{hbxBt,jdbcType=VARCHAR}, #{hbxObject1,jdbcType=VARCHAR}, #{object1Burndegree,jdbcType=VARCHAR}, 
+    values (#{carId,jdbcType=INTEGER}, #{accId,jdbcType=INTEGER}, #{vin,jdbcType=VARCHAR},
+      #{barryPos,jdbcType=VARCHAR}, #{barryVol,jdbcType=VARCHAR}, #{barryBreakDegree,jdbcType=VARCHAR},
+      #{oiltankPos,jdbcType=VARCHAR}, #{oiltankMaterial,jdbcType=VARCHAR}, #{oiltankVol,jdbcType=VARCHAR},
+      #{oiltankBreakDegree,jdbcType=VARCHAR}, #{fdjcFdongj,jdbcType=VARCHAR}, #{fdjcJqqg,jdbcType=VARCHAR},
+      #{fdjcFdianj,jdbcType=VARCHAR}, #{fdjcPqqg,jdbcType=VARCHAR}, #{fdjcQdj,jdbcType=VARCHAR},
+      #{fdjcWlzyq,jdbcType=VARCHAR}, #{fdjcDhxq,jdbcType=VARCHAR}, #{fdjcLqyg,jdbcType=VARCHAR},
+      #{fdjcJylqq,jdbcType=VARCHAR}, #{fdjcQxyg,jdbcType=VARCHAR}, #{fdjcKqlqq,jdbcType=VARCHAR},
+      #{fdjcZdyg,jdbcType=VARCHAR}, #{fdjcZkzlq,jdbcType=VARCHAR}, #{fdjcZlzxyg,jdbcType=VARCHAR},
+      #{fdjcBxh,jdbcType=VARCHAR}, #{fdjcKtysj,jdbcType=VARCHAR}, #{fdjcBsqLhq,jdbcType=VARCHAR},
+      #{fdjcAbs,jdbcType=VARCHAR}, #{fdjcSrq,jdbcType=VARCHAR}, #{fdjcZqd,jdbcType=VARCHAR},
+      #{fdjcLnq,jdbcType=VARCHAR}, #{fdjcYqd,jdbcType=VARCHAR}, #{fdjcLqfs,jdbcType=VARCHAR},
+      #{jssYbb,jdbcType=VARCHAR}, #{jssDyq,jdbcType=VARCHAR}, #{jssZxp,jdbcType=VARCHAR},
+      #{jssStx,jdbcType=VARCHAR}, #{jssZyjxh,jdbcType=VARCHAR}, #{jssZyfsx,jdbcType=VARCHAR},
+      #{jssDhkg,jdbcType=VARCHAR}, #{jssJswzy,jdbcType=VARCHAR}, #{jssBfq,jdbcType=VARCHAR},
+      #{jssFjszy,jdbcType=VARCHAR}, #{jssGfj,jdbcType=VARCHAR}, #{jssHpzy,jdbcType=VARCHAR},
+      #{jssZqm,jdbcType=VARCHAR}, #{jssYqm,jdbcType=VARCHAR}, #{jssZhm,jdbcType=VARCHAR},
+      #{jssYhm,jdbcType=VARCHAR}, #{hbxZhcd,jdbcType=VARCHAR}, #{hbxYhcd,jdbcType=VARCHAR},
+      #{hbxBt,jdbcType=VARCHAR}, #{hbxObject1,jdbcType=VARCHAR}, #{object1Burndegree,jdbcType=VARCHAR},
       #{hbxObject2,jdbcType=VARCHAR}, #{object2Burndegree,jdbcType=VARCHAR})
   </insert>
+  <update id="updateSelective" parameterType="cn.nankai.tjxf1.entity.B1InnerInfo" >
+    update b1_innerinfo
+    <set>
+      <if test="carId != null" >
+        Car_Id = #{carId,jdbcType=INTEGER},
+      </if>
+      <if test="accId != null" >
+        Acc_ID = #{accId,jdbcType=INTEGER},
+      </if>
+      <if test="vin != null" >
+        VIN = #{vin,jdbcType=VARCHAR},
+      </if>
+      <if test="barryPos != null" >
+        Barry_Pos =  #{barryPos,jdbcType=VARCHAR},
+      </if>
+      <if test="barryVol != null" >
+        Barry_Vol = #{barryVol,jdbcType=VARCHAR},
+      </if>
+      <if test="barryBreakDegree != null" >
+        Barry_Break_Degree  = #{barryBreakDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="oiltankPos != null" >
+        OilTank_Pos =  #{oiltankPos,jdbcType=VARCHAR},
+      </if>
+      <if test="oiltankMaterial != null" >
+        OilTank_Material = #{oiltankMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="oiltankVol != null" >
+        OilTank_Vol = #{oiltankVol,jdbcType=VARCHAR},
+      </if>
+      <if test="oiltankBreakDegree != null" >
+        OilTank_Break_Degree  =  #{oiltankBreakDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcFdongj != null" >
+        FDJC_FDongJ = #{fdjcFdongj,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcJqqg != null" >
+        FDJC_JQQG =  #{fdjcJqqg,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcFdianj != null" >
+        FDJC_FDianJ =  #{fdjcFdianj,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcPqqg != null" >
+        FDJC_PQQG = #{fdjcPqqg,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcQdj != null" >
+        FDJC_QDJ =  #{fdjcQdj,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcWlzyq != null" >
+        FDJC_WLZYQ = #{fdjcWlzyq,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcDhxq != null" >
+        FDJC_DHXQ =  #{fdjcDhxq,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcLqyg != null" >
+        FDJC_LQYG =  #{fdjcLqyg,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcJylqq != null" >
+        FDJC_JYLQQ =  #{fdjcJylqq,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcQxyg != null" >
+        FDJC_QXYG =  #{fdjcQxyg,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcKqlqq != null" >
+        FDJC_KQLQQ =  #{fdjcKqlqq,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcZdyg != null" >
+        FDJC_ZDYG =  #{fdjcZdyg,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcZkzlq != null" >
+        FDJC_ZKZLQ =   #{fdjcZkzlq,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcZlzxyg != null" >
+        FDJC_ZLZXYG =  #{fdjcZlzxyg,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcBxh != null" >
+        FDJC_BXH = #{fdjcBxh,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcKtysj != null" >
+        FDJC_KTYSJ = #{fdjcKtysj,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcBsqLhq != null" >
+        FDJC_BSQ_LHQ = #{fdjcBsqLhq,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcAbs != null" >
+        FDJC_ABS = #{fdjcAbs,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcSrq != null" >
+        FDJC_SRQ =  #{fdjcSrq,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcZqd != null" >
+        FDJC_ZQD = #{fdjcZqd,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcLnq != null" >
+        FDJC_LNQ = #{fdjcLnq,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcYqd != null" >
+        FDJC_YQD = #{fdjcYqd,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjcLqfs != null" >
+        FDJC_LQFS =  #{fdjcLqfs,jdbcType=VARCHAR},
+      </if>
+      <if test="jssYbb != null" >
+        JSS_YBB = #{jssYbb,jdbcType=VARCHAR},
+      </if>
+      <if test="jssDyq != null" >
+        JSS_DYQ = #{jssDyq,jdbcType=VARCHAR},
+      </if>
+      <if test="jssZxp != null" >
+        JSS_ZXP =  #{jssZxp,jdbcType=VARCHAR},
+      </if>
+      <if test="jssStx != null" >
+        JSS_STX = #{jssStx,jdbcType=VARCHAR},
+      </if>
+      <if test="jssZyjxh != null" >
+        JSS_ZYJXH =  #{jssZyjxh,jdbcType=VARCHAR},
+      </if>
+      <if test="jssZyfsx != null" >
+        JSS_ZYFSX =  #{jssZyfsx,jdbcType=VARCHAR},
+      </if>
+      <if test="jssDhkg != null" >
+        JSS_DHKG =  #{jssDhkg,jdbcType=VARCHAR},
+      </if>
+      <if test="jssJswzy != null" >
+        JSS_JSWZY = #{jssJswzy,jdbcType=VARCHAR},
+      </if>
+      <if test="jssBfq != null" >
+        JSS_BFQ = #{jssBfq,jdbcType=VARCHAR},
+      </if>
+      <if test="jssFjszy != null" >
+        JSS_FJSZY = #{jssFjszy,jdbcType=VARCHAR},
+      </if>
+      <if test="jssGfj != null" >
+        JSS_GFJ =  #{jssGfj,jdbcType=VARCHAR},
+      </if>
+      <if test="jssHpzy != null" >
+        JSS_HPZY =  #{jssHpzy,jdbcType=VARCHAR},
+      </if>
+      <if test="jssZqm != null" >
+        JSS_ZQM =  #{jssZqm,jdbcType=VARCHAR},
+      </if>
+      <if test="jssYqm != null" >
+        JSS_YQM = #{jssYqm,jdbcType=VARCHAR},
+      </if>
+      <if test="jssZhm != null" >
+        JSS_ZHM = #{jssZhm,jdbcType=VARCHAR},
+      </if>
+      <if test="jssYhm != null" >
+        JSS_YHM = #{jssYhm,jdbcType=VARCHAR},
+      </if>
+      <if test="hbxZhcd != null" >
+        HBX_ZHCD = #{hbxZhcd,jdbcType=VARCHAR},
+      </if>
+      <if test="hbxYhcd != null" >
+        HBX_YHCD = #{hbxYhcd,jdbcType=VARCHAR},
+      </if>
+      <if test="hbxBt != null" >
+        HBX_BT =  #{hbxBt,jdbcType=VARCHAR},
+      </if>
+      <if test="hbxObject1 != null" >
+        HBX_Object1 = #{hbxObject1,jdbcType=VARCHAR},
+      </if>
+      <if test="object1Burndegree != null" >
+        Object1_BurnDegree = #{object1Burndegree,jdbcType=VARCHAR},
+      </if>
+      <if test="hbxObject2 != null" >
+        HBX_Object2 = #{hbxObject2,jdbcType=VARCHAR},
+      </if>
+      <if test="object2Burndegree != null" >
+        Object2_BurnDegree  #{object2Burndegree,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Acc_ID =  #{accId,jdbcType=INTEGER}
+  </update>
+
   <insert id="insertSelective" parameterType="cn.nankai.tjxf1.entity.B1InnerInfo" >
     insert into b1_innerinfo
     <trim prefix="(" suffix=")" suffixOverrides="," >

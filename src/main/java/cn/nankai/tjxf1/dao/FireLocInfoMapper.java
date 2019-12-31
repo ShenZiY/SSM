@@ -11,4 +11,6 @@ public interface FireLocInfoMapper {
     int insertSelective(FireLocInfo record);
 
     FireLocInfo selectA (@Param("accId") Integer accId);
+
+    int updateSelective (@Param("accId") Integer accId);
 }

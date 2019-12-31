@@ -80,7 +80,6 @@ public class pdfController {
             String dirFileC = "D:/TJXFdata/Temp/"+accId+"/"+accId+"C"+j+".pdf";
             splitPDFFile(dirFileMerge,dirFileC,i,i);
         }*/
-
         PdfReader reader;
         FileOutputStream out;
         ByteArrayOutputStream bos;

@@ -11,4 +11,7 @@ public interface B1InnerInfoMapper {
     int insertSelective(B1InnerInfo record);
 
     B1InnerInfo selectA(@Param("accId") Integer accId);
+
+    int updateSelective(@Param("accId") Integer accId);
+
 }

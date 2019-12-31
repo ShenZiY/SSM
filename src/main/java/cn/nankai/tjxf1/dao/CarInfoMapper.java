@@ -12,4 +12,6 @@ public interface CarInfoMapper {
     int insertSelective(CarInfo record);
 
     CarInfo selectAll(@Param("accId") Integer accId);
+
+    int updateSelective (@Param("accId") Integer accId);
 }

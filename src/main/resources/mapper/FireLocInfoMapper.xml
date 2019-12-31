@@ -22,6 +22,57 @@
   <select id="selectA" resultType="cn.nankai.tjxf1.entity.FireLocInfo">
       select * from b_firelocinfo where Acc_ID = #{accId}
   </select>
+  <update id="updateSelective" parameterType="cn.nankai.tjxf1.entity.FireLocInfo">
+      UPDATE b_firelocinfo
+     <set>
+       <if test="carId != null" >
+         Car_Id = #{carId,jdbcType=INTEGER},
+       </if>
+       <if test="vin != null" >
+         VIN = #{vin,jdbcType=VARCHAR},
+       </if>
+       <if test="accId != null" >
+         Acc_ID = #{accId,jdbcType=INTEGER},
+       </if>
+       <if test="mainBurnunit1 != null" >
+         Main_BurnUnit1 =  #{mainBurnunit1,jdbcType=VARCHAR},
+       </if>
+       <if test="mainBurnunit1Degree != null" >
+         Main_BurnUnit1_Degree =  #{mainBurnunit1Degree,jdbcType=VARCHAR},
+       </if>
+       <if test="unit1Circurt != null" >
+         Unit1_Circurt = #{unit1Circurt,jdbcType=VARCHAR},
+       </if>
+       <if test="other1Circurt != null" >
+         Other1_Circurt = #{other1Circurt,jdbcType=VARCHAR},
+       </if>
+       <if test="mainBurnunit2 != null" >
+         Main_BurnUnit2 =  #{mainBurnunit2,jdbcType=VARCHAR},
+       </if>
+       <if test="mainBurnunit2Degree != null" >
+         Main_BurnUnit2_Degree = #{mainBurnunit2Degree,jdbcType=VARCHAR},
+       </if>
+       <if test="unit2Circurt != null" >
+         Unit2_Circurt = #{unit2Circurt,jdbcType=VARCHAR},
+       </if>
+       <if test="other2Circurt != null" >
+         Other2_Circurt = #{other2Circurt,jdbcType=VARCHAR},
+       </if>
+       <if test="mainBurnobject1Name != null" >
+         Main_BurnObject1_Name =  #{mainBurnobject1Name,jdbcType=VARCHAR},
+       </if>
+       <if test="mainBurnobject1Burn != null" >
+         Main_BurnObject1_Burn =  #{mainBurnobject1Burn,jdbcType=VARCHAR},
+       </if>
+       <if test="mainBurnobject2Name != null" >
+         Main_BurnObject2_Name = #{mainBurnobject2Name,jdbcType=VARCHAR},
+       </if>
+       <if test="mainBurnobject2Burn != null" >
+         Main_BurnObject2_Burn =  #{mainBurnobject2Burn,jdbcType=VARCHAR},
+       </if>
+     </set>
+     where Acc_ID =  #{accId,jdbcType=INTEGER}
+  </update>
   <insert id="insert" parameterType="cn.nankai.tjxf1.entity.FireLocInfo" >
     insert into b_firelocinfo (Car_Id,VIN, Acc_ID, Main_BurnUnit1,
       Main_BurnUnit1_Degree, Unit1_Circurt, Other1_Circurt, 

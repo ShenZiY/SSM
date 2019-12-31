@@ -53,6 +53,90 @@
       #{insuranceType,jdbcType=VARCHAR}, #{myqs,jdbcType=VARCHAR}, #{qhbw,jdbcType=VARCHAR}, #{carType,jdbcType=INTEGER}
       )
   </insert>
+  <update id="updateSelective" parameterType="cn.nankai.tjxf1.entity.CarInfo">
+     update b_carinfo
+     <set>
+       <if test="accId != null" >
+         Car_Id = #{carId,jdbcType=INTEGER},
+       </if>
+       <if test="vin != null" >
+         VIN = #{vin,jdbcType=VARCHAR},
+       </if>
+       <if test="accId != null" >
+         Acc_ID = #{accId,jdbcType=INTEGER},
+       </if>
+       <if test="brand != null" >
+         Brand =  #{brand,jdbcType=VARCHAR},
+       </if>
+       <if test="registerTime != null" >
+         Register_Time = #{registerTime,jdbcType=TIMESTAMP},
+       </if>
+       <if test="carProperty != null" >
+         Car_Property = #{carProperty,jdbcType=VARCHAR},
+       </if>
+       <if test="carMiles != null" >
+         Car_Miles = #{carMiles,jdbcType=VARCHAR},
+       </if>
+       <if test="befoRundis != null" >
+         Befo_RunDis = #{befoRundis,jdbcType=VARCHAR},
+       </if>
+       <if test="befoRuntime != null" >
+         Befo_RunTime = #{befoRuntime,jdbcType=VARCHAR},
+       </if>
+       <if test="befoStoptime != null" >
+         Befo_StopTime =  #{befoStoptime,jdbcType=VARCHAR},
+       </if>
+       <if test="state != null" >
+         State = #{state,jdbcType=VARCHAR},
+       </if>
+       <if test="aftloc != null" >
+         AftLoc =  #{aftloc,jdbcType=VARCHAR},
+       </if>
+       <if test="transMethod != null" >
+         Trans_Method = #{transMethod,jdbcType=VARCHAR},
+       </if>
+       <if test="ifModify != null" >
+         If_Modify = #{ifModify,jdbcType=VARCHAR},
+       </if>
+       <if test="modifyTime != null" >
+         Modify_Time = #{modifyTime,jdbcType=TIMESTAMP},
+       </if>
+       <if test="modifyPart != null" >
+         Modify_Part  =  #{modifyPart,jdbcType=VARCHAR},
+       </if>
+       <if test="modifyPos != null" >
+         Modify_Pos = #{modifyPos,jdbcType=VARCHAR},
+       </if>
+       <if test="maintainTime != null" >
+         Maintain_Time = #{maintainTime,jdbcType=TIMESTAMP},
+       </if>
+       <if test="maintainPurpose != null" >
+         Maintain_Purpose = #{maintainPurpose,jdbcType=VARCHAR},
+       </if>
+       <if test="maintainContent != null" >
+         Maintain_Content = #{maintainContent,jdbcType=VARCHAR},
+       </if>
+       <if test="insurance != null" >
+         Insurance = #{insurance,jdbcType=VARCHAR},
+       </if>
+       <if test="insuranceTime != null" >
+         Insurance_Time = #{insuranceTime,jdbcType=TIMESTAMP},
+       </if>
+       <if test="insuranceType != null" >
+         Insurance_Type = #{insuranceType,jdbcType=VARCHAR},
+       </if>
+       <if test="myqs != null" >
+         MYQS =  #{myqs,jdbcType=VARCHAR},
+       </if>
+       <if test="qhbw != null" >
+         QHBW =  #{qhbw,jdbcType=VARCHAR},
+       </if>
+       <if test="carType != null" >
+         Car_Type =  #{carType,jdbcType=INTEGER},
+       </if>
+     </set>
+     where Acc_ID =  #{accId,jdbcType=INTEGER}
+  </update>
   <insert id="insertSelective" parameterType="cn.nankai.tjxf1.entity.CarInfo" >
     insert into b_carinfo
     <trim prefix="(" suffix=")" suffixOverrides="," >

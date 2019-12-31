@@ -49,4 +49,6 @@ public interface BaseInfoMapper {
     List<BaseInfo> getPageListInfoSearch(@Param("id") Integer id,@Param("start") Integer start,@Param("size") Integer size,@Param("keyAccId") Integer keyAccId);
 
     int updateStatus(@Param("status") Integer status,@Param("accId") Integer accId);
+
+    ArrayList<String> selectLocDetail(@Param("id") Integer id);
 }

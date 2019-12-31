@@ -31,6 +31,94 @@
     <result column="Back2_Burn" property="front1Burn" jdbcType="VARCHAR" />
   </resultMap>
 
+  <update id="updateSelective" parameterType="cn.nankai.tjxf1.entity.EnvBurnInfo">
+     update b_envburninfo
+     <set>
+       <if test="carId != null" >
+         Car_Id = #{carId,jdbcType=INTEGER},
+       </if>
+       <if test="vin != null" >
+         VIN = #{vin,jdbcType=VARCHAR},
+       </if>
+       <if test="accId != null" >
+         Acc_ID = #{accId,jdbcType=INTEGER},
+       </if>
+       <if test="front1 != null" >
+         Front1 = #{front1,jdbcType=VARCHAR},
+       </if>
+       <if test="front1Burn != null" >
+         Front1_Burn = #{front1Burn,jdbcType=VARCHAR},
+       </if>
+       <if test="left1 != null" >
+         Left1 = #{left1,jdbcType=VARCHAR},
+       </if>
+       <if test="left1Burn != null" >
+         Left1_Burn =  #{left1Burn,jdbcType=VARCHAR},
+       </if>
+       <if test="right1 != null" >
+         Right1 = #{right1,jdbcType=VARCHAR},
+       </if>
+       <if test="right1Burn != null" >
+         Right1_Burn = #{right1Burn,jdbcType=VARCHAR},
+       </if>
+       <if test="up1 != null" >
+         Up1 =  #{up1,jdbcType=VARCHAR},
+       </if>
+       <if test="up1Burn != null" >
+         Up1_Burn = #{up1Burn,jdbcType=VARCHAR},
+       </if>
+       <if test="down1 != null" >
+         Down1 = #{down1,jdbcType=VARCHAR},
+       </if>
+       <if test="down1Burn != null" >
+         Down1_Burn = #{down1Burn,jdbcType=VARCHAR},
+       </if>
+       <if test="front2 != null" >
+         Front2 = #{front2,jdbcType=VARCHAR},
+       </if>
+       <if test="front2Burn != null" >
+         Front2_Burn =  #{front2Burn,jdbcType=VARCHAR},
+       </if>
+       <if test="left2 != null" >
+         Left2 = #{left2,jdbcType=VARCHAR},
+       </if>
+       <if test="left2Burn != null" >
+         Left2_Burn = #{left2Burn,jdbcType=VARCHAR},
+       </if>
+       <if test="right2 != null" >
+         Right2 = #{right2,jdbcType=VARCHAR},
+       </if>
+       <if test="right2Burn != null" >
+         Right2_Burn = #{right2Burn,jdbcType=VARCHAR},
+       </if>
+       <if test="up2 != null" >
+         Up2 = #{up2,jdbcType=VARCHAR},
+       </if>
+       <if test="up2Burn != null" >
+         Up2_Burn = #{up2Burn,jdbcType=VARCHAR},
+       </if>
+       <if test="down2 != null" >
+         Down2 =  #{down2,jdbcType=VARCHAR},
+       </if>
+       <if test="down2Burn != null" >
+         Down2_Burn = #{down2Burn,jdbcType=VARCHAR},
+       </if>
+       <if test="back1 != null" >
+         Back1 =  #{back1,jdbcType=VARCHAR},
+       </if>
+       <if test="back1Burn != null" >
+         Back1_Burn = #{back1Burn,jdbcType=VARCHAR},
+       </if>
+       <if test="back2 != null" >
+         Back2 =  #{back2,jdbcType=VARCHAR},
+       </if>
+       <if test="back2Burn != null" >
+         Back2_Burn =  #{back2Burn,jdbcType=VARCHAR},
+       </if>
+     </set>
+     where Acc_ID =  #{accId,jdbcType=INTEGER}
+  </update>
+
   <select id="selectAll" resultType="cn.nankai.tjxf1.entity.EnvBurnInfo">
     select * from b_envburninfo where Acc_ID = #{accId}
   </select>

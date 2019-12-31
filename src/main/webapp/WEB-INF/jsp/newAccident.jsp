@@ -549,6 +549,11 @@
                     }, function(){
                         location.reload();
                     });
+                }else if(res.flag=="3"){
+                    layer.msg("存在地点为"+res.locDetail+"的事故记录", {
+                    }, function(){
+                        location.reload();
+                    });
                 }else{
                     layer.msg('导入失败！', {
                     }, function(){

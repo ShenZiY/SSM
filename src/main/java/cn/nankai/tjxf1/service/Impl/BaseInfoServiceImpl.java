@@ -156,4 +156,10 @@ public class BaseInfoServiceImpl implements BaseInfoService {
         return baseInfoMapper.updateStatus(status,accId);
     }
 
+    @Override
+    public ArrayList<String> selectLocDetail(Integer id) {
+        return baseInfoMapper.selectLocDetail(id);
+    }
+
+
 }

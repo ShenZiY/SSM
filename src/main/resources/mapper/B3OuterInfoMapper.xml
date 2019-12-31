@@ -60,6 +60,175 @@
   <select id="selectA" resultType="cn.nankai.tjxf1.entity.B3OuterInfo">
     select * from b3_outerinfo where Acc_ID = 2019
   </select>
+  <update id="updateSelective" parameterType="cn.nankai.tjxf1.entity.B3OuterInfo">
+     update b3_outerinfo
+     <set>
+       <if test="carId != null" >
+         Car_Id = #{carId,jdbcType=INTEGER},
+       </if>
+       <if test="accId != null" >
+         Acc_ID =  #{accId,jdbcType=INTEGER},
+       </if>
+       <if test="vin != null" >
+         VIN =  #{vin,jdbcType=VARCHAR},
+       </if>
+       <if test="ltZ1 != null" >
+         LT_Z1 = #{ltZ1,jdbcType=VARCHAR},
+       </if>
+       <if test="ltZ2 != null" >
+         LT_Z2 = #{ltZ2,jdbcType=VARCHAR},
+       </if>
+       <if test="ltZ3 != null" >
+         LT_Z3 = #{ltZ3,jdbcType=VARCHAR},
+       </if>
+       <if test="ltY1 != null" >
+         LT_Y1 =  #{ltY1,jdbcType=VARCHAR},
+       </if>
+       <if test="ltY2 != null" >
+         LT_Y2 = #{ltY2,jdbcType=VARCHAR},
+       </if>
+       <if test="ltY3 != null" >
+         LT_Y3 =  #{ltY3,jdbcType=VARCHAR},
+       </if>
+       <if test="lwZ1 != null" >
+         LW_Z1 =  #{lwZ1,jdbcType=VARCHAR},
+       </if>
+       <if test="lwZ2 != null" >
+         LW_Z2 =  #{lwZ2,jdbcType=VARCHAR},
+       </if>
+       <if test="lwZ3 != null" >
+         LW_Z3 = #{lwZ3,jdbcType=VARCHAR},
+       </if>
+       <if test="lwY1 != null" >
+         LW_Y1 =  #{lwY1,jdbcType=VARCHAR},
+       </if>
+       <if test="lwY2 != null" >
+         LW_Y2 =  #{lwY2,jdbcType=VARCHAR},
+       </if>
+       <if test="lwY3 != null" >
+         LW_Y3 = #{lwY3,jdbcType=VARCHAR},
+       </if>
+       <if test="cmZ1 != null" >
+         CM_Z1 =  #{cmZ1,jdbcType=VARCHAR},
+       </if>
+       <if test="cmY1 != null" >
+         CM_Y1 = #{cmY1,jdbcType=VARCHAR},
+       </if>
+       <if test="cmY2 != null" >
+         CM_Y2 =  #{cmY2,jdbcType=VARCHAR},
+       </if>
+       <if test="cmY3 != null" >
+         CM_Y3 = #{cmY3,jdbcType=VARCHAR},
+       </if>
+       <if test="cwbZ1 != null" >
+         CWB_Z1 = #{cwbZ1,jdbcType=VARCHAR},
+       </if>
+       <if test="cwbZ2 != null" >
+         CWB_Z2 =  #{cwbZ2,jdbcType=VARCHAR},
+       </if>
+       <if test="cwbZ3 != null" >
+         CWB_Z3 = #{cwbZ3,jdbcType=VARCHAR},
+       </if>
+       <if test="cwbY1 != null" >
+         CWB_Y1 = #{cwbY1,jdbcType=VARCHAR},
+       </if>
+       <if test="cwbY2 != null" >
+         CWB_Y2 = #{cwbY2,jdbcType=VARCHAR},
+       </if>
+       <if test="cwbY3 != null" >
+         CWB_Y3 = #{cwbY3,jdbcType=VARCHAR},
+       </if>
+       <if test="cdZ1 != null" >
+         CD_Z1 = #{cdZ1,jdbcType=VARCHAR},
+       </if>
+       <if test="cdZ2 != null" >
+         CD_Z2 = #{cdZ2,jdbcType=VARCHAR},
+       </if>
+       <if test="cdY1 != null" >
+         CD_Y1 = #{cdY1,jdbcType=VARCHAR},
+       </if>
+       <if test="cdY2 != null" >
+         CD_Y2 = #{cdY2,jdbcType=VARCHAR},
+       </if>
+       <if test="hsjZ != null" >
+         HSJ_Z = #{hsjZ,jdbcType=VARCHAR},
+       </if>
+       <if test="hsjY != null" >
+         HSJ_Y = #{hsjY,jdbcType=VARCHAR},
+       </if>
+       <if test="ccZ1 != null" >
+         CC_Z1 = #{ccZ1,jdbcType=VARCHAR},
+       </if>
+       <if test="ccZ2 != null" >
+         CC_Z2 =  #{ccZ2,jdbcType=VARCHAR},
+       </if>
+       <if test="ccZ3 != null" >
+         CC_Z3 = #{ccZ3,jdbcType=VARCHAR},
+       </if>
+       <if test="ccZ4 != null" >
+         CC_Z4 = #{ccZ4,jdbcType=VARCHAR},
+       </if>
+       <if test="ccZ5 != null" >
+         CC_Z5 = #{ccZ5,jdbcType=VARCHAR},
+       </if>
+       <if test="ccZ6 != null" >
+         CC_Z6 = #{ccZ6,jdbcType=VARCHAR},
+       </if>
+       <if test="ccY1 != null" >
+         CC_Y1 =  #{ccY1,jdbcType=VARCHAR},
+       </if>
+       <if test="ccY2 != null" >
+         CC_Y2 = #{ccY2,jdbcType=VARCHAR},
+       </if>
+       <if test="ccY3 != null" >
+         CC_Y3 = #{ccY3,jdbcType=VARCHAR},
+       </if>
+       <if test="ccY4 != null" >
+         CC_Y4 =  #{ccY4,jdbcType=VARCHAR},
+       </if>
+       <if test="ccY5 != null" >
+         CC_Y5 =  #{ccY5,jdbcType=VARCHAR},
+       </if>
+       <if test="ccY6 != null" >
+         CC_Y6 = #{ccY6,jdbcType=VARCHAR},
+       </if>
+       <if test="bxgQb != null" >
+         BXG_QB = #{bxgQb,jdbcType=VARCHAR},
+       </if>
+       <if test="bxgHb != null" >
+         BXG_HB = #{bxgHb,jdbcType=VARCHAR},
+       </if>
+       <if test="fdblQb != null" >
+         FDBL_QB = #{fdblQb,jdbcType=VARCHAR},
+       </if>
+       <if test="fdblHb != null" >
+         FDBL_HB =  #{fdblHb,jdbcType=VARCHAR},
+       </if>
+       <if test="ygqQb != null" >
+         YGQ_QB =  #{ygqQb,jdbcType=VARCHAR},
+       </if>
+       <if test="ygqHb != null" >
+         YGQ_HB = #{ygqHb,jdbcType=VARCHAR},
+       </if>
+       <if test="dg != null" >
+         DG =  #{dg,jdbcType=VARCHAR},
+       </if>
+       <if test="dbkt != null" >
+         DBKT = #{dbkt,jdbcType=VARCHAR},
+       </if>
+       <if test="dp != null" >
+         DP = #{dp,jdbcType=VARCHAR},
+       </if>
+       <if test="pqg != null" >
+         PQG = #{pqg,jdbcType=VARCHAR},
+       </if>
+       <if test="chzhq != null" >
+         CHZHQ = #{chzhq,jdbcType=VARCHAR},
+       </if>
+     </set>
+    where Acc_ID =  #{accId,jdbcType=INTEGER}
+  </update>
+
   <insert id="insert" parameterType="cn.nankai.tjxf1.entity.B3OuterInfo" >
     insert into b3_outerinfo (Car_Id, Acc_ID, VIN, 
       LT_Z1, LT_Z2, LT_Z3, LT_Y1, 
